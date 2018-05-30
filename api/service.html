@@ -1,0 +1,399 @@
+<head>
+  <meta charset="utf-8">
+  
+  <title>Service Class</title>
+  
+  <link href='_static/css/bootstrap.css' rel='stylesheet' type='text/css'>
+  <link href='_static/css/bootstrap-theme.css' rel='stylesheet' type='text/css'>
+
+  
+      <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+  
+
+  
+
+  <link href='_static/css/n3rv.css' rel='stylesheet' type='text/css'>
+
+  <script type="text/javascript" src="_static/js/jquery.js"></script>
+
+  <script type="text/javascript" src="_static/js/bootstrap.min.js">
+  </script>
+
+</head>
+<!-- <body style="background:#333333;color:white;"> -->
+<body>
+
+    <div class="header-common">
+
+            <div class="container-fluid">
+
+              <div class="col-md-4">
+                <a href="./index.html"><img alt="" id="header-logo" src="_static/img/n3rv.png"></a>
+              </div>
+            
+            </div>
+      </div>
+
+<!--
+<div class="doc-nav">
+
+    <div class="container">
+
+    <ul class="nav nav-pills">
+      <li role="presentation" class="disabled"><a href="#">SaaS</a></li>
+      <li role="presentation" class="active"><a href="/sdk">SDK</a></li>
+      <li role="presentation"><a href="/faq">FAQ</a></li>
+    </ul>
+
+  </div>
+
+  </div>
+-->
+
+  <div class="content-3"></div>
+
+
+  <div class="container" style="margin-top:-80px">
+ 
+
+    <div class="col-md-3" style="margin-top:80px">
+      <div id="doc-leftmenu">
+
+        
+        <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Service Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logger.html">Logger Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="servicecontroller.html">Service Controller Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topology.html">Topology Class</a></li>
+</ul>
+
+      </div>
+    </div>
+
+    <div class="col-md-9">
+
+      <div class="rst-content">
+        
+  <div class="section" id="service-class">
+<h1>Service Class<a class="headerlink" href="#service-class" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="_CPPv3N4n3rv7serviceE">
+<span id="_CPPv2N4n3rv7serviceE"></span><span id="n3rv::service"></span><span class="target" id="classn3rv_1_1service"></span><em class="property">class </em>n3rv<code class="descclassname">::</code><code class="descname">service</code><a class="headerlink" href="#_CPPv3N4n3rv7serviceE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The main class of the n3rv framework. Each microservice inside a n3rv infrastructure inherits the service class, and therefore benefits from its functionalities. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv3N4n3rv7service7serviceENSt6stringENSt6stringENSt6stringEi">
+<span id="_CPPv2N4n3rv7service7serviceENSt6stringENSt6stringENSt6stringEi"></span><span id="n3rv::service::service__ss.ss.ss.i"></span><span class="target" id="classn3rv_1_1service_1a3e1e34060a9454f3ed6f83f47b68244c"></span>n3rv::<a class="reference internal" href="#_CPPv3N4n3rv7serviceE" title="n3rv::service">service</a><code class="descname">service</code><span class="sig-paren">(</span>std::string <em>name</em>, std::string <em>service_class</em>, std::string <em>controller_host</em>, int <em>controller_port</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv7service7serviceENSt6stringENSt6stringENSt6stringEi" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>service class constructor. <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">name</span></code>: The name of the service, acts as an identifier inside the cluster. </li>
+<li><code class="docutils literal notranslate"><span class="pre">service_class</span></code>: basically describes the type of node for the instanciated service.  the ip/hostname of the controller.  the port number on which the controller is listening (ch1). </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N4n3rv7service10initializeEv">
+<span id="_CPPv2N4n3rv7service10initializeEv"></span><span id="n3rv::service::initialize"></span><span class="target" id="classn3rv_1_1service_1a66b32f0b9d781dbaf705a36d06205ea8"></span>int n3rv::<a class="reference internal" href="#_CPPv3N4n3rv7serviceE" title="n3rv::service">service</a><code class="descname">initialize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv7service10initializeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Service class initializer. Empty for base service class, but inheriting classes can use it to initialize new connections and make attachements. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N4n3rv7serviceD0Ev">
+<span id="_CPPv2N4n3rv7serviceD0Ev"></span><span id="n3rv::service::~service"></span><span class="target" id="classn3rv_1_1service_1a4cbefb90d5353c956a01aeac527995a1"></span>n3rv::<a class="reference internal" href="#_CPPv3N4n3rv7serviceE" title="n3rv::service">service</a><code class="descname">~service</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv7serviceD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>service class destructor. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N4n3rv7service9subscribeENSt6stringENSt6stringEi">
+<span id="_CPPv2N4n3rv7service9subscribeENSt6stringENSt6stringEi"></span><span id="n3rv::service::subscribe__ss.ss.i"></span><span class="target" id="classn3rv_1_1service_1a16feba1d1d23bcc7f3759c8718bf382b"></span>int n3rv::<a class="reference internal" href="#_CPPv3N4n3rv7serviceE" title="n3rv::service">service</a><code class="descname">subscribe</code><span class="sig-paren">(</span>std::string <em>name</em>, std::string <em>sclass</em>, int <em>port</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv7service9subscribeENSt6stringENSt6stringEi" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Registers the service on the controller, for it to update its directory and advise others a new node is available. This method is called automatically by <a class="reference internal" href="#classn3rv_1_1service_1a3c25cfcf413bb13a00b7dc29bd91072c"><span class="std std-ref">bind()</span></a> on TCP sockets, except specific cases you don’t need to call it yourself. <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">name</span></code>: Name of the binding to register. </li>
+<li><code class="docutils literal notranslate"><span class="pre">sclass</span></code>: service class of the binding to register. </li>
+<li><code class="docutils literal notranslate"><span class="pre">port</span></code>: port of the binding to register. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N4n3rv7service11unsubscribeEv">
+<span id="_CPPv2N4n3rv7service11unsubscribeEv"></span><span id="n3rv::service::unsubscribe"></span><span class="target" id="classn3rv_1_1service_1a7f2015677efeb3fbd93898dc4e1b2322"></span>int n3rv::<a class="reference internal" href="#_CPPv3N4n3rv7serviceE" title="n3rv::service">service</a><code class="descname">unsubscribe</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv7service11unsubscribeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Gracefuly Unregisters the service from the controller, in case the service must go down. Not very useful, because the ZMQ stack takes care of this. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N4n3rv7service3runEv">
+<span id="_CPPv2N4n3rv7service3runEv"></span><span id="n3rv::service::run"></span><span class="target" id="classn3rv_1_1service_1a4da256ed4c22a9bbde160317d02f604b"></span>int n3rv::<a class="reference internal" href="#_CPPv3N4n3rv7serviceE" title="n3rv::service">service</a><code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv7service3runEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Starts the service. <a class="reference internal" href="#classn3rv_1_1service_1a4da256ed4c22a9bbde160317d02f604b"><span class="std std-ref">run()</span></a> Basically manages all the established connections, plus eventual extra behaviour coded inside <a class="reference internal" href="#classn3rv_1_1service_1a35b462634fdab7003e2cf78b23456027"><span class="std std-ref">hkloop()</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N4n3rv7service9run_asyncEv">
+<span id="_CPPv2N4n3rv7service9run_asyncEv"></span><span id="n3rv::service::run_async"></span><span class="target" id="classn3rv_1_1service_1ab2645d6f8f7fa19215425225f9f50594"></span>int n3rv::<a class="reference internal" href="#_CPPv3N4n3rv7serviceE" title="n3rv::service">service</a><code class="descname">run_async</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv7service9run_asyncEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Start the service asynchronously, by running it in its own dedicated thread. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N4n3rv7service6hkloopEv">
+<span id="_CPPv2N4n3rv7service6hkloopEv"></span><span id="n3rv::service::hkloop"></span><span class="target" id="classn3rv_1_1service_1a35b462634fdab7003e2cf78b23456027"></span>void n3rv::<a class="reference internal" href="#_CPPv3N4n3rv7serviceE" title="n3rv::service">service</a><code class="descname">hkloop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv7service6hkloopEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>hkloop is a “hook” function allowing to place some code inside a service’s main loop. Indeed, <a class="reference internal" href="#classn3rv_1_1service_1a35b462634fdab7003e2cf78b23456027"><span class="std std-ref">hkloop()</span></a> is called inside the <a class="reference internal" href="#classn3rv_1_1service_1a4da256ed4c22a9bbde160317d02f604b"><span class="std std-ref">run()</span></a> process, so if you need to run code inside the main loop, you can override <a class="reference internal" href="#classn3rv_1_1service_1a35b462634fdab7003e2cf78b23456027"><span class="std std-ref">hkloop()</span></a> with your own code.</p>
+<p>Important Note: NEVER PERFORM BLOCKING OPERATIONS inside <a class="reference internal" href="#classn3rv_1_1service_1a35b462634fdab7003e2cf78b23456027"><span class="std std-ref">hkloop()</span></a>, since it will affect the rest of the service’s execution. If you really need to perform blocking, synchronous operations, please do them in a separate thread/process. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N4n3rv7service13map_callbacksEv">
+<span id="_CPPv2N4n3rv7service13map_callbacksEv"></span><span id="n3rv::service::map_callbacks"></span><span class="target" id="classn3rv_1_1service_1a417cff4c3218b7fd2163822e630f55dc"></span>void n3rv::<a class="reference internal" href="#_CPPv3N4n3rv7serviceE" title="n3rv::service">service</a><code class="descname">map_callbacks</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv7service13map_callbacksEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>This method is used essentially to map callback function pointers to an identifier string. Can be very useful for text-defined topologies. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N4n3rv7service7connectENSt6stringEi">
+<span id="_CPPv2N4n3rv7service7connectENSt6stringEi"></span><span id="n3rv::service::connect__ss.i"></span><span class="target" id="classn3rv_1_1service_1adc6f7632312f58a75138c5bac4b88e04"></span>int n3rv::<a class="reference internal" href="#_CPPv3N4n3rv7serviceE" title="n3rv::service">service</a><code class="descname">connect</code><span class="sig-paren">(</span>std::string <em>name</em>, int <em>connection_type</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv7service7connectENSt6stringEi" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>starts a new connection (zmq_socket) to a remote service available inside the directory. <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">name</span></code>: identifier of the remote service inside the directory. </li>
+<li><code class="docutils literal notranslate"><span class="pre">connection_type</span></code>: Type of connection to the remote host, directly related to ZMQ (ZMQ_REQ, ZMQ_SUB, etc..). </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N4n3rv7service4bindENSt6stringENSt6stringEii">
+<span id="_CPPv2N4n3rv7service4bindENSt6stringENSt6stringEii"></span><span id="n3rv::service::bind__ss.ss.i.i"></span><span class="target" id="classn3rv_1_1service_1a3c25cfcf413bb13a00b7dc29bd91072c"></span>int n3rv::<a class="reference internal" href="#_CPPv3N4n3rv7serviceE" title="n3rv::service">service</a><code class="descname">bind</code><span class="sig-paren">(</span>std::string <em>bind_name</em>, std::string <em>ip</em>, int <em>port</em>, int <em>bind_type</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv7service4bindENSt6stringENSt6stringEii" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Binds A NEW ZMQ TCP Socket (main endpoint type supported by n3rv) <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">bind_name</span></code>: Name of the binding. </li>
+<li><code class="docutils literal notranslate"><span class="pre">ip</span></code>: ip to listen on (0.0.0.0 to listen on all addr). </li>
+<li><code class="docutils literal notranslate"><span class="pre">port</span></code>: TCP port to listen on. </li>
+<li><code class="docutils literal notranslate"><span class="pre">bind_type</span></code>: ZMQ socket type to create (ZMQ_REP, ZMQ_PUB,..) </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N4n3rv7service4bindENSt6stringENSt6stringEi">
+<span id="_CPPv2N4n3rv7service4bindENSt6stringENSt6stringEi"></span><span id="n3rv::service::bind__ss.ss.i"></span><span class="target" id="classn3rv_1_1service_1afdffb2b44855a03808b0e8d9c9ea8eff"></span>int n3rv::<a class="reference internal" href="#_CPPv3N4n3rv7serviceE" title="n3rv::service">service</a><code class="descname">bind</code><span class="sig-paren">(</span>std::string <em>bind_name</em>, std::string <em>endpoint</em>, int <em>bind_type</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv7service4bindENSt6stringENSt6stringEi" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>binds a new RAW ZMQ socket if the service needs a listening socket (ZMQ_REP, ZMQ_PUB, etc..) <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">bind_name</span></code>: name of the bound connection, to identify it. </li>
+<li><code class="docutils literal notranslate"><span class="pre">endpoint</span></code>: string, to tell on what parameters to bind the socket. </li>
+<li><code class="docutils literal notranslate"><span class="pre">type</span></code>: kind of ZMQ socket to bind: ZMQ_REP, ZMQ_PUB, etc.. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N4n3rv7service6attachENSt6stringE6fctptr">
+<span id="_CPPv2N4n3rv7service6attachENSt6stringE6fctptr"></span><span id="n3rv::service::attach__ss.fctptr"></span><span class="target" id="classn3rv_1_1service_1a2ceb1c9983345caab353ab8113d060c6"></span>int n3rv::<a class="reference internal" href="#_CPPv3N4n3rv7serviceE" title="n3rv::service">service</a><code class="descname">attach</code><span class="sig-paren">(</span>std::string <em>connection_name</em>, fctptr <em>callback</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv7service6attachENSt6stringE6fctptr" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Attaches a service connection to its message handler callback ! <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">connection_name</span></code>: Name of the connection to attach callback to.  callback function. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N4n3rv7service6attachENSt6stringENSt6stringE">
+<span id="_CPPv2N4n3rv7service6attachENSt6stringENSt6stringE"></span><span id="n3rv::service::attach__ss.ss"></span><span class="target" id="classn3rv_1_1service_1aeb85e2c38c222e093ed960c8f8366b2f"></span>int n3rv::<a class="reference internal" href="#_CPPv3N4n3rv7serviceE" title="n3rv::service">service</a><code class="descname">attach</code><span class="sig-paren">(</span>std::string <em>connection_name</em>, std::string <em>callback_name</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv7service6attachENSt6stringENSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Attaches a service connection to its message handler callback ! Warning: this method only works if service::cbmap was filled at <a class="reference internal" href="#classn3rv_1_1service_1a417cff4c3218b7fd2163822e630f55dc"><span class="std std-ref">map_callbacks()</span></a> time. <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">connection_name</span></code>: Name of the connection to attach callback to. </li>
+<li><code class="docutils literal notranslate"><span class="pre">callback_name</span></code>: string name of the callback to atach to connection. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N4n3rv7service13load_topologyENSt6stringE">
+<span id="_CPPv2N4n3rv7service13load_topologyENSt6stringE"></span><span id="n3rv::service::load_topology__ss"></span><span class="target" id="classn3rv_1_1service_1a6c12c67e6a146f14564b5c9983414062"></span>int n3rv::<a class="reference internal" href="#_CPPv3N4n3rv7serviceE" title="n3rv::service">service</a><code class="descname">load_topology</code><span class="sig-paren">(</span>std::string <em>topology_file</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv7service13load_topologyENSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Loads a topology file and automatically bind ports, connects to remote endpoints and attach callbacks </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N4n3rv7service13load_topologyEP8topology">
+<span id="_CPPv2N4n3rv7service13load_topologyEP8topology"></span><span id="n3rv::service::load_topology__topologyP"></span><span class="target" id="classn3rv_1_1service_1a50ed7291a82916fa8bfbaa47c5753aff"></span>int n3rv::<a class="reference internal" href="#_CPPv3N4n3rv7serviceE" title="n3rv::service">service</a><code class="descname">load_topology</code><span class="sig-paren">(</span><a class="reference internal" href="topology.html#_CPPv3N4n3rv8topologyE" title="n3rv::topology">topology</a> *<em>topo</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv7service13load_topologyEP8topology" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Uses a previously define topology object to automatically bind ports, connects to remote endpoints and attach callbacks </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N4n3rv7service14get_connectionENSt6stringE">
+<span id="_CPPv2N4n3rv7service14get_connectionENSt6stringE"></span><span id="n3rv::service::get_connection__ss"></span><span class="target" id="classn3rv_1_1service_1a2a60b45561f439a18bba8f749bfda58c"></span>n3rv::qconn &amp;n3rv::<a class="reference internal" href="#_CPPv3N4n3rv7serviceE" title="n3rv::service">service</a><code class="descname">get_connection</code><span class="sig-paren">(</span>std::string <em>connection_name</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv7service14get_connectionENSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Retrieves a service connection from the internal connections list. <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>the related connection object. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">connection_name</span></code>: name of the connection to retrieve. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N4n3rv7service4sendENSt6stringERNSt6stringEi">
+<span id="_CPPv2N4n3rv7service4sendENSt6stringERNSt6stringEi"></span><span id="n3rv::service::send__ss.ssR.i"></span><span class="target" id="classn3rv_1_1service_1a337129cdf19335443f5372d4bbf8954a"></span>int n3rv::<a class="reference internal" href="#_CPPv3N4n3rv7serviceE" title="n3rv::service">service</a><code class="descname">send</code><span class="sig-paren">(</span>std::string <em>connection_name</em>, std::string &amp;<em>data</em>, int <em>flags</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv7service4sendENSt6stringERNSt6stringEi" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Conveniency function to send string data on a specified connection. <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">connection_name</span></code>: name of the connection to send data to. </li>
+<li><code class="docutils literal notranslate"><span class="pre">data</span></code>: string to send. </li>
+<li><code class="docutils literal notranslate"><span class="pre">flags</span></code>: ZMQ send flags. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N4n3rv7service4sendENSt6stringEPv6size_ti">
+<span id="_CPPv2N4n3rv7service4sendENSt6stringEPv6size_ti"></span><span id="n3rv::service::send__ss.voidP.s.i"></span><span class="target" id="classn3rv_1_1service_1a2fbcd6d2f306966b15424a1647483023"></span>int n3rv::<a class="reference internal" href="#_CPPv3N4n3rv7serviceE" title="n3rv::service">service</a><code class="descname">send</code><span class="sig-paren">(</span>std::string <em>connection_name</em>, void *<em>data</em>, size_t <em>size</em>, int <em>flags</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv7service4sendENSt6stringEPv6size_ti" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Conveniency function to send raw data on a specified connection. <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">connection_name</span></code>: name of the connection to send data to. </li>
+<li><code class="docutils literal notranslate"><span class="pre">data</span></code>: memory pointer of data to send. </li>
+<li><code class="docutils literal notranslate"><span class="pre">size</span></code>: size of the memory data block. </li>
+<li><code class="docutils literal notranslate"><span class="pre">flags</span></code>: ZMQ send flags. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N4n3rv7service4sendENSt6stringER7messagei">
+<span id="_CPPv2N4n3rv7service4sendENSt6stringER7messagei"></span><span id="n3rv::service::send__ss.messageR.i"></span><span class="target" id="classn3rv_1_1service_1abe675389197e986dfb4a9bd727322dc9"></span>int n3rv::<a class="reference internal" href="#_CPPv3N4n3rv7serviceE" title="n3rv::service">service</a><code class="descname">send</code><span class="sig-paren">(</span>std::string <em>connection_name</em>, message &amp;<em>msg</em>, int <em>flags</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv7service4sendENSt6stringER7messagei" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Conveniency function to send n3rv::mesage data on a specified connection. <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">connection_name</span></code>: name of the connection to send data to. </li>
+<li><code class="docutils literal notranslate"><span class="pre">msg</span></code>: n3rv::message to send. </li>
+<li><code class="docutils literal notranslate"><span class="pre">flags</span></code>: ZMQ send flags. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N4n3rv7service4sendENSt6stringEPN3zmq9message_tEi">
+<span id="_CPPv2N4n3rv7service4sendENSt6stringEPN3zmq9message_tEi"></span><span id="n3rv::service::send__ss.zmq::message_tP.i"></span><span class="target" id="classn3rv_1_1service_1ab8f017fe4fcf352497f0f0694e37d69f"></span>int n3rv::<a class="reference internal" href="#_CPPv3N4n3rv7serviceE" title="n3rv::service">service</a><code class="descname">send</code><span class="sig-paren">(</span>std::string <em>connection_name</em>, zmq::message_t *<em>zmsg</em>, int <em>flags</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv7service4sendENSt6stringEPN3zmq9message_tEi" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Conveniency function to send direct zmq::message_t data on a specified connection. <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">connection_name</span></code>: name of the connection to send data to. </li>
+<li><code class="docutils literal notranslate"><span class="pre">msg</span></code>: ZMQ message_t to send. </li>
+<li><code class="docutils literal notranslate"><span class="pre">flags</span></code>: ZMQ send flags. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N4n3rv7service14check_deferredEv">
+<span id="_CPPv2N4n3rv7service14check_deferredEv"></span><span id="n3rv::service::check_deferred"></span><span class="target" id="classn3rv_1_1service_1a051f3fa9ed38188271d0b6906915a5c9"></span>int n3rv::<a class="reference internal" href="#_CPPv3N4n3rv7serviceE" title="n3rv::service">service</a><code class="descname">check_deferred</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv7service14check_deferredEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Checks for deferred connections whose endpoint was not yet in directory, and tries to establish connection. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Protected Static Functions</p>
+<dl class="function">
+<dt id="_CPPv3N4n3rv7service16directory_updateEPvPN3zmq9message_tE">
+<span id="_CPPv2N4n3rv7service16directory_updateEPvPN3zmq9message_tE"></span><span id="n3rv::service::directory_update__voidP.zmq::message_tP"></span><span class="target" id="classn3rv_1_1service_1aa941ea2005cb539aeff255a66cbd3b58"></span>void *n3rv::<a class="reference internal" href="#_CPPv3N4n3rv7serviceE" title="n3rv::service">service</a><code class="descname">directory_update</code><span class="sig-paren">(</span>void *<em>objref</em>, zmq::message_t *<em>dirmsg</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv7service16directory_updateEPvPN3zmq9message_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Directory updates message handling callback </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <script type="text/javascript">
+
+    $.each( $('.breathe-sectiondef'), function(index,v) {
+
+      if ( $(this).hasClass('container') ) $(this).removeClass('container');
+
+     } );
+
+    $("#header-pbtn").click(function() { product_dropdown_toggle(); });
+
+    function product_dropdown_toggle() {
+
+      $('#product-dropdown').css({ left: $('#header-pbtn').position().left + 20 + 'px'  });
+
+      if ( $('#product-dropdown').width() == 0 ) {
+
+
+        $('#product-dropdown').animate({ width:"140px", duration: 1000})
+        .after(function() { $('#product-dropdown-ct').show(); } );
+
+      }
+
+      else {
+        
+        $('#product-dropdown').animate({width:"0px",duration: 1000})
+        .after( function() { $('#product-dropdown-ct').hide(); } );   
+      }
+    }
+  </script>
+
+</body>
+
+
+
+
+
+
+
+
+<div class="footer-top">
+
+</div>
+
+<div class="footer-bottom">
+
+  <div class="container">
+
+    <div class="row-fluid">
+
+      <div class="col-md-6">
+        
+      </div>
+      <div class="col-md-6" style="text-align:center"></div>
+    </div>
+  </div>
+

@@ -1,0 +1,250 @@
+<head>
+  <meta charset="utf-8">
+  
+  <title>n3rv API Documentation !</title>
+  
+  <link href='_static/css/bootstrap.css' rel='stylesheet' type='text/css'>
+  <link href='_static/css/bootstrap-theme.css' rel='stylesheet' type='text/css'>
+
+  
+      <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+  
+
+  
+
+  <link href='_static/css/n3rv.css' rel='stylesheet' type='text/css'>
+
+  <script type="text/javascript" src="_static/js/jquery.js"></script>
+
+  <script type="text/javascript" src="_static/js/bootstrap.min.js">
+  </script>
+
+</head>
+<!-- <body style="background:#333333;color:white;"> -->
+<body>
+
+    <div class="header-common">
+
+            <div class="container-fluid">
+
+              <div class="col-md-4">
+                <a href="./index.html"><img alt="" id="header-logo" src="_static/img/n3rv.png"></a>
+              </div>
+            
+            </div>
+      </div>
+
+<!--
+<div class="doc-nav">
+
+    <div class="container">
+
+    <ul class="nav nav-pills">
+      <li role="presentation" class="disabled"><a href="#">SaaS</a></li>
+      <li role="presentation" class="active"><a href="/sdk">SDK</a></li>
+      <li role="presentation"><a href="/faq">FAQ</a></li>
+    </ul>
+
+  </div>
+
+  </div>
+-->
+
+  <div class="content-3"></div>
+
+
+  <div class="container" style="margin-top:-80px">
+ 
+
+    <div class="col-md-3" style="margin-top:80px">
+      <div id="doc-leftmenu">
+
+        
+        <ul>
+<li class="toctree-l1"><a class="reference internal" href="service.html">Service Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logger.html">Logger Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="servicecontroller.html">Service Controller Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topology.html">Topology Class</a></li>
+</ul>
+
+      </div>
+    </div>
+
+    <div class="col-md-9">
+
+      <div class="rst-content">
+        
+  <div class="section" id="n3rv-api-documentation">
+<h1>n3rv API Documentation !<a class="headerlink" href="#n3rv-api-documentation" title="Permalink to this headline">¶</a></h1>
+<p>Welcome to the n3rv API documention. You will find below everything you need in order to get the best of the framework,
+and produce fast and reliable microservice architectures.</p>
+<div class="toctree-wrapper compound">
+</div>
+<div class="section" id="classes-list">
+<h2>Classes List<a class="headerlink" href="#classes-list" title="Permalink to this headline">¶</a></h2>
+<p>You will find here the exaustive list of the usable
+classes in the n3rv library.</p>
+<div class="section" id="service-class">
+<h3>Service Class<a class="headerlink" href="#service-class" title="Permalink to this headline">¶</a></h3>
+<p>The main class of the project, every user defined service inherit from this class.
+<a class="reference internal" href="service.html"><span class="doc">See Class Documentation</span></a></p>
+</div>
+<div class="section" id="logger-class">
+<h3>Logger Class<a class="headerlink" href="#logger-class" title="Permalink to this headline">¶</a></h3>
+<p>Provides timestamped logging to your service, which output can be files and/or stdout.
+<a class="reference internal" href="logger.html"><span class="doc">See Class Documentation</span></a></p>
+</div>
+<div class="section" id="service-controller-class">
+<h3>Service Controller Class<a class="headerlink" href="#service-controller-class" title="Permalink to this headline">¶</a></h3>
+<p>This class allows to instanciate a service controller, which plays
+the role of endpoints directory.
+<a class="reference internal" href="servicecontroller.html"><span class="doc">See Class Documentation</span></a></p>
+</div>
+<div class="section" id="topology-class">
+<h3>Topology Class<a class="headerlink" href="#topology-class" title="Permalink to this headline">¶</a></h3>
+<p>This class allows to load and parse topologies, which allows to automatically
+bind/connect to service endpoints.
+<a class="reference internal" href="topology.html"><span class="doc">See Class Documentation</span></a></p>
+</div>
+</div>
+<div class="section" id="hello-world">
+<h2>Hello World<a class="headerlink" href="#hello-world" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;n3rv/n3rvservice.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;n3rv/n3rvservicecontroller.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+
+    <span class="c1">//This service continuously broadcasts &quot;</span>
+    <span class="c1">//Hello World&quot; to a publish endpoint.</span>
+    <span class="k">class</span> <span class="nc">hellosend</span><span class="o">:</span> <span class="k">public</span> <span class="n">n3rv</span><span class="o">::</span><span class="n">service</span> <span class="p">{</span>
+    <span class="k">using</span> <span class="n">n3rv</span><span class="o">::</span><span class="n">service</span><span class="o">::</span><span class="n">service</span><span class="p">;</span>
+    <span class="k">public</span><span class="o">:</span>
+
+    <span class="c1">//here you can declare connections to other services</span>
+    <span class="c1">// to bind and/or establish, and other service initialization directices.</span>
+    <span class="kt">int</span> <span class="n">initialize</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">//creates a new ZMQ socket binding of type PUBLISH</span>
+        <span class="k">this</span><span class="o">-&gt;</span><span class="n">bind</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">,</span><span class="s">&quot;0.0.0.0&quot;</span><span class="p">,</span> <span class="mi">11001</span><span class="p">,</span> <span class="n">ZMQ_PUB</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="n">hkloop</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">n3rv</span><span class="o">::</span><span class="n">message</span> <span class="n">msg</span><span class="p">;</span>
+        <span class="n">msg</span><span class="p">.</span><span class="n">payload</span> <span class="o">=</span> <span class="s">&quot;Hello World&quot;</span><span class="p">;</span>
+        <span class="k">this</span><span class="o">-&gt;</span><span class="n">send</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">,</span><span class="n">msg</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="p">};</span>
+
+    <span class="c1">//This service subscribes to the &quot;hello&quot;</span>
+    <span class="c1">//service to receive its broadcasts.</span>
+    <span class="k">class</span> <span class="nc">helloreceive</span><span class="o">:</span> <span class="k">public</span> <span class="n">n3rv</span><span class="o">::</span><span class="n">service</span> <span class="p">{</span>
+    <span class="k">using</span> <span class="n">n3rv</span><span class="o">::</span><span class="n">service</span><span class="o">::</span><span class="n">service</span><span class="p">;</span>
+    <span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">initialize</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">this</span><span class="o">-&gt;</span><span class="n">connect</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">,</span><span class="n">ZMQ_SUB</span><span class="p">);</span>
+        <span class="k">this</span><span class="o">-&gt;</span><span class="n">attach</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">,</span> <span class="n">hello_recv</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">//data receive callback.</span>
+    <span class="k">static</span> <span class="kt">void</span><span class="o">*</span> <span class="n">hello_recv</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">objref</span><span class="p">,</span> <span class="n">zmq</span><span class="o">::</span><span class="n">message_t</span><span class="o">*</span> <span class="n">zmsg</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">helloreceive</span><span class="o">*</span> <span class="n">self</span> <span class="o">=</span> <span class="p">(</span><span class="n">helloreceive</span><span class="o">*</span><span class="p">)</span> <span class="n">objref</span><span class="p">;</span>
+        <span class="n">n3rv</span><span class="o">::</span><span class="n">message</span> <span class="n">msg</span> <span class="o">=</span> <span class="n">n3rv</span><span class="o">::</span><span class="n">parse_msg</span><span class="p">(</span><span class="n">zmsg</span><span class="p">);</span>
+        <span class="n">self</span><span class="o">-&gt;</span><span class="n">ll</span><span class="o">-&gt;</span><span class="n">log</span><span class="p">(</span><span class="n">n3rv</span><span class="o">::</span><span class="n">LOGLV_NORM</span><span class="p">,</span> <span class="n">msg</span><span class="p">.</span><span class="n">payload</span><span class="p">);</span>
+    <span class="p">}</span>
+
+
+    <span class="p">};</span>
+
+    <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="n">n3rv</span><span class="o">::</span><span class="n">start_controller</span><span class="p">(</span><span class="s">&quot;0.0.0.0&quot;</span><span class="p">,</span><span class="mi">10001</span><span class="p">,</span><span class="nb">true</span><span class="p">,</span><span class="mi">4</span><span class="p">);</span>
+
+    <span class="n">hellosend</span> <span class="n">hs</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">,</span><span class="s">&quot;hello&quot;</span><span class="p">,</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span><span class="mi">10001</span><span class="p">);</span>
+    <span class="n">hs</span><span class="p">.</span><span class="n">initialize</span><span class="p">();</span>
+    <span class="n">hs</span><span class="p">.</span><span class="n">run_async</span><span class="p">();</span>
+
+    <span class="n">helloreceive</span> <span class="n">hr</span><span class="p">(</span><span class="s">&quot;hellorecv&quot;</span><span class="p">,</span><span class="s">&quot;hellorecv&quot;</span><span class="p">,</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span><span class="mi">10001</span><span class="p">);</span>
+    <span class="n">hr</span><span class="p">.</span><span class="n">initialize</span><span class="p">();</span>
+    <span class="n">hr</span><span class="p">.</span><span class="n">ll</span><span class="o">-&gt;</span><span class="n">add_dest</span><span class="p">(</span><span class="s">&quot;stdout&quot;</span><span class="p">);</span>
+    <span class="n">hr</span><span class="p">.</span><span class="n">run</span><span class="p">();</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+</div>
+</div>
+
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <script type="text/javascript">
+
+    $.each( $('.breathe-sectiondef'), function(index,v) {
+
+      if ( $(this).hasClass('container') ) $(this).removeClass('container');
+
+     } );
+
+    $("#header-pbtn").click(function() { product_dropdown_toggle(); });
+
+    function product_dropdown_toggle() {
+
+      $('#product-dropdown').css({ left: $('#header-pbtn').position().left + 20 + 'px'  });
+
+      if ( $('#product-dropdown').width() == 0 ) {
+
+
+        $('#product-dropdown').animate({ width:"140px", duration: 1000})
+        .after(function() { $('#product-dropdown-ct').show(); } );
+
+      }
+
+      else {
+        
+        $('#product-dropdown').animate({width:"0px",duration: 1000})
+        .after( function() { $('#product-dropdown-ct').hide(); } );   
+      }
+    }
+  </script>
+
+</body>
+
+
+
+
+
+
+
+
+<div class="footer-top">
+
+</div>
+
+<div class="footer-bottom">
+
+  <div class="container">
+
+    <div class="row-fluid">
+
+      <div class="col-md-6">
+        
+      </div>
+      <div class="col-md-6" style="text-align:center"></div>
+    </div>
+  </div>
+
