@@ -1,7 +1,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Search</title>
+  <title>Ubuntu Install</title>
   
   <link href='static/css/bootstrap.css' rel='stylesheet' type='text/css'>
   <link href='static/css/bootstrap-theme.css' rel='stylesheet' type='text/css'>
@@ -60,11 +60,15 @@
       <div id="doc-leftmenu">
 
         
-        <ul>
+        <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="start.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tech_overview.html">Technical Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="howtos.html">HowTos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="howtos.html">HowTos</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Ubuntu Install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto_log.html">Logs Centralizing</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="security.html">A word on Security</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
@@ -77,35 +81,47 @@
 
       <div class="rst-content">
         
-  <h1 id="search-documentation">Search</h1>
-  <div id="fallback" class="admonition warning">
-  <script type="text/javascript">$('#fallback').hide();</script>
-  <p>
-    Please activate JavaScript to enable the search
-    functionality.
-  </p>
-  </div>
-  <p>
-    From here you can search these documents. Enter your search
-    words into the box below and click "search". Note that the search
-    function will automatically search for all of the words. Pages
-    containing fewer words won't appear in the result list.
-  </p>
+  <div class="section" id="ubuntu-install">
+<h1>Ubuntu Install<a class="headerlink" href="#ubuntu-install" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="how-to-setup-n3rv-on-a-fresh-ubuntu-debian-box">
+<h2>How to setup n3rv on a fresh Ubuntu/Debian Box<a class="headerlink" href="#how-to-setup-n3rv-on-a-fresh-ubuntu-debian-box" title="Permalink to this headline">¶</a></h2>
+<p>The follwing tutorial will explain how to get started with n3rv, having a freshly installed
+Debian or ubuntu system.</p>
+</div>
+<div class="section" id="install-the-toolchain-and-library-dependancies">
+<h2>1. Install the toolchain and library dependancies<a class="headerlink" href="#install-the-toolchain-and-library-dependancies" title="Permalink to this headline">¶</a></h2>
+<p>Our first step will be to install the required tools and dependancies to build n3rv</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo apt-get install build-essential cmake git libzmq5-dev libevent-dev</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="clone-the-repository">
+<h2>2. Clone the repository<a class="headerlink" href="#clone-the-repository" title="Permalink to this headline">¶</a></h2>
+<p>Then we will fetch the n3rv source code from Github:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">git clone https://github.com/n3rvcpp/n3rv</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="build-the-library">
+<h2>3. Build the library<a class="headerlink" href="#build-the-library" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cd n3rv</span>
+<span class="go">cmake .</span>
+<span class="go">make</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="install">
+<h2>4. Install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h2>
+<p>If the build phase was succesfull, you can now install n3rv:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo make install</span>
+</pre></div>
+</div>
+<p>The libs are installed by default in <cite>/usr/local/lib</cite> (libn3rv.so and libn3rvhttp.so)
+The include files are in /usr/local/include/n3rv</p>
+<p>That is all, you’re ready to go with n3rv !</p>
+</div>
+</div>
 
-  
-  <form class="form-inline" action="" method="get">
-    <div class="form-group">
-      <input type="text" class="form-control" name="q" value="" />
-    </div>
-    <input type="submit" class="btn btn-default" value="search" />
-    <span id="search-progress" style="padding-left: 10px"></span>
-  </form>  
-  
-  
-  
-  <div id="search-results">
-  
-  </div>
 
       </div>
     </div>
