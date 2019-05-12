@@ -1,0 +1,227 @@
+<head>
+  <meta charset="utf-8">
+  
+  <title>n3rv::servicecontroller</title>
+  
+  <link href='static/css/bootstrap.css' rel='stylesheet' type='text/css'>
+  <link href='static/css/bootstrap-theme.css' rel='stylesheet' type='text/css'>
+
+  
+      <link rel="stylesheet" href="static/bootstrap-sphinx.css" type="text/css" />
+  
+
+  
+
+  <link href='static/css/n3rv.css' rel='stylesheet' type='text/css'>
+
+  <script type="text/javascript" src="static/js/jquery.js"></script>
+
+  <script type="text/javascript" src="static/js/bootstrap.min.js">
+  </script>
+
+</head>
+<!-- <body style="background:#333333;color:white;"> -->
+<body>
+
+    <div class="header-common">
+
+            <div class="container-fluid">
+
+              <div class="col-md-4">
+                <a href="./index.html"><img alt="" id="header-logo" src="static/img/n3rv.png"></a>
+              </div>
+            
+            </div>
+      </div>
+
+<!--
+<div class="doc-nav">
+
+    <div class="container">
+
+    <ul class="nav nav-pills">
+      <li role="presentation" class="disabled"><a href="#">SaaS</a></li>
+      <li role="presentation" class="active"><a href="/sdk">SDK</a></li>
+      <li role="presentation"><a href="/faq">FAQ</a></li>
+    </ul>
+
+  </div>
+
+  </div>
+-->
+
+  <div class="content-3"></div>
+
+
+  <div class="container" style="margin-top:-80px">
+ 
+
+    <div class="col-md-3" style="margin-top:80px">
+      <div id="doc-leftmenu">
+
+        
+        <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="start.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tech_overview.html">Technical Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="api.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="api_service.html">n3rv::service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_logger.html">n3rv::logger</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">n3rv::servicecontroller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_topology.html">n3rv::topology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_httpservice.html">n3rv::httpservice</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">A word on Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+</ul>
+
+      </div>
+    </div>
+
+    <div class="col-md-9">
+
+      <div class="rst-content">
+        
+  <div class="section" id="n3rv-servicecontroller">
+<h1>n3rv::servicecontroller<a class="headerlink" href="#n3rv-servicecontroller" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="_CPPv3N4n3rv17servicecontrollerE">
+<span id="_CPPv2N4n3rv17servicecontrollerE"></span><span id="n3rv::servicecontroller"></span><span class="target" id="classn3rv_1_1servicecontroller"></span><em class="property">class </em>n3rv<code class="descclassname">::</code><code class="descname">servicecontroller</code><a class="headerlink" href="#_CPPv3N4n3rv17servicecontrollerE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>servicecontroller is the directory service that:<ul class="simple">
+<li>Maintains the full list of available endpoints.</li>
+<li>Propagates the available endpoints to every online nodes. </li>
+</ul>
+</p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv3N4n3rv17servicecontroller17servicecontrollerEPKcjP6logger">
+<span id="_CPPv2N4n3rv17servicecontroller17servicecontrollerEPKcjP6logger"></span><span id="n3rv::servicecontroller::servicecontroller__cCP.unsigned-i.loggerP"></span><span class="target" id="classn3rv_1_1servicecontroller_1a83b86699c429f5a63e6e4e7e4911ae71"></span>n3rv::<a class="reference internal" href="#_CPPv3N4n3rv17servicecontrollerE" title="n3rv::servicecontroller">servicecontroller</a><code class="descname">servicecontroller</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>binding_addr</em>, unsigned int <em>binding_port</em>, <a class="reference internal" href="api_logger.html#_CPPv3N4n3rv6loggerE" title="n3rv::logger">logger</a> *<em>ll</em> = nullptr<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv17servicecontroller17servicecontrollerEPKcjP6logger" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>service controller class constructor. <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">binding_addr</span></code>: Ip address the controller must listen to (0.0.0.0 for listen all) </li>
+<li><code class="docutils literal notranslate"><span class="pre">binding_port</span></code>: TCP port to bind controller on. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N4n3rv17servicecontroller13load_topologyENSt6stringE">
+<span id="_CPPv2N4n3rv17servicecontroller13load_topologyENSt6stringE"></span><span id="n3rv::servicecontroller::load_topology__ss"></span><span class="target" id="classn3rv_1_1servicecontroller_1a5325a4e0a0768a1059127c2d53e5274a"></span>int n3rv::<a class="reference internal" href="#_CPPv3N4n3rv17servicecontrollerE" title="n3rv::servicecontroller">servicecontroller</a><code class="descname">load_topology</code><span class="sig-paren">(</span>std::string <em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv17servicecontroller13load_topologyENSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Loads a topology file for the service controller to distribute </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N4n3rv17servicecontroller3runEv">
+<span id="_CPPv2N4n3rv17servicecontroller3runEv"></span><span id="n3rv::servicecontroller::run"></span><span class="target" id="classn3rv_1_1servicecontroller_1a2bd5ac54e3f4b1fe7c12738a52543cb7"></span>void n3rv::<a class="reference internal" href="#_CPPv3N4n3rv17servicecontrollerE" title="n3rv::servicecontroller">servicecontroller</a><code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv17servicecontroller3runEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Runs the service controller once instanciated. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N4n3rv17servicecontroller4stopEv">
+<span id="_CPPv2N4n3rv17servicecontroller4stopEv"></span><span id="n3rv::servicecontroller::stop"></span><span class="target" id="classn3rv_1_1servicecontroller_1a9f5758b129b2dfa7dfc9050df01c46e7"></span>void n3rv::<a class="reference internal" href="#_CPPv3N4n3rv17servicecontrollerE" title="n3rv::servicecontroller">servicecontroller</a><code class="descname">stop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv17servicecontroller4stopEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Stops the service controller main loop. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N4n3rv17servicecontroller9run_asyncEv">
+<span id="_CPPv2N4n3rv17servicecontroller9run_asyncEv"></span><span id="n3rv::servicecontroller::run_async"></span><span class="target" id="classn3rv_1_1servicecontroller_1adfe1dc119b6511e9807150c877b7f0d7"></span>std::thread *n3rv::<a class="reference internal" href="#_CPPv3N4n3rv17servicecontrollerE" title="n3rv::servicecontroller">servicecontroller</a><code class="descname">run_async</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv17servicecontroller9run_asyncEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Asynchronously runs the service controller, returns a handler for the running thread. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N4n3rv17servicecontroller9terminateEv">
+<span id="_CPPv2N4n3rv17servicecontroller9terminateEv"></span><span id="n3rv::servicecontroller::terminate"></span><span class="target" id="classn3rv_1_1servicecontroller_1a33af543e1f5fbf22c3523bde21459b7f"></span>void n3rv::<a class="reference internal" href="#_CPPv3N4n3rv17servicecontrollerE" title="n3rv::servicecontroller">servicecontroller</a><code class="descname">terminate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv17servicecontroller9terminateEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Stops the binding of CH1/CH2 sockets. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt id="_CPPv3N4n3rv17servicecontroller7peer_ipEPN3zmq9message_tE">
+<span id="_CPPv2N4n3rv17servicecontroller7peer_ipEPN3zmq9message_tE"></span><span id="n3rv::servicecontroller::peer_ip__zmq::message_tP"></span><span class="target" id="classn3rv_1_1servicecontroller_1abca73259dcf76d4e135c7ef10b238b21"></span>std::string n3rv::<a class="reference internal" href="#_CPPv3N4n3rv17servicecontrollerE" title="n3rv::servicecontroller">servicecontroller</a><code class="descname">peer_ip</code><span class="sig-paren">(</span>zmq::message_t *<em>zmsg</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv17servicecontroller7peer_ipEPN3zmq9message_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Retrieves the sender’s ip in order to advertise endpoint <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>send’s ip string. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">zmsg</span></code>: originating ZMQ message. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <script type="text/javascript">
+
+    $.each( $('.breathe-sectiondef'), function(index,v) {
+
+      if ( $(this).hasClass('container') ) $(this).removeClass('container');
+
+     } );
+
+    $("#header-pbtn").click(function() { product_dropdown_toggle(); });
+
+    function product_dropdown_toggle() {
+
+      $('#product-dropdown').css({ left: $('#header-pbtn').position().left + 20 + 'px'  });
+
+      if ( $('#product-dropdown').width() == 0 ) {
+
+
+        $('#product-dropdown').animate({ width:"140px", duration: 1000})
+        .after(function() { $('#product-dropdown-ct').show(); } );
+
+      }
+
+      else {
+        
+        $('#product-dropdown').animate({width:"0px",duration: 1000})
+        .after( function() { $('#product-dropdown-ct').hide(); } );   
+      }
+    }
+  </script>
+
+</body>
+
+
+
+
+
+
+
+
+<div class="footer-top">
+
+</div>
+
+<div class="footer-bottom">
+
+  <div class="container">
+
+    <div class="row-fluid">
+
+      <div class="col-md-6">
+        
+      </div>
+      <div class="col-md-6" style="text-align:center"></div>
+    </div>
+  </div>
+

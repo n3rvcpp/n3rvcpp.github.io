@@ -1,0 +1,220 @@
+<head>
+  <meta charset="utf-8">
+  
+  <title>FAQ</title>
+  
+  <link href='static/css/bootstrap.css' rel='stylesheet' type='text/css'>
+  <link href='static/css/bootstrap-theme.css' rel='stylesheet' type='text/css'>
+
+  
+      <link rel="stylesheet" href="static/bootstrap-sphinx.css" type="text/css" />
+  
+
+  
+
+  <link href='static/css/n3rv.css' rel='stylesheet' type='text/css'>
+
+  <script type="text/javascript" src="static/js/jquery.js"></script>
+
+  <script type="text/javascript" src="static/js/bootstrap.min.js">
+  </script>
+
+</head>
+<!-- <body style="background:#333333;color:white;"> -->
+<body>
+
+    <div class="header-common">
+
+            <div class="container-fluid">
+
+              <div class="col-md-4">
+                <a href="./index.html"><img alt="" id="header-logo" src="static/img/n3rv.png"></a>
+              </div>
+            
+            </div>
+      </div>
+
+<!--
+<div class="doc-nav">
+
+    <div class="container">
+
+    <ul class="nav nav-pills">
+      <li role="presentation" class="disabled"><a href="#">SaaS</a></li>
+      <li role="presentation" class="active"><a href="/sdk">SDK</a></li>
+      <li role="presentation"><a href="/faq">FAQ</a></li>
+    </ul>
+
+  </div>
+
+  </div>
+-->
+
+  <div class="content-3"></div>
+
+
+  <div class="container" style="margin-top:-80px">
+ 
+
+    <div class="col-md-3" style="margin-top:80px">
+      <div id="doc-leftmenu">
+
+        
+        <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="start.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tech_overview.html">Technical Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">A word on Security</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">FAQ</a></li>
+</ul>
+
+      </div>
+    </div>
+
+    <div class="col-md-9">
+
+      <div class="rst-content">
+        
+  <div class="section" id="faq">
+<h1>FAQ<a class="headerlink" href="#faq" title="Permalink to this headline">¶</a></h1>
+<p>The following section will regroup all the questions you may ask about n3rv
+framework, being general, architecture or code related.</p>
+<div class="section" id="general">
+<h2>General<a class="headerlink" href="#general" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="q-who-develops-n3rv">
+<h3>Q: Who develops n3rv ?<a class="headerlink" href="#q-who-develops-n3rv" title="Permalink to this headline">¶</a></h3>
+<p>A: My name is Clément Gamé and i am the main and only developper of n3rv framework.</p>
+</div>
+<div class="section" id="q-i-did-a-useful-code-modification-can-i-send-it">
+<h3>Q: I did a useful code modification , can i send it ?<a class="headerlink" href="#q-i-did-a-useful-code-modification-can-i-send-it" title="Permalink to this headline">¶</a></h3>
+<p>A: Yes, feel free to send a pull request on the main n3rv code repository, on github.</p>
+</div>
+<div class="section" id="q-how-can-i-contact-the-developper">
+<h3>Q: How can i contact the developper ?<a class="headerlink" href="#q-how-can-i-contact-the-developper" title="Permalink to this headline">¶</a></h3>
+<p>A: You can contact me by mail at clement.game[__at__]gmail.com, or via twitter (&#64;WintermeW)</p>
+</div>
+</div>
+<div class="section" id="architecture">
+<h2>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="q-what-happens-when-a-service-controller-goes-down">
+<h3>Q: What happens when a service controller goes down ?<a class="headerlink" href="#q-what-happens-when-a-service-controller-goes-down" title="Permalink to this headline">¶</a></h3>
+<p>A: Not much actually, you running nodes will keep going as if nothing happened.
+The only problem is that new nodes and node bindings won’t be able to register, therefore
+the other nodes will not be aware of them.</p>
+</div>
+<div class="section" id="q-can-i-attach-multiple-receive-callbacks-to-a-single-zmq-socket">
+<h3>Q: Can i attach multiple receive callbacks to a single ZMQ socket ?<a class="headerlink" href="#q-can-i-attach-multiple-receive-callbacks-to-a-single-zmq-socket" title="Permalink to this headline">¶</a></h3>
+<p>A: No, you can’t. If you call <cite>service::attach()</cite> more than once on the same qhandler*, the last attached callback will win!
+But you can break your message processing logics into multiple functions that your single callback will call conditionally.</p>
+</div>
+<div class="section" id="q-inversly-can-i-attach-the-same-callback-on-multiple-sockets">
+<h3>Q: Inversly, can i attach the same callback on multiple sockets ?<a class="headerlink" href="#q-inversly-can-i-attach-the-same-callback-on-multiple-sockets" title="Permalink to this headline">¶</a></h3>
+<p>A: Yes you can, no problem. You can even have a single receive callback for all your sockets,
+but that would be poor design.</p>
+</div>
+<div class="section" id="q-in-many-cases-zeromq-allows-a-single-socket-to-connect-to-multiple-endpoints-can-i-do-that-with-n3rv">
+<h3>Q: In many cases, ZeroMQ allows a single socket to connect to multiple endpoints. Can i do that with n3rv ?<a class="headerlink" href="#q-in-many-cases-zeromq-allows-a-single-socket-to-connect-to-multiple-endpoints-can-i-do-that-with-n3rv" title="Permalink to this headline">¶</a></h3>
+<p>A: Yes you can ! <cite>n3rv::service::connect()</cite> has a qhandler* ref overloading, which means you can
+use it to connect multiple times with the same handler (&amp; incidentally zeroMQ socket) reference.</p>
+</div>
+<div class="section" id="q-can-i-use-multiple-service-controllers-inside-a-n3rv-cluster-for-redundency-purpose">
+<h3>Q: Can i use multiple service controllers inside a n3rv cluster, for redundency purpose ?<a class="headerlink" href="#q-can-i-use-multiple-service-controllers-inside-a-n3rv-cluster-for-redundency-purpose" title="Permalink to this headline">¶</a></h3>
+<p>A: Well, yes and no..You can perfectly instanciate multiple service controllers on the same network
+and subscribe some nodes on all of them, but as we speak a given node can’t connect to multiple
+service controllers at the same time and use indiferently one or the other
+(by the usual means at least).</p>
+</div>
+</div>
+<div class="section" id="code">
+<h2>Code<a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="q-given-that-a-node-s-service-class-is-always-named-after-its-implemented-c-class-name-why-do-we-have-to-set-it-manually-in-uid">
+<h3>Q: Given that a node’s service_class is always named after its implemented C++ class name, why do we have to set it manually in uid ?<a class="headerlink" href="#q-given-that-a-node-s-service-class-is-always-named-after-its-implemented-c-class-name-why-do-we-have-to-set-it-manually-in-uid" title="Permalink to this headline">¶</a></h3>
+<p>A: Mainly because of C++’s lack of reflection capacities, and because:</p>
+<ul class="simple">
+<li>typeid(this) return value is dependant of the compiler’s implementation (g++ for instance returns the mangled class name)</li>
+<li>typeid(this) does not see inheritence and returns the object’s parent class.</li>
+</ul>
+</div>
+<div class="section" id="q-why-do-n3rv-receive-callbacks-have-to-be-static-methods">
+<h3>Q: Why do n3rv receive callbacks have to be static methods ?<a class="headerlink" href="#q-why-do-n3rv-receive-callbacks-have-to-be-static-methods" title="Permalink to this headline">¶</a></h3>
+<p>A: Again this is due to a language limitation. At compile time, the signature of a non static method
+changes (mangling, <em>this</em> pointer adding,..), this is why they can’t be used as callbacks.
+The only way to go is to declare a static method and pass the calling object pointer as a void*,
+casting it back in its true type later in the callback.</p>
+</div>
+<div class="section" id="q-why-do-most-of-your-object-returning-functions-don-t-return-refs">
+<h3>Q: why do most of your object-returning functions don’t return refs ?<a class="headerlink" href="#q-why-do-most-of-your-object-returning-functions-don-t-return-refs" title="Permalink to this headline">¶</a></h3>
+<p>A: Copy elision, baby ! ;)</p>
+</div>
+<div class="section" id="q-why-is-the-n3rv-library-not-released-as-a-headers-only-source-as-most-of-the-other-c-libs-do-nowadays">
+<h3>Q: Why is the n3rv library not released as a “headers only” source, as most of the other C++ libs do nowadays ?<a class="headerlink" href="#q-why-is-the-n3rv-library-not-released-as-a-headers-only-source-as-most-of-the-other-c-libs-do-nowadays" title="Permalink to this headline">¶</a></h3>
+<p>A: Good question, i just thought that since multiple library linkings are necessary in order to use n3rv,
+one more wouldn’t make much difference.</p>
+</div>
+</div>
+</div>
+
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <script type="text/javascript">
+
+    $.each( $('.breathe-sectiondef'), function(index,v) {
+
+      if ( $(this).hasClass('container') ) $(this).removeClass('container');
+
+     } );
+
+    $("#header-pbtn").click(function() { product_dropdown_toggle(); });
+
+    function product_dropdown_toggle() {
+
+      $('#product-dropdown').css({ left: $('#header-pbtn').position().left + 20 + 'px'  });
+
+      if ( $('#product-dropdown').width() == 0 ) {
+
+
+        $('#product-dropdown').animate({ width:"140px", duration: 1000})
+        .after(function() { $('#product-dropdown-ct').show(); } );
+
+      }
+
+      else {
+        
+        $('#product-dropdown').animate({width:"0px",duration: 1000})
+        .after( function() { $('#product-dropdown-ct').hide(); } );   
+      }
+    }
+  </script>
+
+</body>
+
+
+
+
+
+
+
+
+<div class="footer-top">
+
+</div>
+
+<div class="footer-bottom">
+
+  <div class="container">
+
+    <div class="row-fluid">
+
+      <div class="col-md-6">
+        
+      </div>
+      <div class="col-md-6" style="text-align:center"></div>
+    </div>
+  </div>
+
