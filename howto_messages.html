@@ -1,0 +1,271 @@
+<head>
+  <meta charset="utf-8">
+  
+  <title>Messages Customization</title>
+  
+  <link href='static/css/bootstrap.css' rel='stylesheet' type='text/css'>
+  <link href='static/css/bootstrap-theme.css' rel='stylesheet' type='text/css'>
+
+  
+      <link rel="stylesheet" href="static/bootstrap-sphinx.css" type="text/css" />
+  
+
+  
+
+  <link href='static/css/n3rv.css' rel='stylesheet' type='text/css'>
+
+  <script type="text/javascript" src="static/js/jquery.js"></script>
+
+  <script type="text/javascript" src="static/js/bootstrap.min.js">
+  </script>
+
+</head>
+<!-- <body style="background:#333333;color:white;"> -->
+<body>
+
+    <div class="header-common">
+
+            <div class="container-fluid">
+
+              <div class="col-md-4">
+                <a href="./index.html"><img alt="" id="header-logo" src="static/img/n3rv.png"></a>
+              </div>
+            
+            </div>
+      </div>
+
+<!--
+<div class="doc-nav">
+
+    <div class="container">
+
+    <ul class="nav nav-pills">
+      <li role="presentation" class="disabled"><a href="#">SaaS</a></li>
+      <li role="presentation" class="active"><a href="/sdk">SDK</a></li>
+      <li role="presentation"><a href="/faq">FAQ</a></li>
+    </ul>
+
+  </div>
+
+  </div>
+-->
+
+  <div class="content-3"></div>
+
+
+  <div class="container" style="margin-top:-80px">
+ 
+
+    <div class="col-md-3" style="margin-top:80px">
+      <div id="doc-leftmenu">
+
+        
+        <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="start.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tech_overview.html">Technical Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="howtos.html">HowTos</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="howto_ububuild.html">Ubuntu Install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto_log.html">Logs Centralizing</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Messages Customization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">A word on Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+</ul>
+
+      </div>
+    </div>
+
+    <div class="col-md-9">
+
+      <div class="rst-content">
+        
+  <div class="section" id="messages-customization">
+<h1>Messages Customization<a class="headerlink" href="#messages-customization" title="Permalink to this headline">¶</a></h1>
+<p>In this tutorial we will see how to extend the n3rv message structure to fit your needs.
+As a reminder, the default n3rv message struct is the following:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cm">/** Main n3rv message struct */</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">message_</span> <span class="p">{</span>
+
+  <span class="cm">/** message sender (automatically filled) */</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">sender</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">action</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">args</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">payload</span><span class="p">;</span>
+
+ <span class="p">}</span> <span class="n">message</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="section" id="modify-src-n3rvproto-hpp">
+<h2>1. Modify src/n3rvproto.hpp<a class="headerlink" href="#modify-src-n3rvproto-hpp" title="Permalink to this headline">¶</a></h2>
+<p>Let’s say we want to add a new field to the structure above, <cite>int priority;</cite>
+Our first step will then be to edit <cite>src/n3rvproto.hpp</cite> to add the field in our message struct:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cm">/** Main n3rv message struct */</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">message_</span> <span class="p">{</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">sender</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">action</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">args</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">payload</span><span class="p">;</span>
+
+  <span class="cm">/* We add our extra field here */</span>
+  <span class="kt">int</span> <span class="n">priority</span><span class="p">;</span>
+
+ <span class="p">}</span> <span class="n">message</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="for-json-default">
+<h2>2. For JSON (default)<a class="headerlink" href="#for-json-default" title="Permalink to this headline">¶</a></h2>
+<p>JSON is the default serialization method in n3rv, so if you did not chose to use protobuf, this is
+the section you want to read.</p>
+<p>So after having edited our message struct, we need to modify our serialization / deserialization methods
+to take this new field into account. To do this, we must modify <cite>src/protocol/json/protocol.cpp</cite></p>
+<div class="section" id="n3rv-parse-msg">
+<h3>2.1 n3rv::parse_msg()<a class="headerlink" href="#n3rv-parse-msg" title="Permalink to this headline">¶</a></h3>
+<p>First in the parse_msg method, we must add the priority field parsing:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">//..</span>
+<span class="c1">//msg_.action = d[&quot;action&quot;].GetString();</span>
+<span class="c1">//msg_.payload = d[&quot;payload&quot;].GetString();</span>
+
+<span class="cm">/* We add parsing for our new field */</span>
+<span class="n">msg_</span><span class="p">.</span><span class="n">priority</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s">&quot;priority&quot;</span><span class="p">].</span><span class="n">GetInt</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="n3rv-serialize-msg">
+<h3>2.2 n3rv::serialize_msg()<a class="headerlink" href="#n3rv-serialize-msg" title="Permalink to this headline">¶</a></h3>
+<p>Then we repeat the operation but for the serializing method:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">//..</span>
+<span class="c1">//writer.String(&quot;payload&quot;);</span>
+<span class="c1">//writer.String(msg.payload.c_str());</span>
+
+<span class="cm">/* We add our field for serializing */</span>
+<span class="n">writer</span><span class="p">.</span><span class="n">String</span><span class="p">(</span><span class="s">&quot;prioriy&quot;</span><span class="p">);</span>
+<span class="n">writer</span><span class="p">.</span><span class="n">Int</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">priority</span><span class="p">);</span>
+
+<span class="c1">//writer.EndObject();</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="b-for-protobuf">
+<h2>2b. For Protobuf<a class="headerlink" href="#b-for-protobuf" title="Permalink to this headline">¶</a></h2>
+<p>If you chose protobuf as serializing method, here is what you have to do.</p>
+<div class="section" id="b-1-update-src-protocol-n3rvproto-proto">
+<h3>2b.1 Update <cite>src/protocol/n3rvproto.proto</cite><a class="headerlink" href="#b-1-update-src-protocol-n3rvproto-proto" title="Permalink to this headline">¶</a></h3>
+<p>In the <cite>src/protocol/n3rvproto.proto</cite> file, you will add our extra field in the n3rvmessage object def:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">message n3rvmessage {</span>
+<span class="go"> required string sender = 1;</span>
+<span class="go"> required string action = 2;</span>
+<span class="go"> repeated string args = 3;</span>
+<span class="go"> required string payload = 4;</span>
+
+<span class="go"> required int priority = 5;</span>
+</pre></div>
+</div>
+<p>}</p>
+</div>
+<div class="section" id="b-2-recompile-protobuf-file">
+<h3>2b.2 recompile protobuf file<a class="headerlink" href="#b-2-recompile-protobuf-file" title="Permalink to this headline">¶</a></h3>
+<p>Now we are ready to recreate the protobuf source files:</p>
+</div>
+<div class="section" id="b-3-n3rv-parse-msg">
+<h3>2b.3 n3rv::parse_msg()<a class="headerlink" href="#b-3-n3rv-parse-msg" title="Permalink to this headline">¶</a></h3>
+<p>Then we need to modify <cite>src/protocol/protobuf/protocol.cpp</cite> to take our new field into account
+when deserializing:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">//..</span>
+<span class="c1">//msg_.action = msg__.action();</span>
+<span class="c1">//msg_.payload = msg__.payload();</span>
+<span class="n">msg_</span><span class="p">.</span><span class="n">priority</span> <span class="o">=</span> <span class="n">msg__</span><span class="p">.</span><span class="n">priority</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="b-4-n3rv-serialize-msg">
+<h3>2b.4 n3rv::serialize_msg()<a class="headerlink" href="#b-4-n3rv-serialize-msg" title="Permalink to this headline">¶</a></h3>
+<p>Finally we need to modify serialize_msg() in the same file to take our new field into account
+when serializing:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">//..</span>
+<span class="c1">//msg__.set_action(msg.action);</span>
+<span class="c1">//msg__.set_payload(msg.payload);</span>
+<span class="n">msg__</span><span class="p">.</span><span class="n">set_priority</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">priority</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="rebuild">
+<h2>3. Rebuild<a class="headerlink" href="#rebuild" title="Permalink to this headline">¶</a></h2>
+<p>Now that we made all the required modifications, all we must do is to rebuild the library:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cmake [-DWITH_PROTOBUF=on] .</span>
+<span class="go">make &amp;&amp; sudo make install</span>
+</pre></div>
+</div>
+<p>That is all, you are now ready to use the n3rv::message::priority field inside your custom service classes !</p>
+</div>
+</div>
+
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <script type="text/javascript">
+
+    $.each( $('.breathe-sectiondef'), function(index,v) {
+
+      if ( $(this).hasClass('container') ) $(this).removeClass('container');
+
+     } );
+
+    $("#header-pbtn").click(function() { product_dropdown_toggle(); });
+
+    function product_dropdown_toggle() {
+
+      $('#product-dropdown').css({ left: $('#header-pbtn').position().left + 20 + 'px'  });
+
+      if ( $('#product-dropdown').width() == 0 ) {
+
+
+        $('#product-dropdown').animate({ width:"140px", duration: 1000})
+        .after(function() { $('#product-dropdown-ct').show(); } );
+
+      }
+
+      else {
+        
+        $('#product-dropdown').animate({width:"0px",duration: 1000})
+        .after( function() { $('#product-dropdown-ct').hide(); } );   
+      }
+    }
+  </script>
+
+</body>
+
+
+
+
+
+
+
+
+<div class="footer-top">
+
+</div>
+
+<div class="footer-bottom">
+
+  <div class="container">
+
+    <div class="row-fluid">
+
+      <div class="col-md-6">
+        
+      </div>
+      <div class="col-md-6" style="text-align:center"></div>
+    </div>
+  </div>
+
