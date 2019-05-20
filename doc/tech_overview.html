@@ -1,0 +1,292 @@
+<head>
+  <meta charset="utf-8">
+  
+  <title>Technical Overview</title>
+  
+  <link href='static/css/bootstrap.css' rel='stylesheet' type='text/css'>
+  <link href='static/css/bootstrap-theme.css' rel='stylesheet' type='text/css'>
+
+  
+      <link rel="stylesheet" href="static/bootstrap-sphinx.css" type="text/css" />
+  
+
+  
+
+  <link href='static/css/n3rv.css' rel='stylesheet' type='text/css'>
+
+  <script type="text/javascript" src="static/js/jquery.js"></script>
+
+  <script type="text/javascript" src="static/js/bootstrap.min.js">
+  </script>
+
+</head>
+<!-- <body style="background:#333333;color:white;"> -->
+<body>
+
+    <div class="header-common">
+
+            <div class="container-fluid">
+
+              <div class="col-md-4">
+                <a href="./index.html"><img alt="" id="header-logo" src="static/img/n3rv.png"></a>
+              </div>
+            
+            </div>
+      </div>
+
+<!--
+<div class="doc-nav">
+
+    <div class="container">
+
+    <ul class="nav nav-pills">
+      <li role="presentation" class="disabled"><a href="#">SaaS</a></li>
+      <li role="presentation" class="active"><a href="/sdk">SDK</a></li>
+      <li role="presentation"><a href="/faq">FAQ</a></li>
+    </ul>
+
+  </div>
+
+  </div>
+-->
+
+  <div class="content-3"></div>
+
+
+  <div class="container" style="margin-top:-80px">
+ 
+
+    <div class="col-md-3" style="margin-top:80px">
+      <div id="doc-leftmenu">
+
+        
+        <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="start.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Technical Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tech_terminology.html">n3rv Terminology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_serviceclass.html">The service Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_servicecontroller.html">Service Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_qhandler.html">Qhandlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_bindconnect.html">bind &amp; connect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_messages.html">Messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_send.html">Sending Messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_resolution.html">Resolution Mechanism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_polling.html">Polling System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_svcmainloop.html">Service Main Loop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_logging.html">Logging Mechanism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_topologies.html">Topologies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_httpgateway.html">HTTP Gateway</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="howtos.html">HowTos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">A word on Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+</ul>
+
+      </div>
+    </div>
+
+    <div class="col-md-9">
+
+      <div class="rst-content">
+        
+  <div class="section" id="technical-overview">
+<h1>Technical Overview<a class="headerlink" href="#technical-overview" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tech_terminology.html">n3rv Terminology</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tech_terminology.html#terminology">Terminology</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tech_terminology.html#namespace">Namespace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tech_terminology.html#service-class">Service Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tech_terminology.html#node-or-service-instance">Node or Service Instance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tech_terminology.html#binding">Binding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tech_terminology.html#service-controller">Service Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tech_terminology.html#topology">Topology</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tech_terminology.html#cluster">cluster</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tech_terminology.html#objects-hierachy">Objects Hierachy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tech_serviceclass.html">The service Class</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tech_serviceclass.html#how-to-define-a-custom-service-class">How to define a custom service class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_serviceclass.html#instanciate-a-service-class">Instanciate a service class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_serviceclass.html#uids">UIDs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_serviceclass.html#running-your-service-classes">Running your service classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_serviceclass.html#additionnal-informations">Additionnal informations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tech_servicecontroller.html">Service Controller</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tech_servicecontroller.html#create-a-service-controller">Create a service Controller</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tech_servicecontroller.html#method-1-start-controller">Method 1: start_controller()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tech_servicecontroller.html#method-2-direct-instanciating">Method 2: Direct instanciating</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tech_servicecontroller.html#run-a-service-controller">Run a service Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_servicecontroller.html#a-word-about-service-controllers-and-nat">A word about service controllers and NAT</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tech_qhandler.html">Qhandlers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tech_qhandler.html#getting-zmq-socket-with-a-qhandler">Getting ZMQ socket with a qhandler*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_qhandler.html#qhandlers-and-zmq-socket-options">Qhandlers and ZMQ Socket Options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tech_bindconnect.html">bind &amp; connect</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tech_bindconnect.html#service-bind">service::bind()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tech_bindconnect.html#important-notes-about-service-bind">Important notes about <cite>service::bind()</cite>:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tech_bindconnect.html#service-connect">service::connect()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tech_bindconnect.html#lookup">lookup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tech_bindconnect.html#zmq-socket-type">zmq_socket_type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tech_bindconnect.html#hdlref">hdlref</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tech_bindconnect.html#important-notes-about-service-connect">Important notes about <cite>service::connect()</cite>:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tech_bindconnect.html#zeromq-socket-types">ZeroMQ Socket Types</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tech_messages.html">Messages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tech_messages.html#message-structure">Message structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_messages.html#serialization-deserialization">Serialization / Deserialization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_messages.html#raw-data-byte-sequences-exchange-between-nodes">Raw data (byte sequences) Exchange between nodes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tech_send.html">Sending Messages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tech_send.html#service-send">service::send()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_send.html#send-a-n3rv-message">Send a n3rv::message</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_send.html#send-a-raw-zmq-message">Send a Raw ZMQ message</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_send.html#zmq-flags">ZMQ flags</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tech_resolution.html">Resolution Mechanism</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tech_resolution.html#general-principle">General Principle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_resolution.html#wildcard-resolutions">Wildcard (*) Resolutions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_resolution.html#wildcard-resulutions-batch-connections-connect-all">Wildcard resulutions + batch connections: connect_all()</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tech_polling.html">Polling System</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tech_polling.html#receive-callbacks-and-attach">Receive Callbacks and attach()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_polling.html#more-on-receive-callbacks">More on Receive Callbacks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tech_polling.html#static">static ?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tech_polling.html#objref">objref</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tech_polling.html#msg">msg</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tech_polling.html#polling-timeout">Polling Timeout</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tech_svcmainloop.html">Service Main Loop</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tech_svcmainloop.html#asynchronous-run">Asynchronous Run</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_svcmainloop.html#tempering-with-the-main-loop">Tempering with the main loop</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tech_svcmainloop.html#service-hkloop">service::hkloop()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tech_svcmainloop.html#service-register-main">service::register_main()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tech_svcmainloop.html#a-matter-of-choice">A matter of choice</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tech_svcmainloop.html#interaction-with-poll-timeout">Interaction with poll_timeout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_svcmainloop.html#don-t-mess-with-the-loop">Don’t mess with the Loop</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tech_logging.html">Logging Mechanism</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tech_logging.html#service-ll-member">service::ll member</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_logging.html#log-function">Log() function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_logging.html#log-levels">Log Levels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_logging.html#logging-destinations">Logging Destinations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tech_logging.html#stdout">stdout</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tech_logging.html#file-path">file://&lt;path&gt;</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tech_logging.html#syslog-ident-facility">syslog:&lt;ident&gt;:&lt;facility&gt;</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tech_logging.html#sharing-a-single-logger-across-multiple-nodes-service-controller">Sharing a single logger across multiple nodes / service controller</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tech_topologies.html">Topologies</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tech_topologies.html#topology-definitions">Topology definitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_topologies.html#loading-topologies">Loading Topologies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tech_topologies.html#local-json-file">Local JSON file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tech_topologies.html#the-royal-way-using-the-service-controller">The royal way: using the service controller</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tech_topologies.html#callbacks-preregistering">Callbacks Preregistering</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tech_httpgateway.html">HTTP Gateway</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tech_httpgateway.html#httpservice-class">httpservice class</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tech_httpgateway.html#initializing-http-service">Initializing HTTP Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tech_httpgateway.html#distribute-content-attach-uri-to-callback">Distribute content: Attach URI to Callback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tech_httpgateway.html#callback-structure">Callback Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tech_httpgateway.html#extra-linking">Extra linking</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <script type="text/javascript">
+
+    $.each( $('.breathe-sectiondef'), function(index,v) {
+
+      if ( $(this).hasClass('container') ) $(this).removeClass('container');
+
+     } );
+
+    $("#header-pbtn").click(function() { product_dropdown_toggle(); });
+
+    function product_dropdown_toggle() {
+
+      $('#product-dropdown').css({ left: $('#header-pbtn').position().left + 20 + 'px'  });
+
+      if ( $('#product-dropdown').width() == 0 ) {
+
+
+        $('#product-dropdown').animate({ width:"140px", duration: 1000})
+        .after(function() { $('#product-dropdown-ct').show(); } );
+
+      }
+
+      else {
+        
+        $('#product-dropdown').animate({width:"0px",duration: 1000})
+        .after( function() { $('#product-dropdown-ct').hide(); } );   
+      }
+    }
+  </script>
+
+</body>
+
+
+
+
+
+
+
+
+<div class="footer-top">
+
+</div>
+
+<div class="footer-bottom">
+
+  <div class="container">
+
+    <div class="row-fluid">
+
+      <div class="col-md-6">
+        
+      </div>
+      <div class="col-md-6" style="text-align:center"></div>
+    </div>
+  </div>
+

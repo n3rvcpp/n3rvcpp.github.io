@@ -1,0 +1,353 @@
+<head>
+  <meta charset="utf-8">
+  
+  <title>First Program</title>
+  
+  <link href='static/css/bootstrap.css' rel='stylesheet' type='text/css'>
+  <link href='static/css/bootstrap-theme.css' rel='stylesheet' type='text/css'>
+
+  
+      <link rel="stylesheet" href="static/bootstrap-sphinx.css" type="text/css" />
+  
+
+  
+
+  <link href='static/css/n3rv.css' rel='stylesheet' type='text/css'>
+
+  <script type="text/javascript" src="static/js/jquery.js"></script>
+
+  <script type="text/javascript" src="static/js/bootstrap.min.js">
+  </script>
+
+</head>
+<!-- <body style="background:#333333;color:white;"> -->
+<body>
+
+    <div class="header-common">
+
+            <div class="container-fluid">
+
+              <div class="col-md-4">
+                <a href="./index.html"><img alt="" id="header-logo" src="static/img/n3rv.png"></a>
+              </div>
+            
+            </div>
+      </div>
+
+<!--
+<div class="doc-nav">
+
+    <div class="container">
+
+    <ul class="nav nav-pills">
+      <li role="presentation" class="disabled"><a href="#">SaaS</a></li>
+      <li role="presentation" class="active"><a href="/sdk">SDK</a></li>
+      <li role="presentation"><a href="/faq">FAQ</a></li>
+    </ul>
+
+  </div>
+
+  </div>
+-->
+
+  <div class="content-3"></div>
+
+
+  <div class="container" style="margin-top:-80px">
+ 
+
+    <div class="col-md-3" style="margin-top:80px">
+      <div id="doc-leftmenu">
+
+        
+        <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="start.html">Getting Started</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="start_requirements.html">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="start_buildinstall.html">Build &amp; Install n3rv</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">First Program</a></li>
+<li class="toctree-l2"><a class="reference internal" href="start_examples.html">Running Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tech_overview.html">Technical Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howtos.html">HowTos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">A word on Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+</ul>
+
+      </div>
+    </div>
+
+    <div class="col-md-9">
+
+      <div class="rst-content">
+        
+  <div class="section" id="first-program">
+<h1>First Program<a class="headerlink" href="#first-program" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="your-first-program-hello-world">
+<h2>Your first Program: Hello World !<a class="headerlink" href="#your-first-program-hello-world" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have correctly build and installed the n3rv library, we will start to code.</p>
+<p>The goal here is to create a simple program that will instanciate 2 nodes and a service controller.
+Node 1 will continuously broadcast the “Hello World” string. Node 2 will connect to Node1’s broadcast
+stream and display data on its stdout as soon as they are received.</p>
+<p>So we’ll start by creating a new blank file called “hello.cpp” and edit it</p>
+<div class="section" id="required-headers">
+<h3>Required Headers<a class="headerlink" href="#required-headers" title="Permalink to this headline">¶</a></h3>
+<p>The first step is to add in our hello.cpp the required headers for n3rv.
+Let’s do this:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;n3rv/n3rvcommon.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;n3rv/n3rvservice.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;n3rv/n3rvservicecontroller.hpp&gt;</span><span class="cp"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sender-service-class">
+<h3>Sender Service Class<a class="headerlink" href="#sender-service-class" title="Permalink to this headline">¶</a></h3>
+<p>The Next step will be to create a new service class. its role will just be to:</p>
+<ul class="simple">
+<li>Bind a ZMQ broadcasting socket (ZMQ_PUB)</li>
+<li>send “Hello World” continuously on it.</li>
+</ul>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cm">/* We declare our new class inheriting from n3rv::service. */</span>
+<span class="k">class</span> <span class="nc">hellosend</span><span class="o">:</span> <span class="k">public</span> <span class="n">n3rv</span><span class="o">::</span><span class="n">service</span> <span class="p">{</span>
+    <span class="k">using</span> <span class="n">n3rv</span><span class="o">::</span><span class="n">service</span><span class="o">::</span><span class="n">service</span><span class="p">;</span>
+
+    <span class="k">public</span><span class="o">:</span>
+
+    <span class="n">n3rv</span><span class="o">::</span><span class="n">qhandler</span><span class="o">*</span> <span class="n">hello</span><span class="p">;</span>
+
+    <span class="kt">int</span> <span class="nf">initialize</span><span class="p">()</span> <span class="p">{</span>
+
+      <span class="c1">//Sets a global identifier for service node.</span>
+      <span class="k">this</span><span class="o">-&gt;</span><span class="n">set_uid</span><span class="p">(</span><span class="s">&quot;com.hellosend.hello1&quot;</span><span class="p">);</span>
+
+      <span class="c1">//creates a new ZMQ socket binding of type PUBLISH</span>
+      <span class="n">hello</span> <span class="o">=</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">bind</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">,</span><span class="s">&quot;0.0.0.0&quot;</span><span class="p">,</span> <span class="n">ZMQ_PUB</span><span class="p">);</span>
+
+    <span class="p">}</span>
+
+    <span class="cm">/* We add some code in the main loop to continually send &quot;Hello World&quot;</span>
+<span class="cm">       on the pub socket */</span>
+    <span class="kt">void</span> <span class="nf">hkloop</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">n3rv</span><span class="o">::</span><span class="n">message</span> <span class="n">msg</span><span class="p">;</span>
+        <span class="n">msg</span><span class="p">.</span><span class="n">payload</span> <span class="o">=</span> <span class="s">&quot;Hello World&quot;</span><span class="p">;</span>
+        <span class="k">this</span><span class="o">-&gt;</span><span class="n">send</span><span class="p">(</span><span class="n">hello</span><span class="p">,</span><span class="n">msg</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+    <span class="p">}</span>
+
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="receiver-service-class">
+<h3>Receiver Service Class<a class="headerlink" href="#receiver-service-class" title="Permalink to this headline">¶</a></h3>
+<p>Then we will declare a simple receiver class which has the following behaviour:</p>
+<ul class="simple">
+<li>connect to the sender’s broadcast stream.</li>
+<li>display the data received.</li>
+</ul>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">helloreceive</span><span class="o">:</span> <span class="k">public</span> <span class="n">n3rv</span><span class="o">::</span><span class="n">service</span> <span class="p">{</span>
+  <span class="k">using</span> <span class="n">n3rv</span><span class="o">::</span><span class="n">service</span><span class="o">::</span><span class="n">service</span><span class="p">;</span>
+  <span class="k">public</span><span class="o">:</span>
+
+  <span class="n">n3rv</span><span class="o">::</span><span class="n">qhandler</span><span class="o">*</span> <span class="n">hello</span><span class="p">;</span>
+
+  <span class="kt">int</span> <span class="nf">initialize</span><span class="p">()</span> <span class="p">{</span>
+
+      <span class="k">this</span><span class="o">-&gt;</span><span class="n">set_uid</span><span class="p">(</span><span class="s">&quot;com.hellorecv.recv1&quot;</span><span class="p">);</span>
+
+      <span class="cm">/* We connect to the sender */</span>
+      <span class="n">hello</span> <span class="o">=</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">connect</span><span class="p">(</span><span class="s">&quot;com.hellosend.*.hello&quot;</span><span class="p">,</span><span class="n">ZMQ_SUB</span><span class="p">);</span>
+
+      <span class="cm">/* We attach reveive callback to connection */</span>
+      <span class="k">this</span><span class="o">-&gt;</span><span class="n">attach</span><span class="p">(</span><span class="n">hello</span><span class="p">,</span> <span class="n">hello_recv</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="cm">/*data receive callback.*/</span>
+  <span class="k">static</span> <span class="kt">void</span><span class="o">*</span> <span class="nf">hello_recv</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">objref</span><span class="p">,</span> <span class="n">zmq</span><span class="o">::</span><span class="n">message_t</span><span class="o">*</span> <span class="n">zmsg</span><span class="p">)</span> <span class="p">{</span>
+
+      <span class="n">helloreceive</span><span class="o">*</span> <span class="n">self</span> <span class="o">=</span> <span class="p">(</span><span class="n">helloreceive</span><span class="o">*</span><span class="p">)</span> <span class="n">objref</span><span class="p">;</span>
+      <span class="n">n3rv</span><span class="o">::</span><span class="n">message</span> <span class="n">msg</span> <span class="o">=</span> <span class="n">n3rv</span><span class="o">::</span><span class="n">parse_msg</span><span class="p">(</span><span class="n">zmsg</span><span class="p">);</span>
+      <span class="cm">/* We log received data */</span>
+      <span class="n">self</span><span class="o">-&gt;</span><span class="n">ll</span><span class="o">-&gt;</span><span class="n">log</span><span class="p">(</span><span class="n">n3rv</span><span class="o">::</span><span class="n">LOGLV_NOTICE</span><span class="p">,</span> <span class="n">msg</span><span class="p">.</span><span class="n">payload</span> <span class="o">+</span> <span class="s">&quot; from &quot;</span> <span class="o">+</span> <span class="n">self</span><span class="o">-&gt;</span><span class="n">hello</span><span class="o">-&gt;</span><span class="n">peer_uid</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="instanciating-all-main">
+<h3>Instanciating All: main()<a class="headerlink" href="#instanciating-all-main" title="Permalink to this headline">¶</a></h3>
+<p>Finally we will add a main() function that will instanciate both one hellosend and one helloreceive
+node, along with a service controller and let them all <cite>run()</cite></p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span> <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+
+      <span class="cm">/* We create a new logger object */</span>
+      <span class="n">n3rv</span><span class="o">::</span><span class="n">logger</span><span class="o">*</span> <span class="n">ll</span> <span class="o">=</span> <span class="k">new</span> <span class="n">n3rv</span><span class="o">::</span><span class="n">logger</span><span class="p">(</span><span class="n">n3rv</span><span class="o">::</span><span class="n">LOGLV_DEBUG</span><span class="p">);</span>
+
+      <span class="cm">/* Then we tell it to perform stdout display */</span>
+      <span class="n">ll</span><span class="o">-&gt;</span><span class="n">add_dest</span><span class="p">(</span><span class="s">&quot;stdout&quot;</span><span class="p">);</span>
+
+      <span class="cm">/* We asynchronously start a new service controller */</span>
+      <span class="n">n3rv</span><span class="o">::</span><span class="n">start_controller</span><span class="p">(</span><span class="s">&quot;0.0.0.0&quot;</span><span class="p">,</span><span class="mi">10001</span><span class="p">,</span><span class="n">ll</span><span class="p">);</span>
+
+      <span class="cm">/* We instanciate a new hellosend node */</span>
+      <span class="n">hellosend</span> <span class="n">hs</span><span class="p">(</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span><span class="mi">10001</span><span class="p">,</span><span class="n">ll</span><span class="p">);</span>
+
+      <span class="cm">/* We initialize it and run it asynchronously */</span>
+      <span class="n">hs</span><span class="p">.</span><span class="n">initialize</span><span class="p">();</span>
+      <span class="n">hs</span><span class="p">.</span><span class="n">run_async</span><span class="p">();</span>
+
+      <span class="cm">/* We instanciate a new helloreceive node. */</span>
+      <span class="n">helloreceive</span> <span class="n">hr</span><span class="p">(</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span><span class="mi">10001</span><span class="p">,</span><span class="n">ll</span><span class="p">);</span>
+
+      <span class="cm">/* We initialize then run it */</span>
+      <span class="n">hr</span><span class="p">.</span><span class="n">initialize</span><span class="p">();</span>
+      <span class="n">hr</span><span class="p">.</span><span class="n">run</span><span class="p">();</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="full-code">
+<h3>Full Code<a class="headerlink" href="#full-code" title="Permalink to this headline">¶</a></h3>
+<p>The full hello.cpp code source is then the following:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;n3rv/n3rvcommon.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;n3rv/n3rvservice.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;n3rv/n3rvservicecontroller.hpp&gt;</span><span class="cp"></span>
+
+<span class="k">class</span> <span class="nc">hellosend</span><span class="o">:</span> <span class="k">public</span> <span class="n">n3rv</span><span class="o">::</span><span class="n">service</span> <span class="p">{</span>
+  <span class="k">using</span> <span class="n">n3rv</span><span class="o">::</span><span class="n">service</span><span class="o">::</span><span class="n">service</span><span class="p">;</span>
+  <span class="k">public</span><span class="o">:</span>
+
+  <span class="n">n3rv</span><span class="o">::</span><span class="n">qhandler</span><span class="o">*</span> <span class="n">hello</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="nf">initialize</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">set_uid</span><span class="p">(</span><span class="s">&quot;com.hellosend.hello1&quot;</span><span class="p">);</span>
+    <span class="n">hello</span> <span class="o">=</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">bind</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">,</span><span class="s">&quot;0.0.0.0&quot;</span><span class="p">,</span> <span class="n">ZMQ_PUB</span><span class="p">);</span>
+
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="nf">hkloop</span><span class="p">()</span> <span class="p">{</span>
+      <span class="n">n3rv</span><span class="o">::</span><span class="n">message</span> <span class="n">msg</span><span class="p">;</span>
+      <span class="n">msg</span><span class="p">.</span><span class="n">payload</span> <span class="o">=</span> <span class="s">&quot;Hello World&quot;</span><span class="p">;</span>
+      <span class="k">this</span><span class="o">-&gt;</span><span class="n">send</span><span class="p">(</span><span class="n">hello</span><span class="p">,</span><span class="n">msg</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+  <span class="p">}</span>
+
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">helloreceive</span><span class="o">:</span> <span class="k">public</span> <span class="n">n3rv</span><span class="o">::</span><span class="n">service</span> <span class="p">{</span>
+  <span class="k">using</span> <span class="n">n3rv</span><span class="o">::</span><span class="n">service</span><span class="o">::</span><span class="n">service</span><span class="p">;</span>
+  <span class="k">public</span><span class="o">:</span>
+
+  <span class="n">n3rv</span><span class="o">::</span><span class="n">qhandler</span><span class="o">*</span> <span class="n">hello</span><span class="p">;</span>
+
+  <span class="kt">int</span> <span class="nf">initialize</span><span class="p">()</span> <span class="p">{</span>
+
+      <span class="k">this</span><span class="o">-&gt;</span><span class="n">set_uid</span><span class="p">(</span><span class="s">&quot;com.hellorecv.recv1&quot;</span><span class="p">);</span>
+      <span class="n">hello</span> <span class="o">=</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">connect</span><span class="p">(</span><span class="s">&quot;com.hellosend.*.hello&quot;</span><span class="p">,</span><span class="n">ZMQ_SUB</span><span class="p">);</span>
+      <span class="k">this</span><span class="o">-&gt;</span><span class="n">attach</span><span class="p">(</span><span class="n">hello</span><span class="p">,</span> <span class="n">hello_recv</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">//data receive callback.</span>
+  <span class="k">static</span> <span class="kt">void</span><span class="o">*</span> <span class="nf">hello_recv</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">objref</span><span class="p">,</span> <span class="n">zmq</span><span class="o">::</span><span class="n">message_t</span><span class="o">*</span> <span class="n">zmsg</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">helloreceive</span><span class="o">*</span> <span class="n">self</span> <span class="o">=</span> <span class="p">(</span><span class="n">helloreceive</span><span class="o">*</span><span class="p">)</span> <span class="n">objref</span><span class="p">;</span>
+      <span class="n">n3rv</span><span class="o">::</span><span class="n">message</span> <span class="n">msg</span> <span class="o">=</span> <span class="n">n3rv</span><span class="o">::</span><span class="n">parse_msg</span><span class="p">(</span><span class="n">zmsg</span><span class="p">);</span>
+      <span class="n">self</span><span class="o">-&gt;</span><span class="n">ll</span><span class="o">-&gt;</span><span class="n">log</span><span class="p">(</span><span class="n">n3rv</span><span class="o">::</span><span class="n">LOGLV_NOTICE</span><span class="p">,</span> <span class="n">msg</span><span class="p">.</span><span class="n">payload</span> <span class="o">+</span> <span class="s">&quot; from &quot;</span> <span class="o">+</span> <span class="n">self</span><span class="o">-&gt;</span><span class="n">hello</span><span class="o">-&gt;</span><span class="n">peer_uid</span><span class="p">);</span>
+  <span class="p">}</span>
+
+<span class="p">};</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+
+   <span class="n">n3rv</span><span class="o">::</span><span class="n">logger</span><span class="o">*</span> <span class="n">ll</span> <span class="o">=</span> <span class="k">new</span> <span class="n">n3rv</span><span class="o">::</span><span class="n">logger</span><span class="p">(</span><span class="n">n3rv</span><span class="o">::</span><span class="n">LOGLV_DEBUG</span><span class="p">);</span>
+   <span class="n">ll</span><span class="o">-&gt;</span><span class="n">add_dest</span><span class="p">(</span><span class="s">&quot;stdout&quot;</span><span class="p">);</span>
+
+   <span class="n">n3rv</span><span class="o">::</span><span class="n">start_controller</span><span class="p">(</span><span class="s">&quot;0.0.0.0&quot;</span><span class="p">,</span><span class="mi">10001</span><span class="p">,</span><span class="n">ll</span><span class="p">);</span>
+
+   <span class="n">hellosend</span> <span class="n">hs</span><span class="p">(</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span><span class="mi">10001</span><span class="p">,</span><span class="n">ll</span><span class="p">);</span>
+   <span class="n">hs</span><span class="p">.</span><span class="n">initialize</span><span class="p">();</span>
+   <span class="n">hs</span><span class="p">.</span><span class="n">run_async</span><span class="p">();</span>
+
+   <span class="n">helloreceive</span> <span class="n">hr</span><span class="p">(</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span><span class="mi">10001</span><span class="p">,</span><span class="n">ll</span><span class="p">);</span>
+
+   <span class="n">hr</span><span class="p">.</span><span class="n">initialize</span><span class="p">();</span>
+   <span class="n">hr</span><span class="p">.</span><span class="n">run</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="compile-run">
+<h2>Compile &amp; Run<a class="headerlink" href="#compile-run" title="Permalink to this headline">¶</a></h2>
+<p>Now that we wrote our program, it’s time to compile and run it:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">g++ hello.cpp -o hello -ln3rv -lzmq -lpthread &amp;&amp; ./hello</span>
+</pre></div>
+</div>
+<p>If compiling succeded, here’s what you should see:</p>
+<a class="reference internal image-reference" href="images/hello_screen.png"><img alt="images/hello_screen.png" src="images/hello_screen.png" style="width: 642.0px; height: 422.0px;" /></a>
+</div>
+</div>
+
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <script type="text/javascript">
+
+    $.each( $('.breathe-sectiondef'), function(index,v) {
+
+      if ( $(this).hasClass('container') ) $(this).removeClass('container');
+
+     } );
+
+    $("#header-pbtn").click(function() { product_dropdown_toggle(); });
+
+    function product_dropdown_toggle() {
+
+      $('#product-dropdown').css({ left: $('#header-pbtn').position().left + 20 + 'px'  });
+
+      if ( $('#product-dropdown').width() == 0 ) {
+
+
+        $('#product-dropdown').animate({ width:"140px", duration: 1000})
+        .after(function() { $('#product-dropdown-ct').show(); } );
+
+      }
+
+      else {
+        
+        $('#product-dropdown').animate({width:"0px",duration: 1000})
+        .after( function() { $('#product-dropdown-ct').hide(); } );   
+      }
+    }
+  </script>
+
+</body>
+
+
+
+
+
+
+
+
+<div class="footer-top">
+
+</div>
+
+<div class="footer-bottom">
+
+  <div class="container">
+
+    <div class="row-fluid">
+
+      <div class="col-md-6">
+        
+      </div>
+      <div class="col-md-6" style="text-align:center"></div>
+    </div>
+  </div>
+

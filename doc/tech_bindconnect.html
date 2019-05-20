@@ -1,0 +1,249 @@
+<head>
+  <meta charset="utf-8">
+  
+  <title>bind &amp; connect</title>
+  
+  <link href='static/css/bootstrap.css' rel='stylesheet' type='text/css'>
+  <link href='static/css/bootstrap-theme.css' rel='stylesheet' type='text/css'>
+
+  
+      <link rel="stylesheet" href="static/bootstrap-sphinx.css" type="text/css" />
+  
+
+  
+
+  <link href='static/css/n3rv.css' rel='stylesheet' type='text/css'>
+
+  <script type="text/javascript" src="static/js/jquery.js"></script>
+
+  <script type="text/javascript" src="static/js/bootstrap.min.js">
+  </script>
+
+</head>
+<!-- <body style="background:#333333;color:white;"> -->
+<body>
+
+    <div class="header-common">
+
+            <div class="container-fluid">
+
+              <div class="col-md-4">
+                <a href="./index.html"><img alt="" id="header-logo" src="static/img/n3rv.png"></a>
+              </div>
+            
+            </div>
+      </div>
+
+<!--
+<div class="doc-nav">
+
+    <div class="container">
+
+    <ul class="nav nav-pills">
+      <li role="presentation" class="disabled"><a href="#">SaaS</a></li>
+      <li role="presentation" class="active"><a href="/sdk">SDK</a></li>
+      <li role="presentation"><a href="/faq">FAQ</a></li>
+    </ul>
+
+  </div>
+
+  </div>
+-->
+
+  <div class="content-3"></div>
+
+
+  <div class="container" style="margin-top:-80px">
+ 
+
+    <div class="col-md-3" style="margin-top:80px">
+      <div id="doc-leftmenu">
+
+        
+        <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="start.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="tech_overview.html">Technical Overview</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="tech_terminology.html">n3rv Terminology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_serviceclass.html">The service Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_servicecontroller.html">Service Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_qhandler.html">Qhandlers</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">bind &amp; connect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_messages.html">Messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_send.html">Sending Messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_resolution.html">Resolution Mechanism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_polling.html">Polling System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_svcmainloop.html">Service Main Loop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_logging.html">Logging Mechanism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_topologies.html">Topologies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_httpgateway.html">HTTP Gateway</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="howtos.html">HowTos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">A word on Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+</ul>
+
+      </div>
+    </div>
+
+    <div class="col-md-9">
+
+      <div class="rst-content">
+        
+  <div class="section" id="bind-connect">
+<h1>bind &amp; connect<a class="headerlink" href="#bind-connect" title="Permalink to this headline">¶</a></h1>
+<p><cite>service::bind()</cite> and <cite>service::connect()</cite> are the base methods to establish connections
+between your nodes. These methods are directly linked to <cite>zmq::socket_t-&gt;bind()</cite> and
+<cite>zmq::socket_t-&gt;connect()</cite> (with extra work).</p>
+<div class="section" id="service-bind">
+<h2>service::bind()<a class="headerlink" href="#service-bind" title="Permalink to this headline">¶</a></h2>
+<p>As its name indicates, bind() allows to create ZMQ TCP bindings on the IP address,
+port and socket type given as arguments.</p>
+<p>Once the binding is created, the service will AUTOMATICALLY register it on the service
+controller to make it available to other nodes.  Finally the bind() method will return
+an <cite>n3rv::qhandler*</cite> object, to be later used with <cite>service::attach()</cite> and <cite>service::send()</cite>.</p>
+<p>The method’s signature is the following:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">qhandler</span><span class="o">*</span> <span class="nf">bind</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">bind_name</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">ip</span> <span class="p">,</span> <span class="kt">int</span> <span class="n">zmq_socket_type</span><span class="p">,</span> <span class="kt">int</span> <span class="n">port</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">);</span>
+</pre></div>
+</div>
+<p>The binding will be registred in the directory under the name “bind_name”</p>
+<p>A kewl feature about <cite>service::bind()</cite> is that since the binding is directory-listed, you are not
+required to provide a TCP port number ! If you don’t provide one, the service will try to bind it on
+a random, high-range port.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">n3rv</span><span class="o">::</span><span class="n">service</span> <span class="n">s1</span><span class="p">(</span><span class="s">&quot;127.0.01&quot;</span><span class="p">,</span><span class="mi">10001</span><span class="p">);</span>
+<span class="n">s1</span><span class="p">.</span><span class="n">set_uid</span><span class="p">(</span><span class="s">&quot;com.svc.node1&quot;</span><span class="p">);</span>
+
+<span class="cm">/* We create a first binding named &quot;my_binding&quot;, of type REP on TCP port 12001 */</span>
+<span class="n">qhandler</span><span class="o">*</span> <span class="n">q</span> <span class="o">=</span> <span class="n">s1</span><span class="p">.</span><span class="n">bind</span><span class="p">(</span><span class="s">&quot;my_binding&quot;</span><span class="p">,</span> <span class="s">&quot;0.0.0.0&quot;</span><span class="p">,</span><span class="n">ZMQ_REP</span><span class="p">,</span> <span class="mi">12001</span><span class="p">);</span>
+
+<span class="cm">/* we create a second one, of type PUB that will be bound on a random port */</span>
+<span class="n">qhandler</span><span class="o">*</span> <span class="n">q2</span><span class="o">=</span> <span class="n">s1</span><span class="p">.</span><span class="n">bind</span><span class="p">(</span><span class="s">&quot;my_pub_binding&quot;</span><span class="p">,</span> <span class="s">&quot;0.0.0.0&quot;</span><span class="p">,</span><span class="n">ZMQ_PUB</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="section" id="important-notes-about-service-bind">
+<h3>Important notes about <cite>service::bind()</cite>:<a class="headerlink" href="#important-notes-about-service-bind" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li>A service cannot use bind() if its uid is not properly set with <cite>service::set_uid()</cite>, because if no uid is set, it cannot subscribe the binding.</li>
+<li>In order to unbind TCP ports more quickly, ZMQ binds are set with the option ZMQ_LINGER at 0</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="service-connect">
+<h2>service::connect()<a class="headerlink" href="#service-connect" title="Permalink to this headline">¶</a></h2>
+<p><cite>service::connect()</cite> is the method used by your services to connect to other nodes.
+Like bind(), connect will return a <cite>n3rv::qhandler*</cite> pointer to let you later interact
+with the connection.</p>
+<p>Its signature is</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">qhandler</span><span class="o">*</span> <span class="nf">connect</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">lookup</span><span class="p">,</span> <span class="kt">int</span> <span class="n">zmq_socket_type</span><span class="p">,</span> <span class="n">qhandler</span><span class="o">*</span> <span class="n">hdlref</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="section" id="lookup">
+<h3>lookup<a class="headerlink" href="#lookup" title="Permalink to this headline">¶</a></h3>
+<p>lookup declares the binding you want to connect to, usually
+in the <cite>namespace.service_class.node.binding</cite> format. To get more informations about
+lookup strings, i suggest that you have a look at <a class="reference external" href="./tech_resolution.html#resolution-mechanism/">the resolution mechanism section</a>.</p>
+</div>
+<div class="section" id="zmq-socket-type">
+<h3>zmq_socket_type<a class="headerlink" href="#zmq-socket-type" title="Permalink to this headline">¶</a></h3>
+<p>As its name suggests, it is the ZMQ socket type to create.</p>
+</div>
+<div class="section" id="hdlref">
+<h3>hdlref<a class="headerlink" href="#hdlref" title="Permalink to this headline">¶</a></h3>
+<p>Non mandatory parameter, it has 2 usages:</p>
+<ul class="simple">
+<li>for deferred connections to pass back their initially created qhandler* when they try to reconnect.</li>
+<li>When you want to connect to multiple bindings with the same qhandler*/ZMQ socket.</li>
+</ul>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">n3rv</span><span class="o">::</span><span class="n">service</span> <span class="n">s1</span><span class="p">(</span><span class="s">&quot;127.0.01&quot;</span><span class="p">,</span><span class="mi">10001</span><span class="p">);</span>
+<span class="n">s1</span><span class="p">.</span><span class="n">set_uid</span><span class="p">(</span><span class="s">&quot;com.svc.node1&quot;</span><span class="p">);</span>
+
+<span class="cm">/* We try to connect to binding &quot;com.svc.node2.binding1&quot; with a REQ ZMQ socket */</span>
+<span class="n">qhandler</span><span class="o">*</span> <span class="n">q</span> <span class="o">=</span> <span class="n">s1</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&quot;com.svc.node2.binding1&quot;</span><span class="p">,</span> <span class="n">ZMQ_REQ</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="important-notes-about-service-connect">
+<h3>Important notes about <cite>service::connect()</cite>:<a class="headerlink" href="#important-notes-about-service-connect" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li>If the binding you want to connect to is not yet available in the directory, then the connection is placed inside a “deferred” queue, to retry to connect later.</li>
+<li>when ZMQ socket type is ZMQ_SUB, connect() automatically sets the ZMQ_SUBSCRIBE socket option to 0</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="zeromq-socket-types">
+<h2>ZeroMQ Socket Types<a class="headerlink" href="#zeromq-socket-types" title="Permalink to this headline">¶</a></h2>
+<p>As you can see the <cite>service::bind()</cite> and <cite>service::connect()</cite> need a ZMQ socket type parameter
+in order to work properly. You can find the full list of available ZMQ socket types at the
+follwing URL: <a class="reference external" href="http://api.zeromq.org/4-2:zmq-socket">http://api.zeromq.org/4-2:zmq-socket</a></p>
+</div>
+</div>
+
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <script type="text/javascript">
+
+    $.each( $('.breathe-sectiondef'), function(index,v) {
+
+      if ( $(this).hasClass('container') ) $(this).removeClass('container');
+
+     } );
+
+    $("#header-pbtn").click(function() { product_dropdown_toggle(); });
+
+    function product_dropdown_toggle() {
+
+      $('#product-dropdown').css({ left: $('#header-pbtn').position().left + 20 + 'px'  });
+
+      if ( $('#product-dropdown').width() == 0 ) {
+
+
+        $('#product-dropdown').animate({ width:"140px", duration: 1000})
+        .after(function() { $('#product-dropdown-ct').show(); } );
+
+      }
+
+      else {
+        
+        $('#product-dropdown').animate({width:"0px",duration: 1000})
+        .after( function() { $('#product-dropdown-ct').hide(); } );   
+      }
+    }
+  </script>
+
+</body>
+
+
+
+
+
+
+
+
+<div class="footer-top">
+
+</div>
+
+<div class="footer-bottom">
+
+  <div class="container">
+
+    <div class="row-fluid">
+
+      <div class="col-md-6">
+        
+      </div>
+      <div class="col-md-6" style="text-align:center"></div>
+    </div>
+  </div>
+

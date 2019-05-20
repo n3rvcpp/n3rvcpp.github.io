@@ -1,0 +1,303 @@
+<head>
+  <meta charset="utf-8">
+  
+  <title>Windows Dev</title>
+  
+  <link href='static/css/bootstrap.css' rel='stylesheet' type='text/css'>
+  <link href='static/css/bootstrap-theme.css' rel='stylesheet' type='text/css'>
+
+  
+      <link rel="stylesheet" href="static/bootstrap-sphinx.css" type="text/css" />
+  
+
+  
+
+  <link href='static/css/n3rv.css' rel='stylesheet' type='text/css'>
+
+  <script type="text/javascript" src="static/js/jquery.js"></script>
+
+  <script type="text/javascript" src="static/js/bootstrap.min.js">
+  </script>
+
+</head>
+<!-- <body style="background:#333333;color:white;"> -->
+<body>
+
+    <div class="header-common">
+
+            <div class="container-fluid">
+
+              <div class="col-md-4">
+                <a href="./index.html"><img alt="" id="header-logo" src="static/img/n3rv.png"></a>
+              </div>
+            
+            </div>
+      </div>
+
+<!--
+<div class="doc-nav">
+
+    <div class="container">
+
+    <ul class="nav nav-pills">
+      <li role="presentation" class="disabled"><a href="#">SaaS</a></li>
+      <li role="presentation" class="active"><a href="/sdk">SDK</a></li>
+      <li role="presentation"><a href="/faq">FAQ</a></li>
+    </ul>
+
+  </div>
+
+  </div>
+-->
+
+  <div class="content-3"></div>
+
+
+  <div class="container" style="margin-top:-80px">
+ 
+
+    <div class="col-md-3" style="margin-top:80px">
+      <div id="doc-leftmenu">
+
+        
+        <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="start.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tech_overview.html">Technical Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="howtos.html">HowTos</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="howto_ububuild.html">Ubuntu Install</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Windows Dev</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto_log.html">Logs Centralizing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto_messages.html">Messages Customization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">A word on Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+</ul>
+
+      </div>
+    </div>
+
+    <div class="col-md-9">
+
+      <div class="rst-content">
+        
+  <div class="section" id="windows-dev">
+<h1>Windows Dev<a class="headerlink" href="#windows-dev" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="n3rv-services-development-for-windows">
+<h2>n3rv services development for Windows<a class="headerlink" href="#n3rv-services-development-for-windows" title="Permalink to this headline">¶</a></h2>
+<p>The following tutorial will show you how to get started with n3rv on windows environments. As you will see, the
+process is not a walk in the park. Sorry for that, we will try to do better for the next releases.</p>
+</div>
+<div class="section" id="cygwin-install">
+<h2>1. Cygwin Install<a class="headerlink" href="#cygwin-install" title="Permalink to this headline">¶</a></h2>
+<p>The first step of our windows journey will be to install cygwin on the windows box you plan to develop n3rv services on.
+Go to <a class="reference external" href="http://www.cygwin.com/install.html">http://www.cygwin.com/install.html</a> and download the file <cite>setup_x86_64.exe</cite>. Once it is downloaded,
+launch it. Go through the install steps until you get to the packages selection:</p>
+<a class="reference internal image-reference" href="images/cyg_g++.png"><img alt="images/cyg_g++.png" src="images/cyg_g++.png" style="width: 532.0px; height: 393.0px;" /></a>
+<p>Here are the packages that you will have to select:</p>
+<blockquote>
+<div><ul class="simple">
+<li>gcc-core</li>
+<li>gcc-g++</li>
+<li>cmake</li>
+<li>make</li>
+<li>libzmq5 v4.2.3</li>
+<li>libzmq-devel v4.2.3</li>
+<li>git</li>
+<li>vim</li>
+<li>wget</li>
+</ul>
+</div></blockquote>
+<p>Note: to avoid toolchain config errors, please make sure that the gcc-core package and gcc-g++ are installed with the same version number.</p>
+</div>
+<div class="section" id="the-easy-way-n3rv-binaries-install">
+<h2>2. The easy way: n3rv binaries install<a class="headerlink" href="#the-easy-way-n3rv-binaries-install" title="Permalink to this headline">¶</a></h2>
+<p>Using the n3rv prebuilt package will save you the entire step 3 (the most painful), which is quite convenient. However if
+you encounter problems building your own projects afterwards, i’m afraid that you’ll still have to go through it.</p>
+<p>Now it is time to open a cygwin Terminal (Cygwin64 Terminal) to type a few things:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">wget -qOn3rv-cygwin-win64.tgz https://n3rvcpp.github.io/pkg/n3rv-cygwin-win64.tgz</span>
+<span class="go">tar -xvzf n3rv-cygwin-win64.tgz -C/</span>
+</pre></div>
+</div>
+<p>And this is it, your cygwin is now ready for n3rv services development. Let’s go to step 4 !</p>
+</div>
+<div class="section" id="the-hard-way-full-build">
+<h2>3. The hard way: full build<a class="headerlink" href="#the-hard-way-full-build" title="Permalink to this headline">¶</a></h2>
+<p>If you deliberately chose to build the windows version of the n3rv library, then let’s go. As with the simple method we will
+need to open a new Cygwin terminal (Cygwin64 Terminal):</p>
+<div class="section" id="cppzmq">
+<h3>3.1 cppzmq<a class="headerlink" href="#cppzmq" title="Permalink to this headline">¶</a></h3>
+<p>First we need to download the zmq.hpp header for our version of libzmq:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">wget -qO/usr/include/zmq.hpp https://raw.githubusercontent.com/zeromq/cppzmq/v4.2.3/zmq.hpp</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="libevent">
+<h3>3.2 libevent<a class="headerlink" href="#libevent" title="Permalink to this headline">¶</a></h3>
+<p>The version of libevent provided with cygwin is too old, this is why we will have to build it ourselves. It’s no
+big deal.</p>
+<p>First we fetch the library source code:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">wget -qO./libevent.tgz https://github.com/libevent/libevent/releases/download/release-2.1.8-stable/libevent-2.1.8-stable.tar.gz</span>
+<span class="go">tar -xvzf libevent.tgz</span>
+</pre></div>
+</div>
+<p>Then we launch the build process:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pushd .</span>
+<span class="go">cd libevent-2.1.8-stable</span>
+<span class="go">./configure --prefix=/usr &amp;&amp; make &amp;&amp; make install</span>
+<span class="go">popd</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="images/win_libevent_cfg.png"><img alt="images/win_libevent_cfg.png" src="images/win_libevent_cfg.png" style="width: 579.0px; height: 370.0px;" /></a>
+<p>Note: Depending on your machine’s power, it can take some time.</p>
+</div>
+<div class="section" id="getting-n3rv-source-code">
+<h3>3.3 Getting n3rv source Code<a class="headerlink" href="#getting-n3rv-source-code" title="Permalink to this headline">¶</a></h3>
+<p>Now it is time to get the n3rv library source code from github:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cd ~</span>
+<span class="go">git clone https://github.com/n3rvcpp/n3rv</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cmakefile-txt-modifications">
+<h3>3.4 CMakeFile.txt Modifications<a class="headerlink" href="#cmakefile-txt-modifications" title="Permalink to this headline">¶</a></h3>
+<p>In order to build correctly on cygwin, the n3rv cmake file needs to be modified a bit.
+Open <cite>{C:cygwinhome&lt;user&gt;}n3rvCMakeLists.txt</cite> with your favourite text editor, and change the following elements:</p>
+<ul class="simple">
+<li>line 9, replace <cite>SET (CMAKE_CXX_FLAGS “-g -std=c++1y -fPIC”)</cite> by <cite>SET (CMAKE_CXX_FLAGS “-g -std=gnu++1y -fPIC”)</cite></li>
+<li>line 40, replace <cite>set(LIBS zmq pthread)</cite> by <cite>set(LIBS zmq pthread event event_extra)</cite></li>
+</ul>
+<a class="reference internal image-reference" href="images/win_chcmakelist.png"><img alt="images/win_chcmakelist.png" src="images/win_chcmakelist.png" style="width: 581.0px; height: 370.0px;" /></a>
+<p>Save the file &amp; you’re done for this step.</p>
+</div>
+<div class="section" id="build-install">
+<h3>3.5 Build &amp; Install<a class="headerlink" href="#build-install" title="Permalink to this headline">¶</a></h3>
+<p>We are now ready to compile our code, let’s cross your fingers and type:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cd ~/n3rv</span>
+<span class="go">cmake -DCMAKE_INSTALL_PREFIX=/usr .</span>
+<span class="go">make &amp;&amp; make install</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="code-blocks-install-config">
+<h2>4 Code::Blocks install &amp; config<a class="headerlink" href="#code-blocks-install-config" title="Permalink to this headline">¶</a></h2>
+<p>Now that we’re done with the n3rv library install, we’re going to setup the dev environnment (IDE). We choose code::blocks because of
+it’s support for the cygwin gcc toolchain, and because it’s free (in both ways). The code::blocks installer can be found
+at http://www.codeblocks.org/downloads/binaries.</p>
+<p>Note: do not take the mingw version, it’s useless for us.</p>
+<p>Once it has finished installing, launch the software.</p>
+<div class="section" id="global-compiler-config">
+<h3>4.1 Global Compiler Config<a class="headerlink" href="#global-compiler-config" title="Permalink to this headline">¶</a></h3>
+<p>Once in codeblocks, go to <cite>Settings</cite> =&gt; <cite>Compiler</cite> to configure compiler options:</p>
+<a class="reference internal image-reference" href="images/cb_compsettings.png"><img alt="images/cb_compsettings.png" src="images/cb_compsettings.png" style="width: 775.0px; height: 578.0px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li>Selected Compiler: Cygwin GCC</li>
+<li>Compiler’s install dir: <cite>&lt;Your Cygwin install path&gt;</cite></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="get-the-hello-project-example">
+<h3>4.1 Get the Hello project Example<a class="headerlink" href="#get-the-hello-project-example" title="Permalink to this headline">¶</a></h3>
+<p>A pre-configured code::blocks project can be downloaded at <a class="reference external" href="https://n3rvcpp.github.io/pkg/n3rv-hello-codeblock.zip">https://n3rvcpp.github.io/pkg/n3rv-hello-codeblock.zip</a>
+Unzip-it and open n3rv_hello/n3rv_hello.cbp with codeblocks.</p>
+</div>
+<div class="section" id="configure-project">
+<h3>4.2  Configure project<a class="headerlink" href="#configure-project" title="Permalink to this headline">¶</a></h3>
+<p>Depending on where you installed cygwin, you will have to modify a bit the Project’s Build options.
+To do this, right click on the project’s name on the left bar, then choose <cite>Build Options</cite>. You should see the following
+menu:</p>
+<a class="reference internal image-reference" href="images/cb_proj_searchpaths.png"><img alt="images/cb_proj_searchpaths.png" src="images/cb_proj_searchpaths.png" style="width: 738.0px; height: 380.0px;" /></a>
+<p>Go to the <cite>search directories</cite> tab and edit linker/compiler
+search paths to match with your own cygwin install path.</p>
+</div>
+<div class="section" id="test-hello-building">
+<h3>4.3 Test Hello Building<a class="headerlink" href="#test-hello-building" title="Permalink to this headline">¶</a></h3>
+<p>If you followed all the previous steps, the Hello project should be able to build and run without any issue:</p>
+<div class="figure">
+<img alt="images/cb_run.png" src="images/cb_run.png" />
+</div>
+<p>This is it, you are now ready to develop n3rv architectures on Windows !</p>
+</div>
+</div>
+<div class="section" id="addendum-1-deploy">
+<h2>Addendum 1: Deploy<a class="headerlink" href="#addendum-1-deploy" title="Permalink to this headline">¶</a></h2>
+<p>Once you’ve finished developping your n3rv service on windows, you will probably
+want to deploy the compiled binaries on multiple windows hosts. Good news: you do
+not need to install cygwin on every host, you juste need to provide the runtime Dlls along
+with your binaries:</p>
+<div class="figure">
+<img alt="images/win_rtdlls.png" src="images/win_rtdlls.png" />
+</div>
+</div>
+</div>
+
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <script type="text/javascript">
+
+    $.each( $('.breathe-sectiondef'), function(index,v) {
+
+      if ( $(this).hasClass('container') ) $(this).removeClass('container');
+
+     } );
+
+    $("#header-pbtn").click(function() { product_dropdown_toggle(); });
+
+    function product_dropdown_toggle() {
+
+      $('#product-dropdown').css({ left: $('#header-pbtn').position().left + 20 + 'px'  });
+
+      if ( $('#product-dropdown').width() == 0 ) {
+
+
+        $('#product-dropdown').animate({ width:"140px", duration: 1000})
+        .after(function() { $('#product-dropdown-ct').show(); } );
+
+      }
+
+      else {
+        
+        $('#product-dropdown').animate({width:"0px",duration: 1000})
+        .after( function() { $('#product-dropdown-ct').hide(); } );   
+      }
+    }
+  </script>
+
+</body>
+
+
+
+
+
+
+
+
+<div class="footer-top">
+
+</div>
+
+<div class="footer-bottom">
+
+  <div class="container">
+
+    <div class="row-fluid">
+
+      <div class="col-md-6">
+        
+      </div>
+      <div class="col-md-6" style="text-align:center"></div>
+    </div>
+  </div>
+

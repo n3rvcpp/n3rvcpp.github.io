@@ -1,0 +1,220 @@
+<head>
+  <meta charset="utf-8">
+  
+  <title>n3rv::logger</title>
+  
+  <link href='static/css/bootstrap.css' rel='stylesheet' type='text/css'>
+  <link href='static/css/bootstrap-theme.css' rel='stylesheet' type='text/css'>
+
+  
+      <link rel="stylesheet" href="static/bootstrap-sphinx.css" type="text/css" />
+  
+
+  
+
+  <link href='static/css/n3rv.css' rel='stylesheet' type='text/css'>
+
+  <script type="text/javascript" src="static/js/jquery.js"></script>
+
+  <script type="text/javascript" src="static/js/bootstrap.min.js">
+  </script>
+
+</head>
+<!-- <body style="background:#333333;color:white;"> -->
+<body>
+
+    <div class="header-common">
+
+            <div class="container-fluid">
+
+              <div class="col-md-4">
+                <a href="./index.html"><img alt="" id="header-logo" src="static/img/n3rv.png"></a>
+              </div>
+            
+            </div>
+      </div>
+
+<!--
+<div class="doc-nav">
+
+    <div class="container">
+
+    <ul class="nav nav-pills">
+      <li role="presentation" class="disabled"><a href="#">SaaS</a></li>
+      <li role="presentation" class="active"><a href="/sdk">SDK</a></li>
+      <li role="presentation"><a href="/faq">FAQ</a></li>
+    </ul>
+
+  </div>
+
+  </div>
+-->
+
+  <div class="content-3"></div>
+
+
+  <div class="container" style="margin-top:-80px">
+ 
+
+    <div class="col-md-3" style="margin-top:80px">
+      <div id="doc-leftmenu">
+
+        
+        <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="start.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tech_overview.html">Technical Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howtos.html">HowTos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="api.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="api_service.html">n3rv::service</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">n3rv::logger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_servicecontroller.html">n3rv::servicecontroller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_topology.html">n3rv::topology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_httpservice.html">n3rv::httpservice</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">A word on Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+</ul>
+
+      </div>
+    </div>
+
+    <div class="col-md-9">
+
+      <div class="rst-content">
+        
+  <div class="section" id="n3rv-logger">
+<h1>n3rv::logger<a class="headerlink" href="#n3rv-logger" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="_CPPv3N4n3rv6loggerE">
+<span id="_CPPv2N4n3rv6loggerE"></span><span id="n3rv::logger"></span><span class="target" id="classn3rv_1_1logger"></span><em class="property">class </em>n3rv<code class="descclassname">::</code><code class="descname">logger</code><a class="headerlink" href="#_CPPv3N4n3rv6loggerE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>n3rv logging class Allows to produce timestamped log inside files (so far, syslog udp/512 also planned). </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv3N4n3rv6logger8add_destEPKc">
+<span id="_CPPv2N4n3rv6logger8add_destEPKc"></span><span id="n3rv::logger::add_dest__cCP"></span><span class="target" id="classn3rv_1_1logger_1a6dde3e68067c56c3e4c55e5ac973b613"></span>void n3rv::<a class="reference internal" href="#_CPPv3N4n3rv6loggerE" title="n3rv::logger">logger</a><code class="descname">add_dest</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>dest</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv6logger8add_destEPKc" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Adds a destination for the log stream. <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">dest</span></code>: destination of the logs, eg “file:///var/log/n3rv.log”, “stdout”, or “syslog:name:facility” Note: available syslog facilities are “local0” to “local7”, and “user” </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N4n3rv6loggerrsERNSt7istreamE">
+<span id="_CPPv2N4n3rv6loggerrsERNSt7istreamE"></span><span id="n3rv::logger::rshift-operator__isR"></span><span class="target" id="classn3rv_1_1logger_1ab490a83a9aa01fdef4c1200962970e49"></span>std::istream &amp;n3rv::<a class="reference internal" href="#_CPPv3N4n3rv6loggerE" title="n3rv::logger">logger</a><code class="descname">operator&gt;&gt;</code><span class="sig-paren">(</span>std::istream &amp;<em>is</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv6loggerrsERNSt7istreamE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Note: If buffer encounters std::endl then if is flushed to destinations. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N4n3rv6logger3logEiNSt6stringE">
+<span id="_CPPv2N4n3rv6logger3logEiNSt6stringE"></span><span id="n3rv::logger::log__i.ss"></span><span class="target" id="classn3rv_1_1logger_1a40dfc7666ea49b3072e0950506d806c5"></span>void n3rv::<a class="reference internal" href="#_CPPv3N4n3rv6loggerE" title="n3rv::logger">logger</a><code class="descname">log</code><span class="sig-paren">(</span>int <em>log_level</em>, std::string <em>str</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv6logger3logEiNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Adds str to log buffer and flushes it. <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">log_level</span></code>: log level of the string to log. </li>
+<li><code class="docutils literal notranslate"><span class="pre">str</span></code>: string to log. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N4n3rv6logger12set_loglevelEi">
+<span id="_CPPv2N4n3rv6logger12set_loglevelEi"></span><span id="n3rv::logger::set_loglevel__i"></span><span class="target" id="classn3rv_1_1logger_1a623683c7040bc27947946ed3201f355c"></span>void n3rv::<a class="reference internal" href="#_CPPv3N4n3rv6loggerE" title="n3rv::logger">logger</a><code class="descname">set_loglevel</code><span class="sig-paren">(</span>int <em>lvl</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv6logger12set_loglevelEi" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Changes current logger’s log level. <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">lvl</span></code>: log level to set, from 0 to 4. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N4n3rv6logger6loggerEi">
+<span id="_CPPv2N4n3rv6logger6loggerEi"></span><span id="n3rv::logger::logger__i"></span><span class="target" id="classn3rv_1_1logger_1a3174ead4798d2ba1151344a15d39ac39"></span>n3rv::<a class="reference internal" href="#_CPPv3N4n3rv6loggerE" title="n3rv::logger">logger</a><code class="descname">logger</code><span class="sig-paren">(</span>int <em>log_level</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv6logger6loggerEi" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>class constructor </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N4n3rv6loggerD0Ev">
+<span id="_CPPv2N4n3rv6loggerD0Ev"></span><span id="n3rv::logger::~logger"></span><span class="target" id="classn3rv_1_1logger_1a9bd7828d5c05fc4ccb38444b25e4b2af"></span>n3rv::<a class="reference internal" href="#_CPPv3N4n3rv6loggerE" title="n3rv::logger">logger</a><code class="descname">~logger</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv6loggerD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>class destructor </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <script type="text/javascript">
+
+    $.each( $('.breathe-sectiondef'), function(index,v) {
+
+      if ( $(this).hasClass('container') ) $(this).removeClass('container');
+
+     } );
+
+    $("#header-pbtn").click(function() { product_dropdown_toggle(); });
+
+    function product_dropdown_toggle() {
+
+      $('#product-dropdown').css({ left: $('#header-pbtn').position().left + 20 + 'px'  });
+
+      if ( $('#product-dropdown').width() == 0 ) {
+
+
+        $('#product-dropdown').animate({ width:"140px", duration: 1000})
+        .after(function() { $('#product-dropdown-ct').show(); } );
+
+      }
+
+      else {
+        
+        $('#product-dropdown').animate({width:"0px",duration: 1000})
+        .after( function() { $('#product-dropdown-ct').hide(); } );   
+      }
+    }
+  </script>
+
+</body>
+
+
+
+
+
+
+
+
+<div class="footer-top">
+
+</div>
+
+<div class="footer-bottom">
+
+  <div class="container">
+
+    <div class="row-fluid">
+
+      <div class="col-md-6">
+        
+      </div>
+      <div class="col-md-6" style="text-align:center"></div>
+    </div>
+  </div>
+

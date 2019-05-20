@@ -1,0 +1,303 @@
+<head>
+  <meta charset="utf-8">
+  
+  <title>Logging Mechanism</title>
+  
+  <link href='static/css/bootstrap.css' rel='stylesheet' type='text/css'>
+  <link href='static/css/bootstrap-theme.css' rel='stylesheet' type='text/css'>
+
+  
+      <link rel="stylesheet" href="static/bootstrap-sphinx.css" type="text/css" />
+  
+
+  
+
+  <link href='static/css/n3rv.css' rel='stylesheet' type='text/css'>
+
+  <script type="text/javascript" src="static/js/jquery.js"></script>
+
+  <script type="text/javascript" src="static/js/bootstrap.min.js">
+  </script>
+
+</head>
+<!-- <body style="background:#333333;color:white;"> -->
+<body>
+
+    <div class="header-common">
+
+            <div class="container-fluid">
+
+              <div class="col-md-4">
+                <a href="./index.html"><img alt="" id="header-logo" src="static/img/n3rv.png"></a>
+              </div>
+            
+            </div>
+      </div>
+
+<!--
+<div class="doc-nav">
+
+    <div class="container">
+
+    <ul class="nav nav-pills">
+      <li role="presentation" class="disabled"><a href="#">SaaS</a></li>
+      <li role="presentation" class="active"><a href="/sdk">SDK</a></li>
+      <li role="presentation"><a href="/faq">FAQ</a></li>
+    </ul>
+
+  </div>
+
+  </div>
+-->
+
+  <div class="content-3"></div>
+
+
+  <div class="container" style="margin-top:-80px">
+ 
+
+    <div class="col-md-3" style="margin-top:80px">
+      <div id="doc-leftmenu">
+
+        
+        <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="start.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="tech_overview.html">Technical Overview</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="tech_terminology.html">n3rv Terminology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_serviceclass.html">The service Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_servicecontroller.html">Service Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_qhandler.html">Qhandlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_bindconnect.html">bind &amp; connect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_messages.html">Messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_send.html">Sending Messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_resolution.html">Resolution Mechanism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_polling.html">Polling System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_svcmainloop.html">Service Main Loop</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Logging Mechanism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_topologies.html">Topologies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_httpgateway.html">HTTP Gateway</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="howtos.html">HowTos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">A word on Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+</ul>
+
+      </div>
+    </div>
+
+    <div class="col-md-9">
+
+      <div class="rst-content">
+        
+  <div class="section" id="logging-mechanism">
+<h1>Logging Mechanism<a class="headerlink" href="#logging-mechanism" title="Permalink to this headline">¶</a></h1>
+<p>the n3rv framework comes with embedded logging features, which can be quite useful to follow the
+behaviour of your different nodes. All the logging is handled through the <cite>n3rv::logger</cite> class.
+Each service instance or service controller has its own internal <cite>n3rv::logger</cite> object, which member is
+<cite>n3rv::service::ll</cite></p>
+<div class="section" id="service-ll-member">
+<h2><a class="reference external" href="service::ll">service::ll</a> member<a class="headerlink" href="#service-ll-member" title="Permalink to this headline">¶</a></h2>
+<p><cite>service::ll</cite> is a public member, so you can acces it outside of your service class to make
+settings to your internal service logger:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cm">/* We instanciate a new node */</span>
+<span class="n">n3rv</span><span class="o">::</span><span class="n">service</span> <span class="n">s1</span><span class="p">(</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span><span class="mi">10001</span><span class="p">);</span>
+
+<span class="cm">/* We set the loglevel for our node logger to WARNING */</span>
+<span class="n">s1</span><span class="p">.</span><span class="n">ll</span><span class="o">-&gt;</span><span class="n">set_loglevel</span><span class="p">(</span><span class="n">n3rv</span><span class="o">::</span><span class="n">LOGLV_WARN</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="log-function">
+<h2>Log() function<a class="headerlink" href="#log-function" title="Permalink to this headline">¶</a></h2>
+<p>Whenever you want to log something, you will have to use the method <cite>n3rv::logger::log()</cite>:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cm">/** Adds str to log buffer and flushes it. */</span>
+<span class="kt">void</span> <span class="n">logger</span><span class="o">::</span><span class="n">log</span><span class="p">(</span><span class="kt">int</span> <span class="n">log_level</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">str</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>if log_level is lesser than or equal to the calling logger’s log level,
+the log is made and str is written in destinations, else we discard it.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">n3rv</span><span class="o">::</span><span class="n">logger</span><span class="o">*</span> <span class="n">ll</span> <span class="o">=</span> <span class="k">new</span> <span class="n">n3rv</span><span class="o">::</span><span class="n">logger</span><span class="p">(</span><span class="n">n3rv</span><span class="o">::</span><span class="n">LOGLV_CRIT</span><span class="p">);</span>
+
+<span class="cm">/* this log line will not be used since LOGLV_WARN &gt; LOGLV_CRIT */</span>
+<span class="n">ll</span><span class="o">-&gt;</span><span class="n">log</span><span class="p">(</span><span class="n">n3rv</span><span class="o">::</span><span class="n">LOGLV_WARN</span><span class="p">,</span><span class="s">&quot;blabla&quot;</span><span class="p">);</span>
+
+<span class="cm">/* On the other hand this one will go to destinations. */</span>
+<span class="n">ll</span><span class="o">-&gt;</span><span class="n">log</span><span class="p">(</span><span class="n">n3rv</span><span class="o">::</span><span class="n">LOGLV_PANIC</span><span class="p">,</span><span class="s">&quot;HAAAAAAAA&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="log-levels">
+<h2>Log Levels<a class="headerlink" href="#log-levels" title="Permalink to this headline">¶</a></h2>
+<p>In n3rv the log levels are basically the same as Syslog:</p>
+<table border="1" class="colwidths-given docutils" id="id1">
+<caption><span class="caption-text">Available log levels</span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Level</th>
+<th class="head">Name</th>
+<th class="head">n3rv Name</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>PANIC</td>
+<td>LOGLV_PANIC</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>ALERT</td>
+<td>LOGLV_ALERT</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>CRITICAL</td>
+<td>LOGLV_CRIT</td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>ERROR</td>
+<td>LOGLV_ERR</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>WARNING</td>
+<td>LOGLV_WARN</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>NOTICE</td>
+<td>LOGLV_NOTICE</td>
+</tr>
+<tr class="row-even"><td>6</td>
+<td>INFO</td>
+<td>LOGLV_INFO</td>
+</tr>
+<tr class="row-odd"><td>7</td>
+<td>DEBUG</td>
+<td>LOGLV_DEBUG</td>
+</tr>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line">Note that when you instanciate a new <cite>n3rv::logger</cite> object, you must specify as argument the</div>
+<div class="line">maximum log level you want your logger to output.</div>
+</div>
+</div>
+<div class="section" id="logging-destinations">
+<h2>Logging Destinations<a class="headerlink" href="#logging-destinations" title="Permalink to this headline">¶</a></h2>
+<p>In order to add a destination for a logger object, one must use the <cite>logger::add_dest()</cite> method.
+the logger class supports 3 different types outputs for logging (which can be combined without any issue)</p>
+<div class="section" id="stdout">
+<h3>stdout<a class="headerlink" href="#stdout" title="Permalink to this headline">¶</a></h3>
+<p>Explicitely enough, setting this destination will display the logs on the standard output.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">n3rv</span><span class="o">::</span><span class="n">logger</span><span class="o">*</span> <span class="n">ll</span> <span class="o">=</span> <span class="k">new</span> <span class="n">n3rv</span><span class="o">::</span><span class="n">logger</span><span class="p">(</span><span class="n">LOGLV_DEBUG</span><span class="p">);</span>
+<span class="cm">/* tells logger to display its logs on stdout */</span>
+<span class="n">ll</span><span class="o">-&gt;</span><span class="n">add_dest</span><span class="p">(</span><span class="s">&quot;stdout&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="file-path">
+<h3><a class="reference external" href="file:/">file:/</a>/&lt;path&gt;<a class="headerlink" href="#file-path" title="Permalink to this headline">¶</a></h3>
+<p>Also quite straightforward, this tells the logger to append its logs in a file.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cm">/* tells logger to append its logs in /opt/logs/n3rv.log */</span>
+<span class="n">ll</span><span class="o">-&gt;</span><span class="n">add_dest</span><span class="p">(</span><span class="s">&quot;file:///opt/logs/n3rv.log&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="syslog-ident-facility">
+<h3>syslog:&lt;ident&gt;:&lt;facility&gt;<a class="headerlink" href="#syslog-ident-facility" title="Permalink to this headline">¶</a></h3>
+<p>Probably the most interesting feature of the logger, you can use syslog to log your nodes activity
+and thus centralize all your logs on a single remote-syslogd (got logstash ? ;-))</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cm">/* tells logger to use syslog for logging, with ident &quot;n3rv&quot; and facility &quot;user&quot; */</span>
+<span class="n">ll</span><span class="o">-&gt;</span><span class="n">add_dest</span><span class="p">(</span><span class="s">&quot;syslog:n3rv:user&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Note: Supported syslog facilities are local0..7, and user.</p>
+</div>
+</div>
+<div class="section" id="sharing-a-single-logger-across-multiple-nodes-service-controller">
+<h2>Sharing a single logger across multiple nodes / service controller<a class="headerlink" href="#sharing-a-single-logger-across-multiple-nodes-service-controller" title="Permalink to this headline">¶</a></h2>
+<p>As we saw earlier, when instanciated <cite>n3rv::service</cite> and <cite>n3rv::servicecontroller</cite> automatically create
+an internal logger which is accessible through their <cite>ll</cite> member. But they can also take
+an existing logger object in their constructor and use it instead of the default one.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cm">/* We create and setup a new logger */</span>
+<span class="n">n3rv</span><span class="o">::</span><span class="n">logger</span><span class="o">*</span> <span class="n">log</span> <span class="o">=</span> <span class="k">new</span> <span class="n">n3rv</span><span class="o">::</span><span class="n">logger</span><span class="p">(</span><span class="n">n3rv</span><span class="o">::</span><span class="n">LOGLV_DEBUG</span><span class="p">);</span>
+<span class="n">log</span><span class="o">-&gt;</span><span class="n">add_dest</span><span class="p">(</span><span class="s">&quot;stdout&quot;</span><span class="p">);</span>
+<span class="n">log</span><span class="o">-&gt;</span><span class="n">add_dest</span><span class="p">(</span><span class="s">&quot;syslog:n3rv:user&quot;</span><span class="p">);</span>
+
+<span class="cm">/* We pass this logger as argument for nodes &amp; sc to use it. */</span>
+
+<span class="n">n3rv</span><span class="o">::</span><span class="n">service</span> <span class="n">s1</span><span class="p">(</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span><span class="mi">10001</span><span class="p">,</span><span class="n">log</span><span class="p">);</span>
+<span class="n">n3rv</span><span class="o">::</span><span class="n">service</span> <span class="n">s2</span><span class="p">(</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span><span class="mi">10001</span><span class="p">,</span><span class="n">log</span><span class="p">);</span>
+<span class="n">n3rv</span><span class="o">::</span><span class="n">servicecontroller</span> <span class="n">sc</span><span class="p">(</span><span class="s">&quot;0.0.0.0&quot;</span><span class="p">,</span><span class="mi">10001</span><span class="p">,</span><span class="n">log</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <script type="text/javascript">
+
+    $.each( $('.breathe-sectiondef'), function(index,v) {
+
+      if ( $(this).hasClass('container') ) $(this).removeClass('container');
+
+     } );
+
+    $("#header-pbtn").click(function() { product_dropdown_toggle(); });
+
+    function product_dropdown_toggle() {
+
+      $('#product-dropdown').css({ left: $('#header-pbtn').position().left + 20 + 'px'  });
+
+      if ( $('#product-dropdown').width() == 0 ) {
+
+
+        $('#product-dropdown').animate({ width:"140px", duration: 1000})
+        .after(function() { $('#product-dropdown-ct').show(); } );
+
+      }
+
+      else {
+        
+        $('#product-dropdown').animate({width:"0px",duration: 1000})
+        .after( function() { $('#product-dropdown-ct').hide(); } );   
+      }
+    }
+  </script>
+
+</body>
+
+
+
+
+
+
+
+
+<div class="footer-top">
+
+</div>
+
+<div class="footer-bottom">
+
+  <div class="container">
+
+    <div class="row-fluid">
+
+      <div class="col-md-6">
+        
+      </div>
+      <div class="col-md-6" style="text-align:center"></div>
+    </div>
+  </div>
+
