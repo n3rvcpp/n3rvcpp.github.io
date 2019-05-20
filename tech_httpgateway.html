@@ -1,0 +1,230 @@
+<head>
+  <meta charset="utf-8">
+  
+  <title>HTTP Gateway</title>
+  
+  <link href='_static/css/bootstrap.css' rel='stylesheet' type='text/css'>
+  <link href='_static/css/bootstrap-theme.css' rel='stylesheet' type='text/css'>
+
+  
+      <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+  
+
+  
+
+  <link href='_static/css/n3rv.css' rel='stylesheet' type='text/css'>
+
+  <script type="text/javascript" src="_static/js/jquery.js"></script>
+
+  <script type="text/javascript" src="_static/js/bootstrap.min.js">
+  </script>
+
+</head>
+<!-- <body style="background:#333333;color:white;"> -->
+<body>
+
+    <div class="header-common">
+
+            <div class="container-fluid">
+
+              <div class="col-md-4">
+                <a href="./index.html"><img alt="" id="header-logo" src="_static/img/n3rv.png"></a>
+              </div>
+            
+            </div>
+      </div>
+
+<!--
+<div class="doc-nav">
+
+    <div class="container">
+
+    <ul class="nav nav-pills">
+      <li role="presentation" class="disabled"><a href="#">SaaS</a></li>
+      <li role="presentation" class="active"><a href="/sdk">SDK</a></li>
+      <li role="presentation"><a href="/faq">FAQ</a></li>
+    </ul>
+
+  </div>
+
+  </div>
+-->
+
+  <div class="content-3"></div>
+
+
+  <div class="container" style="margin-top:-80px">
+ 
+
+    <div class="col-md-3" style="margin-top:80px">
+      <div id="doc-leftmenu">
+
+        
+        <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="start.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="tech_overview.html">Technical Overview</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="tech_terminology.html">n3rv Terminology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_serviceclass.html">The service Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_servicecontroller.html">Service Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_qhandler.html">Qhandlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_bindconnect.html">bind &amp; connect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_messages.html">Messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_send.html">Sending Messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_resolution.html">Resolution Mechanism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_polling.html">Polling System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_svcmainloop.html">Service Main Loop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_logging.html">Logging Mechanism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_topologies.html">Topologies</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">HTTP Gateway</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="howtos.html">HowTos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">A word on Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+</ul>
+
+      </div>
+    </div>
+
+    <div class="col-md-9">
+
+      <div class="rst-content">
+        
+  <div class="section" id="http-gateway">
+<h1>HTTP Gateway<a class="headerlink" href="#http-gateway" title="Permalink to this headline">¶</a></h1>
+<p>n3rv framework provides a lightweight http server based on libevent, which allows your n3rv cluster
+to communicate with the outside world over HTTP (the client part is at your discretion though)</p>
+<div class="section" id="httpservice-class">
+<h2>httpservice class<a class="headerlink" href="#httpservice-class" title="Permalink to this headline">¶</a></h2>
+<p><cite>n3rv::httpservice</cite> is an extension of the <cite>n3rv::service</cite> superclass, which means it has
+the exact same features but with extra http service capacities.</p>
+<div class="section" id="initializing-http-service">
+<h3>Initializing HTTP Service<a class="headerlink" href="#initializing-http-service" title="Permalink to this headline">¶</a></h3>
+<p>the httpservice class has 2 methods that you need to call to enable http service: <cite>init_http()</cite>
+and then <cite>run_http_async()</cite>:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cm">/* We create a new httpservice instance */</span>
+<span class="n">n3rv</span><span class="o">::</span><span class="n">httpservice</span> <span class="n">hs1</span><span class="p">(</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span><span class="mi">10001</span><span class="p">);</span>
+
+<span class="cm">/* We initialize and bind the http service on port 80 */</span>
+<span class="n">hs1</span><span class="p">.</span><span class="n">init_http</span><span class="p">(</span><span class="s">&quot;0.0.0.0&quot;</span><span class="p">,</span><span class="s">&quot;80&quot;</span><span class="p">);</span>
+
+<span class="cm">/* We start HTTP service */</span>
+<span class="n">hs1</span><span class="p">.</span><span class="n">run_http_async</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="distribute-content-attach-uri-to-callback">
+<h3>Distribute content: Attach URI to Callback<a class="headerlink" href="#distribute-content-attach-uri-to-callback" title="Permalink to this headline">¶</a></h3>
+<p><cite>n3rv::httpservice</cite> uses libevent as underlying mechanism for http serving. libevent’s
+inner mechanism requires binding an HTTP URI with a callback function that will produce
+the desired actions and return the appropriate content to the client for that URI.
+This is precisely what <cite>httpservice::attach_http()</cite> does:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cm">/** We attach to the default httpservice callback, which responds</span>
+<span class="cm">  &quot;Hello World&quot; when URI is requested */</span>
+<span class="n">hs1</span><span class="p">.</span><span class="n">attach_http</span><span class="p">(</span><span class="s">&quot;/foo&quot;</span><span class="p">,</span><span class="n">n3rv</span><span class="o">::</span><span class="n">httpservice</span><span class="o">::</span><span class="n">http_callback</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Signature for HTTP callbacks is the following:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">static</span> <span class="kt">void</span> <span class="nf">http_callback</span><span class="p">(</span><span class="n">evhttp_request</span> <span class="o">*</span><span class="n">req</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span> <span class="n">objref</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><cite>req</cite> is the data representation of the client’s http request, <cite>objref</cite> is the caller backref</p>
+</div>
+<div class="section" id="callback-structure">
+<h3>Callback Structure<a class="headerlink" href="#callback-structure" title="Permalink to this headline">¶</a></h3>
+<p>Like Receive callbacks, HTTP callbacks must have a minimum of processing logic in order to be useful.</p>
+<p>A typical HTTP callback implementation is as follows:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="n">httpservice</span><span class="o">::</span><span class="n">http_callback</span><span class="p">(</span><span class="n">evhttp_request</span> <span class="o">*</span><span class="n">req</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span> <span class="n">objref</span><span class="p">)</span> <span class="p">{</span>
+
+      <span class="cm">/** we get back httpservice object */</span>
+      <span class="n">httpservice</span><span class="o">*</span> <span class="n">self</span> <span class="o">=</span> <span class="p">(</span><span class="n">httpservice</span><span class="o">*</span><span class="p">)</span> <span class="n">objref</span><span class="p">;</span>
+
+      <span class="cm">/* we create an output buffer for response */</span>
+      <span class="k">auto</span> <span class="o">*</span><span class="n">out_buff</span> <span class="o">=</span> <span class="n">evhttp_request_get_output_buffer</span><span class="p">(</span><span class="n">req</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">out_buff</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+
+      <span class="n">self</span><span class="o">-&gt;</span><span class="n">ll</span><span class="o">-&gt;</span><span class="n">log</span><span class="p">(</span><span class="n">LOGLV_DEBUG</span><span class="p">,</span> <span class="s">&quot;sending back http reply&quot;</span><span class="p">);</span>
+
+      <span class="cm">/* We fill the buffer */</span>
+      <span class="n">evbuffer_add_printf</span><span class="p">(</span><span class="n">out_buff</span><span class="p">,</span> <span class="s">&quot;&lt;html&gt;&lt;body&gt;Hello World!&lt;/body&gt;&lt;/html&gt;&quot;</span><span class="p">);</span>
+
+      <span class="cm">/* We send the response with the buffer&#39;s content */</span>
+      <span class="n">evhttp_send_reply</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">HTTP_OK</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">out_buff</span><span class="p">);</span>
+  <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="extra-linking">
+<h2>Extra linking<a class="headerlink" href="#extra-linking" title="Permalink to this headline">¶</a></h2>
+<p>Important: Given that <cite>n3rv::httpservice</cite> uses libevent, two extra libraries are required by the linker in
+order to correctly build your programs containing references to httpservice. these two libs are
+<cite>-ln3rvhttp</cite> and <cite>-levent</cite></p>
+</div>
+</div>
+
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <script type="text/javascript">
+
+    $.each( $('.breathe-sectiondef'), function(index,v) {
+
+      if ( $(this).hasClass('container') ) $(this).removeClass('container');
+
+     } );
+
+    $("#header-pbtn").click(function() { product_dropdown_toggle(); });
+
+    function product_dropdown_toggle() {
+
+      $('#product-dropdown').css({ left: $('#header-pbtn').position().left + 20 + 'px'  });
+
+      if ( $('#product-dropdown').width() == 0 ) {
+
+
+        $('#product-dropdown').animate({ width:"140px", duration: 1000})
+        .after(function() { $('#product-dropdown-ct').show(); } );
+
+      }
+
+      else {
+        
+        $('#product-dropdown').animate({width:"0px",duration: 1000})
+        .after( function() { $('#product-dropdown-ct').hide(); } );   
+      }
+    }
+  </script>
+
+</body>
+
+
+
+
+
+
+
+
+<div class="footer-top">
+
+</div>
+
+<div class="footer-bottom">
+
+  <div class="container">
+
+    <div class="row-fluid">
+
+      <div class="col-md-6">
+        
+      </div>
+      <div class="col-md-6" style="text-align:center"></div>
+    </div>
+  </div>
+

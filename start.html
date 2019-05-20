@@ -1,0 +1,192 @@
+<head>
+  <meta charset="utf-8">
+  
+  <title>Getting Started</title>
+  
+  <link href='_static/css/bootstrap.css' rel='stylesheet' type='text/css'>
+  <link href='_static/css/bootstrap-theme.css' rel='stylesheet' type='text/css'>
+
+  
+      <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+  
+
+  
+
+  <link href='_static/css/n3rv.css' rel='stylesheet' type='text/css'>
+
+  <script type="text/javascript" src="_static/js/jquery.js"></script>
+
+  <script type="text/javascript" src="_static/js/bootstrap.min.js">
+  </script>
+
+</head>
+<!-- <body style="background:#333333;color:white;"> -->
+<body>
+
+    <div class="header-common">
+
+            <div class="container-fluid">
+
+              <div class="col-md-4">
+                <a href="./index.html"><img alt="" id="header-logo" src="_static/img/n3rv.png"></a>
+              </div>
+            
+            </div>
+      </div>
+
+<!--
+<div class="doc-nav">
+
+    <div class="container">
+
+    <ul class="nav nav-pills">
+      <li role="presentation" class="disabled"><a href="#">SaaS</a></li>
+      <li role="presentation" class="active"><a href="/sdk">SDK</a></li>
+      <li role="presentation"><a href="/faq">FAQ</a></li>
+    </ul>
+
+  </div>
+
+  </div>
+-->
+
+  <div class="content-3"></div>
+
+
+  <div class="container" style="margin-top:-80px">
+ 
+
+    <div class="col-md-3" style="margin-top:80px">
+      <div id="doc-leftmenu">
+
+        
+        <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="start_requirements.html">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="start_buildinstall.html">Build &amp; Install n3rv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="start_firstprog.html">First Program</a></li>
+<li class="toctree-l2"><a class="reference internal" href="start_examples.html">Running Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tech_overview.html">Technical Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howtos.html">HowTos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">A word on Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+</ul>
+
+      </div>
+    </div>
+
+    <div class="col-md-9">
+
+      <div class="rst-content">
+        
+  <div class="section" id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<p>The following guide explains how to get started with the n3rv framework from the beginning.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="start_requirements.html">Requirements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="start_requirements.html#what-do-i-need-to-use-n3rv">What do i need to use n3rv ?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="start_requirements.html#prior-knowledge">Prior knowledge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="start_requirements.html#os-and-tools">OS and tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="start_requirements.html#library-dependancies">library dependancies</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="start_buildinstall.html">Build &amp; Install n3rv</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="start_buildinstall.html#how-to-build-n3rv">How to build n3rv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="start_buildinstall.html#protobuf-support">Protobuf Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="start_buildinstall.html#building-examples">Building Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="start_buildinstall.html#building-tests">Building Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="start_buildinstall.html#troubleshooting-build-errors">Troubleshooting Build errors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="start_buildinstall.html#missing-header-zmq-hpp">Missing Header zmq.hpp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="start_buildinstall.html#undefined-reference-to-getnameinfo-ni-maxhost-ni-numericserv">Undefined reference to getnameinfo / NI_MAXHOST / NI_NUMERICSERV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="start_buildinstall.html#undefined-reference-to-ev-http">Undefined reference to ev_http_*</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="start_firstprog.html">First Program</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="start_firstprog.html#your-first-program-hello-world">Your first Program: Hello World !</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="start_firstprog.html#required-headers">Required Headers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="start_firstprog.html#sender-service-class">Sender Service Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="start_firstprog.html#receiver-service-class">Receiver Service Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="start_firstprog.html#instanciating-all-main">Instanciating All: main()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="start_firstprog.html#full-code">Full Code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="start_firstprog.html#compile-run">Compile &amp; Run</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="start_examples.html">Running Examples</a></li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <script type="text/javascript">
+
+    $.each( $('.breathe-sectiondef'), function(index,v) {
+
+      if ( $(this).hasClass('container') ) $(this).removeClass('container');
+
+     } );
+
+    $("#header-pbtn").click(function() { product_dropdown_toggle(); });
+
+    function product_dropdown_toggle() {
+
+      $('#product-dropdown').css({ left: $('#header-pbtn').position().left + 20 + 'px'  });
+
+      if ( $('#product-dropdown').width() == 0 ) {
+
+
+        $('#product-dropdown').animate({ width:"140px", duration: 1000})
+        .after(function() { $('#product-dropdown-ct').show(); } );
+
+      }
+
+      else {
+        
+        $('#product-dropdown').animate({width:"0px",duration: 1000})
+        .after( function() { $('#product-dropdown-ct').hide(); } );   
+      }
+    }
+  </script>
+
+</body>
+
+
+
+
+
+
+
+
+<div class="footer-top">
+
+</div>
+
+<div class="footer-bottom">
+
+  <div class="container">
+
+    <div class="row-fluid">
+
+      <div class="col-md-6">
+        
+      </div>
+      <div class="col-md-6" style="text-align:center"></div>
+    </div>
+  </div>
+

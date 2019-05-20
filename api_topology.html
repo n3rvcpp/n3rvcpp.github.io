@@ -1,0 +1,265 @@
+<head>
+  <meta charset="utf-8">
+  
+  <title>n3rv::topology</title>
+  
+  <link href='_static/css/bootstrap.css' rel='stylesheet' type='text/css'>
+  <link href='_static/css/bootstrap-theme.css' rel='stylesheet' type='text/css'>
+
+  
+      <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+  
+
+  
+
+  <link href='_static/css/n3rv.css' rel='stylesheet' type='text/css'>
+
+  <script type="text/javascript" src="_static/js/jquery.js"></script>
+
+  <script type="text/javascript" src="_static/js/bootstrap.min.js">
+  </script>
+
+</head>
+<!-- <body style="background:#333333;color:white;"> -->
+<body>
+
+    <div class="header-common">
+
+            <div class="container-fluid">
+
+              <div class="col-md-4">
+                <a href="./index.html"><img alt="" id="header-logo" src="_static/img/n3rv.png"></a>
+              </div>
+            
+            </div>
+      </div>
+
+<!--
+<div class="doc-nav">
+
+    <div class="container">
+
+    <ul class="nav nav-pills">
+      <li role="presentation" class="disabled"><a href="#">SaaS</a></li>
+      <li role="presentation" class="active"><a href="/sdk">SDK</a></li>
+      <li role="presentation"><a href="/faq">FAQ</a></li>
+    </ul>
+
+  </div>
+
+  </div>
+-->
+
+  <div class="content-3"></div>
+
+
+  <div class="container" style="margin-top:-80px">
+ 
+
+    <div class="col-md-3" style="margin-top:80px">
+      <div id="doc-leftmenu">
+
+        
+        <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="start.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tech_overview.html">Technical Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howtos.html">HowTos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="api.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="api_service.html">n3rv::service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_logger.html">n3rv::logger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_servicecontroller.html">n3rv::servicecontroller</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">n3rv::topology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_httpservice.html">n3rv::httpservice</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">A word on Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+</ul>
+
+      </div>
+    </div>
+
+    <div class="col-md-9">
+
+      <div class="rst-content">
+        
+  <div class="section" id="n3rv-topology">
+<h1>n3rv::topology<a class="headerlink" href="#n3rv-topology" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="_CPPv3N4n3rv8topologyE">
+<span id="_CPPv2N4n3rv8topologyE"></span><span id="n3rv::topology"></span><span class="target" id="classn3rv_1_1topology"></span><em class="property">class </em>n3rv<code class="descclassname">::</code><code class="descname">topology</code><a class="headerlink" href="#_CPPv3N4n3rv8topologyE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>This class is meant to store and manimulate topology representations, in order to help services dynamically know which endpoints to bind or contact. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv3N4n3rv8topology9serializeEv">
+<span id="_CPPv2N4n3rv8topology9serializeEv"></span><span id="n3rv::topology::serialize"></span><span class="target" id="classn3rv_1_1topology_1adda609fe22f8f8d9e6e285e61e396d65"></span>std::string n3rv::<a class="reference internal" href="#_CPPv3N4n3rv8topologyE" title="n3rv::topology">topology</a><code class="descname">serialize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv8topology9serializeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Serializes current topology object to a JSON-string <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>JSON-serialized topology object. </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N4n3rv8topology8topologyEv">
+<span id="_CPPv2N4n3rv8topology8topologyEv"></span><span id="n3rv::topology::topology"></span><span class="target" id="classn3rv_1_1topology_1a944b0a2e2f3a928dc12cd48133b12e71"></span>n3rv::<a class="reference internal" href="#_CPPv3N4n3rv8topologyE" title="n3rv::topology">topology</a><code class="descname">topology</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv8topology8topologyEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>class constructor </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N4n3rv8topologyD0Ev">
+<span id="_CPPv2N4n3rv8topologyD0Ev"></span><span id="n3rv::topology::~topology"></span><span class="target" id="classn3rv_1_1topology_1a58677f2faf964807a4461b24c29019d9"></span>n3rv::<a class="reference internal" href="#_CPPv3N4n3rv8topologyE" title="n3rv::topology">topology</a><code class="descname">~topology</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv8topologyD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>class destructor </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv3N4n3rv8topology9svclassesE">
+<span id="_CPPv2N4n3rv8topology9svclassesE"></span><span id="n3rv::topology::svclasses__std::map:ss.jservice_class:"></span><span class="target" id="classn3rv_1_1topology_1a3e48014ea2c6e4b1fa40daed91c382ba"></span>std::map&lt;std::string, jservice_class&gt; n3rv::<a class="reference internal" href="#_CPPv3N4n3rv8topologyE" title="n3rv::topology">topology</a><code class="descname">svclasses</code><a class="headerlink" href="#_CPPv3N4n3rv8topology9svclassesE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Map of available service classes inside topology. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Static Functions</p>
+<dl class="function">
+<dt id="_CPPv3N4n3rv8topology4loadENSt6stringE">
+<span id="_CPPv2N4n3rv8topology4loadENSt6stringE"></span><span id="n3rv::topology::load__ss"></span><span class="target" id="classn3rv_1_1topology_1a48138542c872e354c4a172c4a832fe8c"></span><a class="reference internal" href="#_CPPv3N4n3rv8topologyE" title="n3rv::topology">topology</a> *n3rv::<a class="reference internal" href="#_CPPv3N4n3rv8topologyE" title="n3rv::topology">topology</a><code class="descname">load</code><span class="sig-paren">(</span>std::string <em>topology_file</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv8topology4loadENSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Loads a topology from a JSON-formatted topology file. <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>a topology object. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">topology_file</span></code>: Path of the topology file to load. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N4n3rv8topology5parseERNSt6stringE">
+<span id="_CPPv2N4n3rv8topology5parseERNSt6stringE"></span><span id="n3rv::topology::parse__ssR"></span><span class="target" id="classn3rv_1_1topology_1aea349ed3a42c931360b0053a70018ba4"></span><a class="reference internal" href="#_CPPv3N4n3rv8topologyE" title="n3rv::topology">topology</a> *n3rv::<a class="reference internal" href="#_CPPv3N4n3rv8topologyE" title="n3rv::topology">topology</a><code class="descname">parse</code><span class="sig-paren">(</span>std::string &amp;<em>topology_def</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv8topology5parseERNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Parses a JSON-formatted string into a topology object. <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>a topology object. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">topology_def</span></code>: JSON-serialized Topology String. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv3N4n3rv15jservice_class_E">
+<span id="_CPPv2N4n3rv15jservice_class_E"></span><span id="n3rv::jservice_class_"></span><span class="target" id="structn3rv_1_1jservice__class__"></span><em class="property">struct </em>n3rv<code class="descclassname">::</code><code class="descname">jservice_class_</code><a class="headerlink" href="#_CPPv3N4n3rv15jservice_class_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>service_class struc allows to describe a full service class, with all its binding, connections and callback fucntions. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv3N4n3rv15jservice_class_10namespace_E">
+<span id="_CPPv2N4n3rv15jservice_class_10namespace_E"></span><span id="n3rv::jservice_class_::namespace___ss"></span><span class="target" id="structn3rv_1_1jservice__class___1ae37898e919b0428f9e7ce0e6805c7b73"></span>std::string n3rv::<a class="reference internal" href="#_CPPv3N4n3rv15jservice_class_E" title="n3rv::jservice_class_">jservice_class_</a><code class="descname">namespace_</code><a class="headerlink" href="#_CPPv3N4n3rv15jservice_class_10namespace_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Namespace of the service class. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv3N4n3rv15jservice_class_8bindingsE">
+<span id="_CPPv2N4n3rv15jservice_class_8bindingsE"></span><span id="n3rv::jservice_class_::bindings__std::vector:jbinding:"></span><span class="target" id="structn3rv_1_1jservice__class___1a16faa41e1036df96b244bf178843e488"></span>std::vector&lt;jbinding&gt; n3rv::<a class="reference internal" href="#_CPPv3N4n3rv15jservice_class_E" title="n3rv::jservice_class_">jservice_class_</a><code class="descname">bindings</code><a class="headerlink" href="#_CPPv3N4n3rv15jservice_class_8bindingsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>List of bindings the service class must create. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv3N4n3rv15jservice_class_11connectionsE">
+<span id="_CPPv2N4n3rv15jservice_class_11connectionsE"></span><span id="n3rv::jservice_class_::connections__std::vector:jconnection:"></span><span class="target" id="structn3rv_1_1jservice__class___1aa81dd71ae98d0b66634c0b4c4e473354"></span>std::vector&lt;jconnection&gt; n3rv::<a class="reference internal" href="#_CPPv3N4n3rv15jservice_class_E" title="n3rv::jservice_class_">jservice_class_</a><code class="descname">connections</code><a class="headerlink" href="#_CPPv3N4n3rv15jservice_class_11connectionsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>List of connections to remote endpoints a service class must establish. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv3N4n3rv15jservice_class_17receive_callbacksE">
+<span id="_CPPv2N4n3rv15jservice_class_17receive_callbacksE"></span><span id="n3rv::jservice_class_::receive_callbacks__std::vector:jcallback:"></span><span class="target" id="structn3rv_1_1jservice__class___1a7b65e0e43acd6a902ee8052ee8558251"></span>std::vector&lt;jcallback&gt; n3rv::<a class="reference internal" href="#_CPPv3N4n3rv15jservice_class_E" title="n3rv::jservice_class_">jservice_class_</a><code class="descname">receive_callbacks</code><a class="headerlink" href="#_CPPv3N4n3rv15jservice_class_17receive_callbacksE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>List of [connection, callback] attacchements, which declare how to process messages. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv3N4n3rv15jservice_class_12ml_callbacksE">
+<span id="_CPPv2N4n3rv15jservice_class_12ml_callbacksE"></span><span id="n3rv::jservice_class_::ml_callbacks__std::vector:jcallback:"></span><span class="target" id="structn3rv_1_1jservice__class___1ac4c93cbddaf01e06ebdc529a67f66158"></span>std::vector&lt;jcallback&gt; n3rv::<a class="reference internal" href="#_CPPv3N4n3rv15jservice_class_E" title="n3rv::jservice_class_">jservice_class_</a><code class="descname">ml_callbacks</code><a class="headerlink" href="#_CPPv3N4n3rv15jservice_class_12ml_callbacksE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>List of callbacks to run inside the service main loop. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <script type="text/javascript">
+
+    $.each( $('.breathe-sectiondef'), function(index,v) {
+
+      if ( $(this).hasClass('container') ) $(this).removeClass('container');
+
+     } );
+
+    $("#header-pbtn").click(function() { product_dropdown_toggle(); });
+
+    function product_dropdown_toggle() {
+
+      $('#product-dropdown').css({ left: $('#header-pbtn').position().left + 20 + 'px'  });
+
+      if ( $('#product-dropdown').width() == 0 ) {
+
+
+        $('#product-dropdown').animate({ width:"140px", duration: 1000})
+        .after(function() { $('#product-dropdown-ct').show(); } );
+
+      }
+
+      else {
+        
+        $('#product-dropdown').animate({width:"0px",duration: 1000})
+        .after( function() { $('#product-dropdown-ct').hide(); } );   
+      }
+    }
+  </script>
+
+</body>
+
+
+
+
+
+
+
+
+<div class="footer-top">
+
+</div>
+
+<div class="footer-bottom">
+
+  <div class="container">
+
+    <div class="row-fluid">
+
+      <div class="col-md-6">
+        
+      </div>
+      <div class="col-md-6" style="text-align:center"></div>
+    </div>
+  </div>
+

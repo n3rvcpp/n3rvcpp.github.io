@@ -1,0 +1,251 @@
+<head>
+  <meta charset="utf-8">
+  
+  <title>Introduction</title>
+  
+  <link href='_static/css/bootstrap.css' rel='stylesheet' type='text/css'>
+  <link href='_static/css/bootstrap-theme.css' rel='stylesheet' type='text/css'>
+
+  
+      <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+  
+
+  
+
+  <link href='_static/css/n3rv.css' rel='stylesheet' type='text/css'>
+
+  <script type="text/javascript" src="_static/js/jquery.js"></script>
+
+  <script type="text/javascript" src="_static/js/bootstrap.min.js">
+  </script>
+
+</head>
+<!-- <body style="background:#333333;color:white;"> -->
+<body>
+
+    <div class="header-common">
+
+            <div class="container-fluid">
+
+              <div class="col-md-4">
+                <a href="./index.html"><img alt="" id="header-logo" src="_static/img/n3rv.png"></a>
+              </div>
+            
+            </div>
+      </div>
+
+<!--
+<div class="doc-nav">
+
+    <div class="container">
+
+    <ul class="nav nav-pills">
+      <li role="presentation" class="disabled"><a href="#">SaaS</a></li>
+      <li role="presentation" class="active"><a href="/sdk">SDK</a></li>
+      <li role="presentation"><a href="/faq">FAQ</a></li>
+    </ul>
+
+  </div>
+
+  </div>
+-->
+
+  <div class="content-3"></div>
+
+
+  <div class="container" style="margin-top:-80px">
+ 
+
+    <div class="col-md-3" style="margin-top:80px">
+      <div id="doc-leftmenu">
+
+        
+        <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="start.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tech_overview.html">Technical Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howtos.html">HowTos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">A word on Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+</ul>
+
+      </div>
+    </div>
+
+    <div class="col-md-9">
+
+      <div class="rst-content">
+        
+  <div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<div class="section" id="what-is-n3rv">
+<h2>What is n3rv ?<a class="headerlink" href="#what-is-n3rv" title="Permalink to this headline">¶</a></h2>
+<p>n3rv is a C++ library that leverages the power of ZeroMQ to create multiservices architectures.
+Using ZMQ as core communication mechanism, n3rv basically provides all the components that
+modern services development requires, meaning:</p>
+<blockquote>
+<div><ul class="simple">
+<li>A Services Directory &amp; subscribing mechanism.</li>
+<li>An events handler.</li>
+<li>Messages encapsulation methods.</li>
+<li>Logging.</li>
+<li>An HTTP/ZeroMQ gateway.</li>
+<li>Dynamic architecture reconfiguration.</li>
+</ul>
+</div></blockquote>
+<p>Actually it is quite similar to <a class="reference external" href="https://github.com/facebook/fbzmq/">Facebook’s fbzmq</a>,
+but easier to use and with more features.</p>
+</div>
+<div class="section" id="architecture-example">
+<h2>Architecture Example<a class="headerlink" href="#architecture-example" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="_images/n3rv_arch.png"><img alt="_images/n3rv_arch.png" class="align-center" src="_images/n3rv_arch.png" style="width: 560.6999999999999px; height: 395.5px;" /></a>
+</div>
+<div class="section" id="how-does-it-work">
+<h2>How does it work ?<a class="headerlink" href="#how-does-it-work" title="Permalink to this headline">¶</a></h2>
+<p>Running nodes create ZMQ socket bindings, then register them to a directory service
+(service controller). Each update of the directory triggers a broadcast-update on all the
+nodes, thus making the bindings joinable by everyone.</p>
+<a class="reference internal image-reference" href="_images/svcctl_scheme.png"><img alt="_images/svcctl_scheme.png" class="align-center" src="_images/svcctl_scheme.png" style="width: 420.0px; height: 360.59999999999997px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<p>From the developer’s perspective, n3rv lets you implement custom service classes, inheriting from
+the <cite>n3rv::service</cite> superclass. In these custom classes you will describe the complete behaviour
+of your services:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Which sockets they must bind.</li>
+<li>Which nodes they must connect to.</li>
+<li>Backend interractions.</li>
+<li>Business rules, ..</li>
+</ul>
+</div></blockquote>
+<p>After that, you just need to instanciate your defined service classes to let the magics begin !</p>
+<div class="figure" id="id1">
+<a class="reference internal image-reference" href="_images/algorun.png"><img alt="" src="_images/algorun.png" style="width: 992.0px; height: 600.0px;" /></a>
+<p class="caption"><span class="caption-text">Running example of a proto-algotrading solution using a n3rv multinodal architecture</span></p>
+</div>
+</div>
+<div class="section" id="get-n3rv">
+<h2>Get n3rv<a class="headerlink" href="#get-n3rv" title="Permalink to this headline">¶</a></h2>
+<p>n3rv framework is available on github at the following address: <a class="reference external" href="https://github.com/n3rvcpp/n3rv">https://github.com/n3rvcpp/n3rv</a></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">git clone https://github.com/n3rvcpp/n3rv</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="changelog">
+<h2>Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h2>
+<p>You will find below the changelog for the different versions of n3rv framework.</p>
+<div class="section" id="v0-2">
+<h3>v0.2:<a class="headerlink" href="#v0-2" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Added support for protcol buffers messages exchange.</li>
+<li>Added support for syslog in logger.</li>
+<li>New lookup mechanism, allowing to deal with lots of subscribed nodes and bindings.</li>
+<li>Additionnal work on unit tests and code coverage</li>
+<li>Documentation largely extended</li>
+<li>Many bugfixes</li>
+</ul>
+</div>
+<div class="section" id="v0-15">
+<h3>v0.15:<a class="headerlink" href="#v0-15" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Implementation of httpservice (HTTP&lt;=&gt;ZMQ gateway)</li>
+<li>started unit tests implementation.</li>
+</ul>
+</div>
+<div class="section" id="v0-1">
+<h3>v0.1:<a class="headerlink" href="#v0-1" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Initial version.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="todo">
+<h2>TODO<a class="headerlink" href="#todo" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Implement redundency mechanisms for the service controller component.</li>
+<li>Better support of NATed networks for service controller.</li>
+<li>Add FastCGI and easy file serving support for the HTTP Gateway.</li>
+<li>Improve unit tests code coverage.</li>
+<li>WYSIWYG edtior to generate topologies and class templates (separate project).</li>
+<li>Webmin interface for service controller.</li>
+<li>Possible replacement of ZeroMQ by Nanomsg for services I/O.</li>
+<li>Python binding (maybe)</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="contact">
+<h2>Contact<a class="headerlink" href="#contact" title="Permalink to this headline">¶</a></h2>
+<p>&#64;WintermeW on twitter, or by email at <a class="reference external" href="mailto:clement&#46;game&#37;&#52;&#48;gmail&#46;com">clement<span>&#46;</span>game<span>&#64;</span>gmail<span>&#46;</span>com</a></p>
+</div>
+</div>
+
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <script type="text/javascript">
+
+    $.each( $('.breathe-sectiondef'), function(index,v) {
+
+      if ( $(this).hasClass('container') ) $(this).removeClass('container');
+
+     } );
+
+    $("#header-pbtn").click(function() { product_dropdown_toggle(); });
+
+    function product_dropdown_toggle() {
+
+      $('#product-dropdown').css({ left: $('#header-pbtn').position().left + 20 + 'px'  });
+
+      if ( $('#product-dropdown').width() == 0 ) {
+
+
+        $('#product-dropdown').animate({ width:"140px", duration: 1000})
+        .after(function() { $('#product-dropdown-ct').show(); } );
+
+      }
+
+      else {
+        
+        $('#product-dropdown').animate({width:"0px",duration: 1000})
+        .after( function() { $('#product-dropdown-ct').hide(); } );   
+      }
+    }
+  </script>
+
+</body>
+
+
+
+
+
+
+
+
+<div class="footer-top">
+
+</div>
+
+<div class="footer-bottom">
+
+  <div class="container">
+
+    <div class="row-fluid">
+
+      <div class="col-md-6">
+        
+      </div>
+      <div class="col-md-6" style="text-align:center"></div>
+    </div>
+  </div>
+

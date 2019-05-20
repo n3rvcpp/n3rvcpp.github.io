@@ -1,0 +1,190 @@
+<head>
+  <meta charset="utf-8">
+  
+  <title>API Reference</title>
+  
+  <link href='_static/css/bootstrap.css' rel='stylesheet' type='text/css'>
+  <link href='_static/css/bootstrap-theme.css' rel='stylesheet' type='text/css'>
+
+  
+      <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+  
+
+  
+
+  <link href='_static/css/n3rv.css' rel='stylesheet' type='text/css'>
+
+  <script type="text/javascript" src="_static/js/jquery.js"></script>
+
+  <script type="text/javascript" src="_static/js/bootstrap.min.js">
+  </script>
+
+</head>
+<!-- <body style="background:#333333;color:white;"> -->
+<body>
+
+    <div class="header-common">
+
+            <div class="container-fluid">
+
+              <div class="col-md-4">
+                <a href="./index.html"><img alt="" id="header-logo" src="_static/img/n3rv.png"></a>
+              </div>
+            
+            </div>
+      </div>
+
+<!--
+<div class="doc-nav">
+
+    <div class="container">
+
+    <ul class="nav nav-pills">
+      <li role="presentation" class="disabled"><a href="#">SaaS</a></li>
+      <li role="presentation" class="active"><a href="/sdk">SDK</a></li>
+      <li role="presentation"><a href="/faq">FAQ</a></li>
+    </ul>
+
+  </div>
+
+  </div>
+-->
+
+  <div class="content-3"></div>
+
+
+  <div class="container" style="margin-top:-80px">
+ 
+
+    <div class="col-md-3" style="margin-top:80px">
+      <div id="doc-leftmenu">
+
+        
+        <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="start.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tech_overview.html">Technical Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howtos.html">HowTos</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_service.html">n3rv::service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_logger.html">n3rv::logger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_servicecontroller.html">n3rv::servicecontroller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_topology.html">n3rv::topology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_httpservice.html">n3rv::httpservice</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">A word on Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+</ul>
+
+      </div>
+    </div>
+
+    <div class="col-md-9">
+
+      <div class="rst-content">
+        
+  <div class="section" id="api-reference">
+<h1>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h1>
+<p>This section covers the full n3rv API documention. You will find below everything you need in order
+to get the best of the framework, and produce fast and reliable multiservices architectures.</p>
+<div class="toctree-wrapper compound">
+</div>
+<div class="section" id="classes-list">
+<h2>Classes List<a class="headerlink" href="#classes-list" title="Permalink to this headline">¶</a></h2>
+<p>You will find here the exaustive list of the usable
+classes in the n3rv library.</p>
+<div class="section" id="service-class">
+<h3>Service Class<a class="headerlink" href="#service-class" title="Permalink to this headline">¶</a></h3>
+<p>The main superclass class of the project, every user defined service class inherit from this one.
+<a class="reference internal" href="api_service.html"><span class="doc">See Class Documentation</span></a></p>
+</div>
+<div class="section" id="logger-class">
+<h3>Logger Class<a class="headerlink" href="#logger-class" title="Permalink to this headline">¶</a></h3>
+<p>Provides timestamped logging to your service, which output can be syslog, files and/or stdout.
+<a class="reference internal" href="api_logger.html"><span class="doc">See Class Documentation</span></a></p>
+</div>
+<div class="section" id="service-controller-class">
+<h3>Service Controller Class<a class="headerlink" href="#service-controller-class" title="Permalink to this headline">¶</a></h3>
+<p>This class allows to instanciate a service controller, which plays
+the role of endpoints directory.
+<a class="reference internal" href="api_servicecontroller.html"><span class="doc">See Class Documentation</span></a></p>
+</div>
+<div class="section" id="http-service-class">
+<h3>HTTP Service Class<a class="headerlink" href="#http-service-class" title="Permalink to this headline">¶</a></h3>
+<p>n3rv::httpservice is an extension of the n3rv::service superclass which provides additionnal http
+server capacities with libevent
+<a class="reference internal" href="api_httpservice.html"><span class="doc">See Class Documentation</span></a></p>
+</div>
+<div class="section" id="topology-class">
+<h3>Topology Class<a class="headerlink" href="#topology-class" title="Permalink to this headline">¶</a></h3>
+<p>This class allows to load and parse topologies, which allows to automatically
+bind/connect to service endpoints.
+<a class="reference internal" href="api_topology.html"><span class="doc">See Class Documentation</span></a></p>
+</div>
+</div>
+</div>
+
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <script type="text/javascript">
+
+    $.each( $('.breathe-sectiondef'), function(index,v) {
+
+      if ( $(this).hasClass('container') ) $(this).removeClass('container');
+
+     } );
+
+    $("#header-pbtn").click(function() { product_dropdown_toggle(); });
+
+    function product_dropdown_toggle() {
+
+      $('#product-dropdown').css({ left: $('#header-pbtn').position().left + 20 + 'px'  });
+
+      if ( $('#product-dropdown').width() == 0 ) {
+
+
+        $('#product-dropdown').animate({ width:"140px", duration: 1000})
+        .after(function() { $('#product-dropdown-ct').show(); } );
+
+      }
+
+      else {
+        
+        $('#product-dropdown').animate({width:"0px",duration: 1000})
+        .after( function() { $('#product-dropdown-ct').hide(); } );   
+      }
+    }
+  </script>
+
+</body>
+
+
+
+
+
+
+
+
+<div class="footer-top">
+
+</div>
+
+<div class="footer-bottom">
+
+  <div class="container">
+
+    <div class="row-fluid">
+
+      <div class="col-md-6">
+        
+      </div>
+      <div class="col-md-6" style="text-align:center"></div>
+    </div>
+  </div>
+

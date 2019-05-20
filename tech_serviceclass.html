@@ -1,0 +1,230 @@
+<head>
+  <meta charset="utf-8">
+  
+  <title>The service Class</title>
+  
+  <link href='_static/css/bootstrap.css' rel='stylesheet' type='text/css'>
+  <link href='_static/css/bootstrap-theme.css' rel='stylesheet' type='text/css'>
+
+  
+      <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+  
+
+  
+
+  <link href='_static/css/n3rv.css' rel='stylesheet' type='text/css'>
+
+  <script type="text/javascript" src="_static/js/jquery.js"></script>
+
+  <script type="text/javascript" src="_static/js/bootstrap.min.js">
+  </script>
+
+</head>
+<!-- <body style="background:#333333;color:white;"> -->
+<body>
+
+    <div class="header-common">
+
+            <div class="container-fluid">
+
+              <div class="col-md-4">
+                <a href="./index.html"><img alt="" id="header-logo" src="_static/img/n3rv.png"></a>
+              </div>
+            
+            </div>
+      </div>
+
+<!--
+<div class="doc-nav">
+
+    <div class="container">
+
+    <ul class="nav nav-pills">
+      <li role="presentation" class="disabled"><a href="#">SaaS</a></li>
+      <li role="presentation" class="active"><a href="/sdk">SDK</a></li>
+      <li role="presentation"><a href="/faq">FAQ</a></li>
+    </ul>
+
+  </div>
+
+  </div>
+-->
+
+  <div class="content-3"></div>
+
+
+  <div class="container" style="margin-top:-80px">
+ 
+
+    <div class="col-md-3" style="margin-top:80px">
+      <div id="doc-leftmenu">
+
+        
+        <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="start.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="tech_overview.html">Technical Overview</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="tech_terminology.html">n3rv Terminology</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">The service Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_servicecontroller.html">Service Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_qhandler.html">Qhandlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_bindconnect.html">bind &amp; connect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_messages.html">Messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_send.html">Sending Messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_resolution.html">Resolution Mechanism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_polling.html">Polling System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_svcmainloop.html">Service Main Loop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_logging.html">Logging Mechanism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_topologies.html">Topologies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_httpgateway.html">HTTP Gateway</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="howtos.html">HowTos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">A word on Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+</ul>
+
+      </div>
+    </div>
+
+    <div class="col-md-9">
+
+      <div class="rst-content">
+        
+  <div class="section" id="the-service-class">
+<h1>The service Class<a class="headerlink" href="#the-service-class" title="Permalink to this headline">¶</a></h1>
+<p>The <cite>n3rv::service</cite> class is the backbone of the n3rv framework. The service class mainly handles:</p>
+<blockquote>
+<div><ul class="simple">
+<li>The polling of you open sockets.</li>
+<li>Your socket events.</li>
+<li>Communications with the service controller, for bindings subsciptions and directory updates.</li>
+<li>The lookup of the other nodes it must connect to.</li>
+</ul>
+</div></blockquote>
+<div class="section" id="how-to-define-a-custom-service-class">
+<h2>How to define a custom service class<a class="headerlink" href="#how-to-define-a-custom-service-class" title="Permalink to this headline">¶</a></h2>
+<p>All your defined service classes must inherit from <cite>n3rv::service</cite> (or <cite>n3rv::httpservice</cite>) to
+work properly. Note that you imperatively must import the <cite>n3rv::service</cite> constructor with
+<cite>using n3rv::service::service;</cite> directive.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;n3rv/n3rvcommon.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;n3rv/n3rvservice.hpp&gt;</span><span class="cp"></span>
+
+<span class="k">class</span> <span class="nc">example_service</span><span class="o">:</span> <span class="k">public</span> <span class="n">n3rv</span><span class="o">::</span><span class="n">service</span> <span class="p">{</span>
+    <span class="k">using</span> <span class="n">n3rv</span><span class="o">::</span><span class="n">service</span><span class="o">::</span><span class="n">service</span><span class="p">;</span>
+    <span class="k">public</span><span class="o">:</span>
+
+      <span class="kt">int</span> <span class="n">initalize</span><span class="p">()</span> <span class="p">{</span>
+          <span class="cm">/* Your service class init code here */</span>
+      <span class="p">}</span>
+
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="instanciate-a-service-class">
+<h2>Instanciate a service class<a class="headerlink" href="#instanciate-a-service-class" title="Permalink to this headline">¶</a></h2>
+<p>The <cite>n3rv::service</cite> constructor signature is pretty simple:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">service</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">controller_host</span><span class="p">,</span> <span class="kt">int</span> <span class="n">controller_port</span><span class="p">,</span> <span class="n">logger</span><span class="o">*</span> <span class="n">ll</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>As you can see the creation of a service instance requires the service controller’s IP and port
+as parameters. The logger is not mandatory (see <a class="reference external" href="./tech_logging.html">Logging</a> for more details)</p>
+<p>For our previously defined custom service class, that may give:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cm">/* Our service controller listens on 127.0.0.1:10001 */</span>
+<span class="n">example_service</span><span class="o">*</span> <span class="n">es</span> <span class="o">=</span> <span class="k">new</span> <span class="n">example_service</span><span class="p">(</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span><span class="mi">10001</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="uids">
+<h2>UIDs<a class="headerlink" href="#uids" title="Permalink to this headline">¶</a></h2>
+<p>A very important aspect about service instances is that they must have a unique identifier
+on the cluster. For this purpose, you must use the <cite>service::set_uid()</cite> method. Node UIDs
+must be composed of 3 elements: the node’s namespace, the node’s service class, and the node’s name.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cm">/* We tell our service instance that it is on namespace &quot;com&quot;,</span>
+<span class="cm">   it has &quot;example_service&quot; service class and a name &quot;node1&quot; */</span>
+<span class="n">es</span><span class="o">-&gt;</span><span class="n">set_uid</span><span class="p">(</span><span class="s">&quot;com.example_service.node1&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="running-your-service-classes">
+<h2>Running your service classes<a class="headerlink" href="#running-your-service-classes" title="Permalink to this headline">¶</a></h2>
+<p>In order to poll its sockets and receive directory updates, a service instance must be in
+running state. To pass a service instance in running state, one must use the <cite>service::run()</cite> (blocking) or
+<cite>service::run_async</cite> (non-blocking) methods</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cm">/* We start our service instance */</span>
+<span class="n">es</span><span class="o">-&gt;</span><span class="n">run_async</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="additionnal-informations">
+<h2>Additionnal informations<a class="headerlink" href="#additionnal-informations" title="Permalink to this headline">¶</a></h2>
+<p>Feel free to explore the rest of this documentation to get more clues about how the service class
+works. You can also go to the <a class="reference external" href="./api_service.html#n3rv-service">n3rv::service class API reference</a> for full infos.</p>
+</div>
+</div>
+
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <script type="text/javascript">
+
+    $.each( $('.breathe-sectiondef'), function(index,v) {
+
+      if ( $(this).hasClass('container') ) $(this).removeClass('container');
+
+     } );
+
+    $("#header-pbtn").click(function() { product_dropdown_toggle(); });
+
+    function product_dropdown_toggle() {
+
+      $('#product-dropdown').css({ left: $('#header-pbtn').position().left + 20 + 'px'  });
+
+      if ( $('#product-dropdown').width() == 0 ) {
+
+
+        $('#product-dropdown').animate({ width:"140px", duration: 1000})
+        .after(function() { $('#product-dropdown-ct').show(); } );
+
+      }
+
+      else {
+        
+        $('#product-dropdown').animate({width:"0px",duration: 1000})
+        .after( function() { $('#product-dropdown-ct').hide(); } );   
+      }
+    }
+  </script>
+
+</body>
+
+
+
+
+
+
+
+
+<div class="footer-top">
+
+</div>
+
+<div class="footer-bottom">
+
+  <div class="container">
+
+    <div class="row-fluid">
+
+      <div class="col-md-6">
+        
+      </div>
+      <div class="col-md-6" style="text-align:center"></div>
+    </div>
+  </div>
+

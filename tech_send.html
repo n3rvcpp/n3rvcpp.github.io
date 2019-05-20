@@ -1,0 +1,226 @@
+<head>
+  <meta charset="utf-8">
+  
+  <title>Sending Messages</title>
+  
+  <link href='_static/css/bootstrap.css' rel='stylesheet' type='text/css'>
+  <link href='_static/css/bootstrap-theme.css' rel='stylesheet' type='text/css'>
+
+  
+      <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+  
+
+  
+
+  <link href='_static/css/n3rv.css' rel='stylesheet' type='text/css'>
+
+  <script type="text/javascript" src="_static/js/jquery.js"></script>
+
+  <script type="text/javascript" src="_static/js/bootstrap.min.js">
+  </script>
+
+</head>
+<!-- <body style="background:#333333;color:white;"> -->
+<body>
+
+    <div class="header-common">
+
+            <div class="container-fluid">
+
+              <div class="col-md-4">
+                <a href="./index.html"><img alt="" id="header-logo" src="_static/img/n3rv.png"></a>
+              </div>
+            
+            </div>
+      </div>
+
+<!--
+<div class="doc-nav">
+
+    <div class="container">
+
+    <ul class="nav nav-pills">
+      <li role="presentation" class="disabled"><a href="#">SaaS</a></li>
+      <li role="presentation" class="active"><a href="/sdk">SDK</a></li>
+      <li role="presentation"><a href="/faq">FAQ</a></li>
+    </ul>
+
+  </div>
+
+  </div>
+-->
+
+  <div class="content-3"></div>
+
+
+  <div class="container" style="margin-top:-80px">
+ 
+
+    <div class="col-md-3" style="margin-top:80px">
+      <div id="doc-leftmenu">
+
+        
+        <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="start.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="tech_overview.html">Technical Overview</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="tech_terminology.html">n3rv Terminology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_serviceclass.html">The service Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_servicecontroller.html">Service Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_qhandler.html">Qhandlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_bindconnect.html">bind &amp; connect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_messages.html">Messages</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Sending Messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_resolution.html">Resolution Mechanism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_polling.html">Polling System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_svcmainloop.html">Service Main Loop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_logging.html">Logging Mechanism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_topologies.html">Topologies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tech_httpgateway.html">HTTP Gateway</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="howtos.html">HowTos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">A word on Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+</ul>
+
+      </div>
+    </div>
+
+    <div class="col-md-9">
+
+      <div class="rst-content">
+        
+  <div class="section" id="sending-messages">
+<h1>Sending Messages<a class="headerlink" href="#sending-messages" title="Permalink to this headline">¶</a></h1>
+<p>Of course the main purpose of n3rv is to make your nodes to exchange messages with each other,
+and this is what we are going to see in the following section.</p>
+<p>Once you have opened a new connection or created a new binding there are multiple ways to make messages
+pass through it, although they all use the <cite>service::send()</cite> method or one of its overloadings.</p>
+<div class="section" id="service-send">
+<h2>service::send()<a class="headerlink" href="#service-send" title="Permalink to this headline">¶</a></h2>
+<p><cite>service::send()</cite> has many signatures, which are basically:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">send</span><span class="p">(</span><span class="n">qhandler</span><span class="o">*</span> <span class="n">hdl</span><span class="p">,</span> <span class="n">message</span><span class="o">&amp;</span> <span class="n">msg</span><span class="p">,</span> <span class="kt">int</span> <span class="n">flags</span><span class="p">);</span>
+<span class="kt">int</span> <span class="nf">send</span><span class="p">(</span><span class="n">qhandler</span><span class="o">*</span> <span class="n">hdl</span><span class="p">,</span> <span class="kt">void</span><span class="o">*</span> <span class="n">data</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">size</span><span class="p">,</span> <span class="kt">int</span> <span class="n">flags</span><span class="p">);</span>
+<span class="kt">int</span> <span class="nf">send</span><span class="p">(</span><span class="n">qhandler</span><span class="o">*</span> <span class="n">hdl</span><span class="p">,</span> <span class="n">zmq</span><span class="o">::</span><span class="n">message_t</span><span class="o">*</span> <span class="n">zmsg</span><span class="p">,</span> <span class="kt">int</span> <span class="n">flags</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="send-a-n3rv-message">
+<h2>Send a n3rv::message<a class="headerlink" href="#send-a-n3rv-message" title="Permalink to this headline">¶</a></h2>
+<p>The point here is to declare a new <cite>n3rv::message object</cite>, fill it with your data and send it over
+the wire. At the time of sending, the n3rv message struct will be serialized either to JSON/Protobuf
+(depending which serializing method you chose when building the lib),
+ready to be deserialized on the other end.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">n3rv</span><span class="o">::</span><span class="n">service</span> <span class="n">s1</span><span class="p">(</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span><span class="mi">10001</span><span class="p">);</span>
+
+<span class="cm">/* We create a new connection to get a qhandler* */</span>
+<span class="n">n3rv</span><span class="o">::</span><span class="n">qhandler</span><span class="o">*</span> <span class="n">q</span> <span class="o">=</span> <span class="n">s1</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&quot;com.svc.node1.binding1&quot;</span><span class="p">,</span><span class="n">ZMQ_REQ</span><span class="p">);</span>
+
+<span class="cm">/* We create a new n3rv message and fill it with some data */</span>
+<span class="n">n3rv</span><span class="o">::</span><span class="n">message</span> <span class="n">msg</span><span class="p">;</span>
+<span class="n">msg</span><span class="p">.</span><span class="n">action</span> <span class="o">=</span> <span class="s">&quot;RPC_CALL&quot;</span><span class="p">;</span>
+<span class="n">msg</span><span class="p">.</span><span class="n">args</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="s">&quot;MyRemoteFunction&quot;</span><span class="p">);</span>
+<span class="n">msg</span><span class="p">.</span><span class="n">payload</span> <span class="o">=</span> <span class="s">&quot;I am a n3rv message payload!&quot;</span><span class="p">;</span>
+
+<span class="cm">/* We send the message to the ZMQ socket attached to qhandler* q */</span>
+<span class="n">s1</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="n">msg</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="send-a-raw-zmq-message">
+<h2>Send a Raw ZMQ message<a class="headerlink" href="#send-a-raw-zmq-message" title="Permalink to this headline">¶</a></h2>
+<p>n3rv also lets the possibility to send raw ZMQ messages (<cite>zmq::message_t</cite>), which is not much more complicated
+than n3rv messages:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">n3rv</span><span class="o">::</span><span class="n">service</span> <span class="n">s1</span><span class="p">(</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span><span class="mi">10001</span><span class="p">);</span>
+
+<span class="cm">/* We create a new connection to get a qhandler* */</span>
+<span class="n">n3rv</span><span class="o">::</span><span class="n">qhandler</span><span class="o">*</span> <span class="n">q</span> <span class="o">=</span> <span class="n">s1</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&quot;com.svc.node1.binding1&quot;</span><span class="p">,</span><span class="n">ZMQ_REQ</span><span class="p">);</span>
+
+<span class="cm">/* We create a new zmq message_t and fill it with some data */</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">pload</span> <span class="o">=</span> <span class="s">&quot;My ZMQ Payload !!&quot;</span><span class="p">;</span>
+<span class="n">zmq</span><span class="o">::</span><span class="n">message_t</span><span class="o">*</span> <span class="n">msg</span> <span class="o">=</span> <span class="k">new</span> <span class="n">zmq</span><span class="o">::</span><span class="n">message_t</span><span class="p">(</span><span class="n">pload</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+<span class="n">memcpy</span><span class="p">(</span><span class="n">msg</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">(),</span> <span class="n">pload</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span> <span class="n">pload</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+
+<span class="cm">/* We send the message to the ZMQ socket attached to qhandler* q */</span>
+<span class="n">s1</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="n">msg</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="zmq-flags">
+<h2>ZMQ flags<a class="headerlink" href="#zmq-flags" title="Permalink to this headline">¶</a></h2>
+<p>As you may have noticed, <cite>service::send()</cite> has a <cite>flags</cite> paramaters, which allows to
+pass extra flags to the underlying <cite>zmq_send()</cite>, including:</p>
+<ul class="simple">
+<li>ZMQ_DONTWAIT, for socket types</li>
+<li>ZMQ_SNDMORE, for multipart messages (eg big payloads)</li>
+</ul>
+<p>You can find more details here: <a class="reference external" href="http://api.zeromq.org/4-2:zmq-send">http://api.zeromq.org/4-2:zmq-send</a></p>
+</div>
+</div>
+
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <script type="text/javascript">
+
+    $.each( $('.breathe-sectiondef'), function(index,v) {
+
+      if ( $(this).hasClass('container') ) $(this).removeClass('container');
+
+     } );
+
+    $("#header-pbtn").click(function() { product_dropdown_toggle(); });
+
+    function product_dropdown_toggle() {
+
+      $('#product-dropdown').css({ left: $('#header-pbtn').position().left + 20 + 'px'  });
+
+      if ( $('#product-dropdown').width() == 0 ) {
+
+
+        $('#product-dropdown').animate({ width:"140px", duration: 1000})
+        .after(function() { $('#product-dropdown-ct').show(); } );
+
+      }
+
+      else {
+        
+        $('#product-dropdown').animate({width:"0px",duration: 1000})
+        .after( function() { $('#product-dropdown-ct').hide(); } );   
+      }
+    }
+  </script>
+
+</body>
+
+
+
+
+
+
+
+
+<div class="footer-top">
+
+</div>
+
+<div class="footer-bottom">
+
+  <div class="container">
+
+    <div class="row-fluid">
+
+      <div class="col-md-6">
+        
+      </div>
+      <div class="col-md-6" style="text-align:center"></div>
+    </div>
+  </div>
+
