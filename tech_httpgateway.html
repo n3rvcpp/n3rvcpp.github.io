@@ -102,7 +102,7 @@ to communicate with the outside world over HTTP (the client part is at your disc
 the exact same features but with extra http service capacities.</p>
 <div class="section" id="initializing-http-service">
 <h3>Initializing HTTP Service<a class="headerlink" href="#initializing-http-service" title="Permalink to this headline">¶</a></h3>
-<p>the httpservice class has 2 methods that you need to call to enable http service: <cite>init_http()</cite>
+<p>the <cite>httpservice</cite> class has 2 methods that you need to call to enable http service: <cite>init_http()</cite>
 and then <cite>run_http_async()</cite>:</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cm">/* We create a new httpservice instance */</span>
 <span class="n">n3rv</span><span class="o">::</span><span class="n">httpservice</span> <span class="n">hs1</span><span class="p">(</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span><span class="mi">10001</span><span class="p">);</span>
@@ -115,8 +115,8 @@ and then <cite>run_http_async()</cite>:</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="distribute-content-attach-uri-to-callback">
-<h3>Distribute content: Attach URI to Callback<a class="headerlink" href="#distribute-content-attach-uri-to-callback" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="attach-uri-to-callback">
+<h3>Attach URI to Callback<a class="headerlink" href="#attach-uri-to-callback" title="Permalink to this headline">¶</a></h3>
 <p><cite>n3rv::httpservice</cite> uses libevent as underlying mechanism for http serving. libevent’s
 inner mechanism requires binding an HTTP URI with a callback function that will produce
 the desired actions and return the appropriate content to the client for that URI.
@@ -156,12 +156,16 @@ This is precisely what <cite>httpservice::attach_http()</cite> does:</p>
 </pre></div>
 </div>
 </div>
+<div class="section" id="serve-static-files-directories-from-filesystem">
+<h3>Serve static files/directories from Filesystem<a class="headerlink" href="#serve-static-files-directories-from-filesystem" title="Permalink to this headline">¶</a></h3>
+<p>the <cite>httpservice</cite> class offers the possibility to serve static files coming from your local filesystem. To do this,
+you have to</p>
+</div>
 </div>
 <div class="section" id="extra-linking">
 <h2>Extra linking<a class="headerlink" href="#extra-linking" title="Permalink to this headline">¶</a></h2>
-<p>Important: Given that <cite>n3rv::httpservice</cite> uses libevent, two extra libraries are required by the linker in
-order to correctly build your programs containing references to httpservice. these two libs are
-<cite>-ln3rvhttp</cite> and <cite>-levent</cite></p>
+<blockquote>
+<div>Important: Given that <cite>n3rv::httpservice</cite> uses libevent, whenever you use this class you need to link your generated binary with <cite>-levent</cite></div></blockquote>
 </div>
 </div>
 

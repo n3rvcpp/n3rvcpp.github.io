@@ -96,18 +96,19 @@
 <h1>Qhandlers<a class="headerlink" href="#qhandlers" title="Permalink to this headline">¶</a></h1>
 <p><cite>n3rv::qhandler</cite> objects are producted whenever a service creates a new binding or <cite>connect()</cite> to one.
 Concretely, it is an overlying layer which “hides” ZMQ sockets under the hood.</p>
-<p>The qhandler object structure is really simple:</p>
+<p>The qhandler object def is really simple:</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cm">/** Connction handler returned by connect()</span>
 <span class="cm"> * or bind(), used for send() and attach() operations. */</span>
 
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">qhandler_</span> <span class="p">{</span>
+<span class="k">class</span> <span class="nc">qhandler</span> <span class="p">{</span>
 
-      <span class="cm">/** randomly generated connection id */</span>
-      <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">cid</span><span class="p">;</span>
+      <span class="k">public</span><span class="o">:</span>
+        <span class="cm">/** randomly generated connection id */</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">cid</span><span class="p">;</span>
 
-      <span class="cm">/** full peer node uid after lookup (filled only for connect() operations ) */</span>
-      <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">peer_uid</span><span class="p">;</span>
-  <span class="p">}</span> <span class="n">qhandler</span><span class="p">;</span>
+        <span class="cm">/** full peer node uid after lookup (filled only for connect() operations ) */</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">peer_uid</span><span class="p">;</span>
+  <span class="p">};</span>
 </pre></div>
 </div>
 <p>qhandlers are the objects which make the link with ZMQ sockets in n3rv, and <cite>service::send()</cite> and

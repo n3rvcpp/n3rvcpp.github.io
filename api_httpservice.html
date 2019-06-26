@@ -93,9 +93,26 @@
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
 <dl class="function">
+<dt id="_CPPv3N4n3rv11httpservice10serve_fileEPKc">
+<span id="_CPPv2N4n3rv11httpservice10serve_fileEPKc"></span><span id="n3rv::httpservice::serve_file__cCP"></span><span class="target" id="classn3rv_1_1httpservice_1a98373930e62b2a2a6489ddb4d5ac7461"></span>fserve_res n3rv::<a class="reference internal" href="#_CPPv3N4n3rv11httpserviceE" title="n3rv::httpservice">httpservice</a><code class="descname">serve_file</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv11httpservice10serve_fileEPKc" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Opens file on host and retrieves its content. <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>file’s content and &amp; bool indicating if file was found. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">path</span></code>: File’s path. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
 <dt id="_CPPv3N4n3rv11httpservice9init_httpENSt6stringEi">
 <span id="_CPPv2N4n3rv11httpservice9init_httpENSt6stringEi"></span><span id="n3rv::httpservice::init_http__ss.i"></span><span class="target" id="classn3rv_1_1httpservice_1a15e3aee83bdfc4e62de17f3ec02992d8"></span>int n3rv::<a class="reference internal" href="#_CPPv3N4n3rv11httpserviceE" title="n3rv::httpservice">httpservice</a><code class="descname">init_http</code><span class="sig-paren">(</span>std::string <em>http_listen_addr</em>, int <em>http_listen_port</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv11httpservice9init_httpENSt6stringEi" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>initializes http service on listen_addr:port <dl class="docutils">
+<dd><p>Initializes http service on listen_addr:port. <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>0 if HTTP init went fine, -1 otherwise. </dd>
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last simple">
 <li><code class="docutils literal notranslate"><span class="pre">http_listen_addr</span></code>: IP to bind http service on. </li>
@@ -107,19 +124,49 @@
 </dd></dl>
 
 <dl class="function">
+<dt id="_CPPv3N4n3rv11httpservice8run_httpEv">
+<span id="_CPPv2N4n3rv11httpservice8run_httpEv"></span><span id="n3rv::httpservice::run_http"></span><span class="target" id="classn3rv_1_1httpservice_1ad898cc14c61f787768d85c955035b3a4"></span>int n3rv::<a class="reference internal" href="#_CPPv3N4n3rv11httpserviceE" title="n3rv::httpservice">httpservice</a><code class="descname">run_http</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv11httpservice8run_httpEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Starts the http service once initialized. <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>0 if run was succesful, -1 otherwise. WARNING: run_http is blocking. </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
 <dt id="_CPPv3N4n3rv11httpservice14run_http_asyncEv">
-<span id="_CPPv2N4n3rv11httpservice14run_http_asyncEv"></span><span id="n3rv::httpservice::run_http_async"></span><span class="target" id="classn3rv_1_1httpservice_1a8ed67993d8ae8994abd8bc0036338411"></span>std::thread *n3rv::<a class="reference internal" href="#_CPPv3N4n3rv11httpserviceE" title="n3rv::httpservice">httpservice</a><code class="descname">run_http_async</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv11httpservice14run_http_asyncEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Starts the http service, in a dedicated thread </p>
+<span id="_CPPv2N4n3rv11httpservice14run_http_asyncEv"></span><span id="n3rv::httpservice::run_http_async"></span><span class="target" id="classn3rv_1_1httpservice_1af5f0221cafc2db599ca27601c3492db7"></span>std::thread *n3rv::<a class="reference internal" href="#_CPPv3N4n3rv11httpserviceE" title="n3rv::httpservice">httpservice</a><code class="descname">run_http_async</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv11httpservice14run_http_asyncEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Starts the http service, in a dedicated thread. <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The created thread pointer. </dd>
+</dl>
+</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="_CPPv3N4n3rv11httpservice11attach_httpENSt6stringE6httpcb">
-<span id="_CPPv2N4n3rv11httpservice11attach_httpENSt6stringE6httpcb"></span><span id="n3rv::httpservice::attach_http__ss.httpcb"></span><span class="target" id="classn3rv_1_1httpservice_1a6044c1ab4ddeb0fb1a47958ce10d941a"></span>int n3rv::<a class="reference internal" href="#_CPPv3N4n3rv11httpserviceE" title="n3rv::httpservice">httpservice</a><code class="descname">attach_http</code><span class="sig-paren">(</span>std::string <em>uri</em>, httpcb <em>cb</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv11httpservice11attach_httpENSt6stringE6httpcb" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>HTTP URI Callback binding method <dl class="docutils">
+<span id="_CPPv2N4n3rv11httpservice11attach_httpENSt6stringE6httpcb"></span><span id="n3rv::httpservice::attach_http__ss.httpcb"></span><span class="target" id="classn3rv_1_1httpservice_1a1e4d941660afca3146aa5311512eec40"></span>int n3rv::<a class="reference internal" href="#_CPPv3N4n3rv11httpserviceE" title="n3rv::httpservice">httpservice</a><code class="descname">attach_http</code><span class="sig-paren">(</span>std::string <em>uri</em>, httpcb <em>cb</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv11httpservice11attach_httpENSt6stringE6httpcb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>HTTP URI Callback binding method. <dl class="docutils">
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal notranslate"><span class="pre">uri</span></code>: URI address to attach callback to </li>
-<li><code class="docutils literal notranslate"><span class="pre">httpcb</span></code>: callback pointer </li>
+<li><code class="docutils literal notranslate"><span class="pre">uri</span></code>: URI address to attach callback to. </li>
+<li><code class="docutils literal notranslate"><span class="pre">cb</span></code>: callback pointer. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv3N4n3rv11httpservice12register_dirENSt6stringENSt6stringE">
+<span id="_CPPv2N4n3rv11httpservice12register_dirENSt6stringENSt6stringE"></span><span id="n3rv::httpservice::register_dir__ss.ss"></span><span class="target" id="classn3rv_1_1httpservice_1aac80eb3d1d4182818875708facd27dff"></span>int n3rv::<a class="reference internal" href="#_CPPv3N4n3rv11httpserviceE" title="n3rv::httpservice">httpservice</a><code class="descname">register_dir</code><span class="sig-paren">(</span>std::string <em>uri</em>, std::string <em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv11httpservice12register_dirENSt6stringENSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Adds a new FS directory to recursively serve files that are inside. <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>0 if registering went fine, &lt; 0 otherwise. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">uri</span></code>: root URI of files to serve. </li>
+<li><code class="docutils literal notranslate"><span class="pre">path</span></code>: Filesystem path of directory to serve. </li>
 </ul>
 </dd>
 </dl>
@@ -130,9 +177,23 @@
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Static Functions</p>
 <dl class="function">
+<dt id="_CPPv3N4n3rv11httpservice17http_gen_callbackEP14evhttp_requestPv">
+<span id="_CPPv2N4n3rv11httpservice17http_gen_callbackEP14evhttp_requestPv"></span><span id="n3rv::httpservice::http_gen_callback__evhttp_requestP.voidP"></span><span class="target" id="classn3rv_1_1httpservice_1a943c04533f28bcb5561947d15758de4d"></span><em class="property">static</em> void n3rv::<a class="reference internal" href="#_CPPv3N4n3rv11httpserviceE" title="n3rv::httpservice">httpservice</a><code class="descname">http_gen_callback</code><span class="sig-paren">(</span>evhttp_request *<em>req</em>, void *<em>objref</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv11httpservice17http_gen_callbackEP14evhttp_requestPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>General purpose callback, mainly stands for file serving. <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">req</span></code>: libevent’s request pointer. </li>
+<li><code class="docutils literal notranslate"><span class="pre">objref</span></code>: <em>this</em> backward pointer. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
 <dt id="_CPPv3N4n3rv11httpservice13http_callbackEP14evhttp_requestPv">
-<span id="_CPPv2N4n3rv11httpservice13http_callbackEP14evhttp_requestPv"></span><span id="n3rv::httpservice::http_callback__evhttp_requestP.voidP"></span><span class="target" id="classn3rv_1_1httpservice_1a988c80b0d6120bec29e130b418c8db15"></span>void n3rv::<a class="reference internal" href="#_CPPv3N4n3rv11httpserviceE" title="n3rv::httpservice">httpservice</a><code class="descname">http_callback</code><span class="sig-paren">(</span>evhttp_request *<em>req</em>, void *<em>objref</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv11httpservice13http_callbackEP14evhttp_requestPv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>default HTTP callback (for testing and example) <dl class="docutils">
+<span id="_CPPv2N4n3rv11httpservice13http_callbackEP14evhttp_requestPv"></span><span id="n3rv::httpservice::http_callback__evhttp_requestP.voidP"></span><span class="target" id="classn3rv_1_1httpservice_1a9b95d96a7c0eee120aa7dd7c219ef332"></span><em class="property">static</em> void n3rv::<a class="reference internal" href="#_CPPv3N4n3rv11httpserviceE" title="n3rv::httpservice">httpservice</a><code class="descname">http_callback</code><span class="sig-paren">(</span>evhttp_request *<em>req</em>, void *<em>objref</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4n3rv11httpservice13http_callbackEP14evhttp_requestPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Default HTTP callback (for testing and example) <dl class="docutils">
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last simple">
 <li><code class="docutils literal notranslate"><span class="pre">req</span></code>: request object coming from libevent. </li>
